@@ -413,6 +413,75 @@
       padding-left: 1.15rem;
     }
 
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .food-card {
+      min-width: 0;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--sun);
+      border-radius: var(--radius);
+      background: var(--card);
+    }
+
+    .food-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+    }
+
+    .food-price {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 9px;
+      border: 1px solid #e4bd91;
+      border-radius: 999px;
+      background: var(--sun-soft);
+      color: #70451f;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .food-list {
+      display: grid;
+      gap: 10px;
+      margin: 15px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .food-list li {
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+
+    .food-list strong {
+      display: block;
+      color: var(--ink);
+      font-size: 0.94rem;
+    }
+
+    .food-list span {
+      display: block;
+      margin-top: 3px;
+      color: #5f6a70;
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+
+    .food-advice {
+      margin: 15px 0 0;
+      padding-top: 12px;
+      border-top: 2px solid var(--ink);
+      color: #49555b;
+      font-size: 0.86rem;
+    }
+
     .calendar {
       margin-top: 26px;
       display: grid;
@@ -876,12 +945,14 @@
 
       .quick-facts,
       .grid-2,
+      .food-grid,
       .checklist {
         grid-template-columns: 1fr;
       }
 
       .grid-2 > *,
       .grid-3 > *,
+      .food-grid > *,
       .calendar,
       .day,
       .day-meta,
@@ -999,6 +1070,7 @@
 
       .route-map,
       .decision,
+      .food-card,
       .table-wrap,
       .callout,
       .check-item {
@@ -1032,7 +1104,7 @@
         </p>
         <h1>苏北鲁南<br>不早起路书</h1>
         <p class="lede">
-          从常熟出发，油车 2 人，一人驾驶。9/30 晚直接开到连云港，不再在盐城中转；主线约 1226 公里。全程不设清晨闹钟，热门景点集中在 3 天，但改到 10:30 后或午后进入。
+          从常熟出发，油车 2 人，一人驾驶。9/30 晚直接开到连云港，不再在盐城中转；主线约 1226 公里。全程不设清晨闹钟，热门景点集中在 3 天，并按国庆人流预留排队和堵车余量。
         </p>
       </div>
       <div class="quick-facts" aria-label="行程概览">
@@ -1046,7 +1118,7 @@
         </div>
         <div class="fact">
           <strong>3 天</strong>
-          <span>热门景点集中安排，但不赶清晨场</span>
+          <span>热门景点集中 3 天，每点预留 1 到 2 小时缓冲</span>
         </div>
         <div class="fact">
           <strong>9:00 后</strong>
@@ -1062,7 +1134,8 @@
         <a href="#overview"><i class="icon" data-lucide="map" aria-hidden="true"></i>总览</a>
         <a href="#calendar"><i class="icon" data-lucide="calendar-days" aria-hidden="true"></i>逐日路书</a>
         <a href="#timing"><i class="icon" data-lucide="clock-3" aria-hidden="true"></i>错峰表</a>
-        <a href="#booking"><i class="icon" data-lucide="ticket-check" aria-hidden="true"></i>预约清单</a>
+        <a href="#food"><i class="icon" data-lucide="utensils" aria-hidden="true"></i>美食价格</a>
+        <a href="#booking"><i class="icon" data-lucide="ticket-check" aria-hidden="true"></i>购票预约</a>
         <a href="#stay-fuel"><i class="icon" data-lucide="hotel" aria-hidden="true"></i>住宿与加油</a>
         <a href="#fallback"><i class="icon" data-lucide="shield-alert" aria-hidden="true"></i>备选与应急</a>
       </div>
@@ -1094,23 +1167,23 @@
             </div>
             <div class="route-stop">
               <strong>连云港</strong>
-              <small>9/30 直达 · 连住两晚 · 连岛需预约</small>
+              <small>9/30 直达 · 连住两晚 · 连岛买票预约</small>
             </div>
             <div class="route-stop">
               <strong>日照</strong>
-              <small>住宿需订 · 海岸预约待确认</small>
+              <small>住宿需订 · 海岸通常免费但可能预约</small>
             </div>
             <div class="route-stop">
               <strong>沂水</strong>
-              <small>住宿两晚 · 景区需预约</small>
+              <small>住宿两晚 · 云蒙或峡谷买票预约</small>
             </div>
             <div class="route-stop">
               <strong>临沂</strong>
-              <small>返程前站 · 住宿需订</small>
+              <small>住宿需订 · 岱崮或天蒙买票预约</small>
             </div>
             <div class="route-stop home">
               <strong>常熟</strong>
-              <small>10/6 约 15:00 到</small>
+              <small>10/6 18:30 到 21:00 到</small>
             </div>
           </div>
         </div>
@@ -1142,11 +1215,11 @@
       <div class="grid-3">
         <article class="decision">
           <h3><i class="icon" data-lucide="sunrise" aria-hidden="true"></i>热门怎么错峰</h3>
-          <p>不设 6 点清晨场。热门点尽量约 10:30 后或午后时段，每个只保留一条主线，控制在 3 到 4 小时。人流会比清晨多，但不用早起。</p>
+          <p>不设清晨场，热门点尽量约 10:30 后或午后时段。国庆排队、停车和接驳各留 1 到 2 小时缓冲，每个点只保留一条主线。</p>
         </article>
         <article class="decision offbeat">
           <h3><i class="icon" data-lucide="waves" aria-hidden="true"></i>冷门怎么补</h3>
-          <p>下午只走渔村、海岸外围、博物馆、县城夜市和老区村落。好吃、好走，不追排队项目。</p>
+          <p>下午只走渔村、海岸外围、博物馆、县城夜市和老区村落。热门点排队过长时，直接用冷门点替换，不影响住宿和转场。</p>
         </article>
         <article class="decision warn">
           <h3><i class="icon" data-lucide="bed-double" aria-hidden="true"></i>一人驾驶底线</h3>
@@ -1156,12 +1229,22 @@
 
       <div class="callout">
         <h3>9/30 可以直接到连云港</h3>
-        <p>18:00 从常熟出发，正常约 4.7 小时到连云港；按国庆路况、服务区休息和进城时间，预计 23:30 到 00:30 入住。这样 10/1 可以睡到自然醒，不再在盐城多停一晚。不建议当晚继续冲到日照，路程明显超出一人夜间安全驾驶范围。</p>
+        <p>18:00 从常熟出发，正常约 4.7 小时到连云港；按节前路况、服务区休息和进城时间，预计 23:30 到 01:00 入住。这样 10/1 可以睡到自然醒，不再在盐城多停一晚。不建议当晚继续冲到日照，路程明显超出一人夜间安全驾驶范围。</p>
+      </div>
+
+      <div class="callout hot">
+        <h3>国庆人流放宽规则</h3>
+        <ul>
+          <li>每天最多 1 个主目标，再加 1 个顺路点。主目标玩 3 到 4 小时，顺路点可随时删除。</li>
+          <li>正常 1 小时车程按 1.5 小时估，2 小时车程按 2.5 到 3 小时估。晚到 1 小时不改路线，只删景点。</li>
+          <li>热门点预约优先选 11:00 后或 14:00 后时段。约不到合适时段就换备选，不为了预约改成早起。</li>
+          <li>国庆景区餐饮和停车可能排队。吃饭避开 12:00 到 13:00，停车先找外围正规停车场，再步行或接驳。</li>
+        </ul>
       </div>
 
       <div class="callout">
         <h3>这条线为什么适合你们</h3>
-        <p>海洋、渔港、海岸公路和沂蒙山区的组合，与常熟的园林、水乡、湖景差异明显。9/30 直达连云港省掉一次中转，白天不再设 5 点清晨场。代价是热门点会碰到更多游客，所以用限时参观和冷门备选控制节奏。</p>
+        <p>海洋、渔港、海岸公路和沂蒙山区的组合，与常熟的园林、水乡、湖景差异明显。9/30 直达连云港省掉一次中转，白天不设清晨场。代价是热门点会碰到更多游客，所以用放宽时长、限时参观和冷门备选控制节奏。</p>
       </div>
     </section>
 
@@ -1182,7 +1265,7 @@
           </div>
           <div class="day-content">
             <h3 class="day-title">常熟 → 连云港：当晚直接到第一站</h3>
-            <p class="day-summary">18:00 下班后出发，不安排景点。正常约 4.7 小时，按国庆路况和休息预计 23:30 到 00:30 入住。</p>
+            <p class="day-summary">18:00 下班后出发，不安排景点。正常约 4.7 小时，按节前路况、服务区休息和进城时间，预计 23:30 到 01:00 入住。</p>
             <div class="reservation-strip">
               <span class="reserve-badge hotel">必须提前订房</span>
               <span><strong>连云港住宿：</strong>订连云区或墟沟，标记“可晚到入住”和“免费停车”。</span>
@@ -1220,11 +1303,11 @@
                 </div>
               </li>
               <li>
-                <span class="time">23:30 到 00:30</span>
+                <span class="time">23:30 到 01:00</span>
                 <div class="event">
                   <strong>到连云港，直接入住</strong>
                   <span>优先选连云区或墟沟。不要把住宿订在市中心，第二天去海边和转场都会更远。</span>
-                  <span class="reserve-detail"><strong>需订房：</strong>取消政策选“免费取消”，并电话确认“23:30 后仍保留房间”和免费停车。</span>
+                  <span class="reserve-detail"><strong>需订房：</strong>取消政策选“免费取消”，并电话确认“01:00 前仍保留房间”和免费停车。</span>
                 </div>
               </li>
             </ol>
@@ -1232,7 +1315,7 @@
             <div class="tags">
               <span class="tag">约 4.7 h 驾驶</span>
               <span class="tag">不安排景点</span>
-              <span class="tag sun">住宿选连云区</span>
+              <span class="tag sun">最晚 01:00 入住</span>
             </div>
           </div>
         </article>
@@ -1309,10 +1392,10 @@
           </div>
           <div class="day-content">
             <h3 class="day-title">连云港 → 日照：连岛晚点去，下午转场</h3>
-            <p class="day-summary">9:00 后起床、10:30 后进连岛，只走主栈道和 1 到 2 个观景点。15:30 左右离开，傍晚到日照。</p>
+            <p class="day-summary">9:00 后起床、10:30 后进连岛，只走主栈道和 1 到 2 个观景点。最晚 16:30 离开，傍晚到日照。</p>
             <div class="reservation-strip">
-              <span class="reserve-badge required">必须预约</span>
-              <span><strong>连岛：</strong>优先预约 10:30 到 12:00 入园时段，按官方要求实名预约。</span>
+              <span class="reserve-badge required">买票 + 预约</span>
+              <span><strong>连岛：</strong>必须买票并实名预约。优先约 10:30 到 12:00 时段。</span>
               <span class="reserve-badge hotel">住宿需预订</span>
               <span>10/2 日照住宿，优先万平口、灯塔或山海天外围。</span>
             </div>
@@ -1349,24 +1432,24 @@
                 </div>
               </li>
               <li>
-                <span class="time">15:30</span>
+                <span class="time">16:00 到 16:30</span>
                 <div class="event">
                   <strong>离开连岛，回酒店取行李</strong>
                   <span>不要继续加景点。出发前在连云港市区加油，不要在景区门口排队。</span>
                 </div>
               </li>
               <li>
-                <span class="time">16:30</span>
+                <span class="time">17:00 到 17:30</span>
                 <div class="event">
                   <strong>连云港 → 日照</strong>
-                  <span>约 119 公里、正常 1.4 小时，国庆按 2 小时预留。</span>
+                  <span>约 119 公里、正常 1.4 小时，国庆按 2 到 2.5 小时预留。</span>
                 </div>
               </li>
               <li>
-                <span class="time">18:30 到 19:00</span>
+                <span class="time">19:00 到 20:00</span>
                 <div class="event">
                   <strong>到日照，入住、吃晚饭</strong>
-                  <span>住宿优先选灯塔、万平口或山海天外围。今晚只吃饭休息，不赶夜游。</span>
+                  <span>住宿优先选灯塔、万平口或山海天外围。吃蒸汽海鲜锅或鲅鱼水饺，今晚只吃饭休息，不赶夜游。</span>
                   <span class="reserve-detail"><strong>需订房：</strong>确认停车位，不要只看“距景区几百米”。</span>
                 </div>
               </li>
@@ -1375,7 +1458,7 @@
             <div class="tags">
               <span class="tag hot">连岛</span>
               <span class="tag">10:30 后进</span>
-              <span class="tag">15:30 出</span>
+              <span class="tag">最晚 16:30 出</span>
               <span class="tag">傍晚到日照</span>
             </div>
           </div>
@@ -1389,10 +1472,10 @@
           </div>
           <div class="day-content">
             <h3 class="day-title">日照 → 沂水：上午睡够，午后看海</h3>
-            <p class="day-summary">万平口或灯塔二选一，14:00 后进景区，走 2 到 3 小时。17:30 左右再转去沂水，避开清晨和正午。</p>
+            <p class="day-summary">万平口或灯塔二选一，14:00 后进景区，按 3 到 3.5 小时安排。18:00 左右再转去沂水，避开清晨和正午。</p>
             <div class="reservation-strip">
-              <span class="reserve-badge suggested">建议预约 / 每日确认</span>
-              <span><strong>万平口或灯塔：</strong>免费也未必免预约，优先选 14:00 后时段。</span>
+              <span class="reserve-badge suggested">免费但可能预约</span>
+              <span><strong>万平口或灯塔：</strong>通常免门票，但国庆可能分时预约或交通管制。优先选 14:00 后时段。</span>
               <span class="reserve-badge hotel">住宿需预订</span>
               <span>沂水连住两晚。</span>
             </div>
@@ -1414,32 +1497,32 @@
                 </div>
               </li>
               <li class="warn">
-                <span class="time">12:00 到 13:30</span>
+                <span class="time">12:00 到 14:00</span>
                 <div class="event">
                   <strong>酒店或咖啡馆休息</strong>
-                  <span>这段正是景区和停车最挤的时候，不进去硬碰。午后团队开始往外走，再进海岸。</span>
+                  <span>国庆正午停车场最容易满，这段不进去硬碰。先把午饭吃完，再按实时停车情况选万平口或灯塔。</span>
                   <span class="reserve-detail"><strong>出发前一日确认：</strong>是否需预约、能否开车直达、14:00 后时段是否开放。</span>
                 </div>
               </li>
               <li class="hot">
-                <span class="time">14:00</span>
+                <span class="time">14:00 到 14:30</span>
                 <div class="event">
                   <strong>进入万平口或灯塔</strong>
-                  <span>只走一条主步道和 1 到 2 个观景点。人多时不要恋战，拍完照就走。</span>
+                  <span>只走一条主步道和 1 到 2 个观景点。找车位超过 30 分钟就换另一处，或改走外围海岸，不把时间耗在排队上。</span>
                 </div>
               </li>
               <li>
-                <span class="time">17:00</span>
+                <span class="time">18:00</span>
                 <div class="event">
                   <strong>离开海岸，日照 → 沂水</strong>
-                  <span>先在日照市区加油。约 107 公里、正常 1.4 小时，按 2 小时预留。</span>
+                  <span>先在日照市区加油。约 107 公里、正常 1.4 小时，国庆按 2 到 2.5 小时预留。</span>
                 </div>
               </li>
               <li>
-                <span class="time">19:00 到 19:30</span>
+                <span class="time">20:00 到 20:30</span>
                 <div class="event">
                   <strong>到沂水，入住、吃晚饭</strong>
-                  <span>选择县城中心或景区方向交通方便的连锁酒店。今天不再加大景点。</span>
+                  <span>选择县城中心或景区方向交通方便的连锁酒店。晚饭吃沂蒙炒鸡或糁汤，今天不再加大景点。</span>
                   <span class="reserve-detail"><strong>需订房：</strong>10/3 和 10/4 连住同一家，确认两晚房型和停车。</span>
                 </div>
               </li>
@@ -1447,8 +1530,8 @@
 
             <div class="tags">
               <span class="tag hot">万平口/灯塔</span>
-              <span class="tag">14:00 进</span>
-              <span class="tag">17:00 出</span>
+              <span class="tag">14:00 后进</span>
+              <span class="tag">18:00 出</span>
               <span class="tag">不赶日出</span>
             </div>
           </div>
@@ -1685,30 +1768,30 @@
             <tr>
               <td>连云港连岛</td>
               <td>10/2 10:30 到 11:00</td>
-              <td>10/2 15:30</td>
-              <td>9:00 起床后出发，不坐清晨第一班；只走主栈道和 1 到 2 个观景点。</td>
-              <td>停车或排队超过 30 分钟，改走外围海岸，傍晚按时去日照。</td>
+              <td>10/2 16:00 到 16:30</td>
+              <td>9:00 起床后出发，不坐清晨第一班；只走主栈道和 1 到 2 个观景点，国庆留 1.5 小时排队和停车缓冲。</td>
+              <td>停车或排队超过 30 分钟，改走外围海岸；最晚 16:30 离开去日照。</td>
             </tr>
             <tr>
               <td>日照万平口 / 灯塔</td>
-              <td>10/3 14:00</td>
-              <td>10/3 17:00</td>
-              <td>中午先在酒店休息，避开正午最挤时段；午后团队开始往外走，再进海岸。</td>
-              <td>二选一，只走一条短步道，不恋战；17:00 必须离开去沂水。</td>
+              <td>10/3 14:00 到 14:30</td>
+              <td>10/3 18:00</td>
+              <td>中午先在酒店休息，避开正午最挤时段；两处二选一，国庆停车超过 30 分钟就换。</td>
+              <td>只走一条短步道，不恋战；18:00 离开去沂水，20:00 后到也接受。</td>
             </tr>
             <tr>
               <td>沂蒙山云蒙 / 地下大峡谷</td>
-              <td>10/4 11:00 左右</td>
-              <td>10/4 16:00</td>
-              <td>10:30 后从县城出发，不设清晨闹钟。只走主线，不追支线项目。</td>
+              <td>10/4 11:00 到 11:30</td>
+              <td>10/4 16:00 到 16:30</td>
+              <td>10:30 后从县城出发，不设清晨闹钟。只走主线，索道和换乘按 1 到 2 小时排队预留。</td>
               <td>天气不好改地下大峡谷；预约时段约不到午后，就改走冷门村落。</td>
             </tr>
             <tr>
               <td>岱崮地貌 / 天蒙</td>
               <td>10/5 11:30</td>
-              <td>10/5 16:00</td>
-              <td>10:30 后从沂水出发，默认走岱崮；天蒙只作为体力好的备选。</td>
-              <td>直接临沂市区，保留返程体力。晚上可以逛街吃饭，不安排登山。</td>
+              <td>10/5 16:00 到 16:30</td>
+              <td>10:30 后从沂水出发，默认走岱崮；天蒙只作为体力好的备选，索道和摆渡车要留排队时间。</td>
+              <td>排队明显就跳过山地，直接临沂市区，保留返程体力。晚上可以逛街吃饭。</td>
             </tr>
           </tbody>
         </table>
@@ -1719,14 +1802,137 @@
         <ul>
           <li>接受：起床不早于 9:00，热门点可以玩到 16:00 后，晚上也可以逛街吃饭。</li>
           <li>放弃：清晨第一批入园和空景照片。热门点的人会更多，所以每个点都必须限时。</li>
-          <li>硬规则：排队超过 30 分钟就撤；当天必须完成的只有转场和住宿，景点随时可换。</li>
+          <li>硬规则：停车或排队超过 30 分钟就换；当天必须完成的只有转场和住宿，景点随时可删。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="food">
+      <div class="section-head">
+        <h2>地方美食与价格参考</h2>
+        <p class="section-note">价格为 2026 国庆常见菜单参考区间，不是官方定价。海鲜先问清按斤还是按份，以进店当天菜单和称重为准。</p>
+      </div>
+
+      <div class="food-grid">
+        <article class="food-card">
+          <h3><i class="icon" data-lucide="fish" aria-hidden="true"></i>连云港：海鲜和板浦凉粉</h3>
+          <span class="food-price">两人一餐参考 180 到 320 元</span>
+          <ul class="food-list">
+            <li>
+              <strong>梭子蟹：约 80 到 180 元 / 斤</strong>
+              <span>国庆可能上浮。先问活蟹规格、是否含加工费，称重后再确认做法。</span>
+            </li>
+            <li>
+              <strong>皮皮虾：约 50 到 100 元 / 斤</strong>
+              <span>适合两人点 1 到 1.5 斤，选清蒸或椒盐。空壳多时及时停止加点。</span>
+            </li>
+            <li>
+              <strong>对虾：约 60 到 120 元 / 斤</strong>
+              <span>白灼或蒜蓉都可。不要只看“时价”，要让店家报出每斤价格。</span>
+            </li>
+            <li>
+              <strong>海鲜面：约 15 到 30 元 / 碗</strong>
+              <span>适合早餐或简单午餐，两人再配一份凉菜即可。</span>
+            </li>
+            <li>
+              <strong>板浦凉粉：约 8 到 15 元 / 份</strong>
+              <span>便宜、有地方特色，适合当开胃菜，不要当主食。</span>
+            </li>
+            <li>
+              <strong>花果山风鹅：约 30 到 70 元 / 份</strong>
+              <span>常见按斤或按份卖，咸香偏重，两人点小份即可。</span>
+            </li>
+          </ul>
+          <p class="food-advice"><strong>最适合：</strong>10/1 晚餐。两人点 1 种海鲜、1 份凉粉、1 份主食。避开景区门口，选市区明码标价店。</p>
+        </article>
+
+        <article class="food-card">
+          <h3><i class="icon" data-lucide="soup" aria-hidden="true"></i>日照：蒸汽海鲜和鲅鱼水饺</h3>
+          <span class="food-price">两人一餐参考 160 到 300 元</span>
+          <ul class="food-list">
+            <li>
+              <strong>蒸汽海鲜锅：约 168 到 298 元 / 锅</strong>
+              <span>通常包含贝类、虾和少量蟹。先问清是否按锅计价、有没有额外加工费。</span>
+            </li>
+            <li>
+              <strong>鲅鱼水饺：约 28 到 45 元 / 份</strong>
+              <span>两人点半份或一份，再配一个热菜。不要在海边第一排盲选高价店。</span>
+            </li>
+            <li>
+              <strong>海沙子面：约 12 到 25 元 / 碗</strong>
+              <span>地方口味，适合早餐或夜宵。海鲜过敏者先确认汤底。</span>
+            </li>
+            <li>
+              <strong>日照绿茶：约 30 到 120 元 / 罐</strong>
+              <span>价格跨度大。自喝选小罐，不要在景区门口买高价礼盒。</span>
+            </li>
+          </ul>
+          <p class="food-advice"><strong>最适合：</strong>10/2 到日照后的晚餐。两人点 1 锅蒸汽海鲜加 1 份水饺就够，最多再加一个素菜。</p>
+        </article>
+
+        <article class="food-card">
+          <h3><i class="icon" data-lucide="wheat" aria-hidden="true"></i>沂水 / 沂蒙：炒鸡、煎饼和糁汤</h3>
+          <span class="food-price">两人一餐参考 100 到 190 元</span>
+          <ul class="food-list">
+            <li>
+              <strong>沂蒙炒鸡：约 68 到 138 元 / 份</strong>
+              <span>通常是一大盆，两人点小份或半只就够。先问是否含配菜和饼。</span>
+            </li>
+            <li>
+              <strong>糁汤：约 8 到 20 元 / 碗</strong>
+              <span>适合早餐或晚饭配主食。可选牛肉或鸡肉，先问是否偏辣。</span>
+            </li>
+            <li>
+              <strong>沂蒙煎饼：约 2 到 8 元 / 张</strong>
+              <span>卷菜版本约 10 到 25 元 / 份。牙口一般的人少点，配汤更好入口。</span>
+            </li>
+            <li>
+              <strong>沂水丰糕：约 10 到 20 元 / 斤</strong>
+              <span>适合当路上点心。先买半斤试口味，不要一次买大盒。</span>
+            </li>
+          </ul>
+          <p class="food-advice"><strong>最适合：</strong>10/3 晚到沂水后吃炒鸡，10/4 晚餐用糁汤配煎饼。两人点 1 个主菜、1 个主食、1 个素菜即可。</p>
+        </article>
+
+        <article class="food-card">
+          <h3><i class="icon" data-lucide="flame-kindling" aria-hidden="true"></i>临沂：炒鸡、糁汤和豆豉</h3>
+          <span class="food-price">两人一餐参考 100 到 200 元</span>
+          <ul class="food-list">
+            <li>
+              <strong>临沂炒鸡：约 68 到 138 元 / 份</strong>
+              <span>和沂蒙炒鸡相近，偏咸香。两人点小份，加一份面或饼蘸汤。</span>
+            </li>
+            <li>
+              <strong>糁汤：约 8 到 20 元 / 碗</strong>
+              <span>晚餐和早餐都能吃。国庆热门店排队时，换居民区老店更稳。</span>
+            </li>
+            <li>
+              <strong>八宝豆豉：约 10 到 25 元 / 袋</strong>
+              <span>适合带回家，先看生产日期和保存方式，不在景区买散装高价货。</span>
+            </li>
+            <li>
+              <strong>沂蒙煎饼：约 2 到 8 元 / 张</strong>
+              <span>适合配炒鸡和糁汤，两人先点 2 张，不够再加。</span>
+            </li>
+          </ul>
+          <p class="food-advice"><strong>最适合：</strong>10/5 晚上。吃完去沂河附近走走，可以玩晚一点，但不再开车去远景区。</p>
+        </article>
+      </div>
+
+      <div class="callout">
+        <h3>点菜和避坑规则</h3>
+        <ul>
+          <li>海鲜先确认“按斤、按份还是按锅”，再确认加工费、茶位费和餐具费。没有明确报价就不点。</li>
+          <li>国庆海边第一排和景区门口价格通常更高。宁可开 10 分钟去居民区或市区连锁店。</li>
+          <li>两人点菜控制在 1 个主菜、1 个海鲜或肉类、1 个主食、1 个素菜。临沂和连云港菜量偏大，先少点。</li>
+          <li>肠胃敏感就少吃生腌，海鲜尽量选清蒸、白灼或热炒。车上准备肠胃药和矿泉水。</li>
         </ul>
       </div>
     </section>
 
     <section class="section" id="booking">
       <div class="section-head">
-        <h2>预约与订房清单</h2>
+        <h2>购票、预约与订房清单</h2>
         <p class="section-note">先看状态总表，再逐项勾选。进度会保存在当前浏览器，手机和电脑不会互相同步。</p>
       </div>
 
