@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="常熟出发 6 天自驾路书">
+  <rect width="64" height="64" rx="15" fill="#0d6a73"/>
+  <path d="M13 48c9 1.5 9.5-11 18.5-11S42 48 51 46.5" fill="none" stroke="#eaf5f3" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="32" cy="22" r="7" fill="#d9772f"/>
+  <circle cx="32" cy="22" r="2.6" fill="#0d6a73"/>
+</svg>
