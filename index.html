@@ -2,55 +2,59 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="light">
-  <title>常熟出发 6 天自驾路书 | 乌镇 · 宁波 · 神仙居 · 横店 · 绍兴 · 南浔</title>
-  <meta name="description" content="常熟出发的两人民俗山水 6 天自驾路书：乌镇、宁波、神仙居、横店、绍兴、南浔，总里程约 850 公里。">
+  <meta name="theme-color" content="#17343a">
+  <title>常熟出发 6 天 5 晚自驾地图路书 | 乌镇 · 诸暨 · 横店 · 绍兴 · 嘉兴</title>
+  <meta name="description" content="常熟出发的 6 天 5 晚自驾地图路书：乌镇、诸暨五泄、西施故里、横店、绍兴东湖与仓桥直街、嘉兴月河老街。">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./leaflet.css">
   <style>
     :root {
-      --paper: #fbfaf7;
-      --paper-deep: #eef3f2;
-      --ink: #1d2e36;
-      --muted: #68757c;
-      --ocean: #238a8c;
-      --ocean-soft: #dff5f2;
-      --sun: #f0a24f;
-      --sun-soft: #fff0d8;
-      --hot: #ee7065;
-      --hot-soft: #ffe5e1;
-      --lavender: #8a76c8;
-      --lavender-soft: #eee9ff;
-      --line: #d9e3e1;
-      --card: #fffefa;
-      --success: #459a74;
-      --shadow: 0 22px 52px rgba(44, 77, 83, 0.10);
-      --shadow-soft: 0 10px 26px rgba(44, 77, 83, 0.07);
+      --ink: #17343a;
+      --ink-soft: #31545a;
+      --muted: #688186;
+      --paper: #f7f5ef;
+      --panel: #fffdf8;
+      --panel-strong: #ffffff;
+      --line: #d9e3e0;
+      --line-strong: #b8cbc7;
+      --teal: #197f7b;
+      --teal-soft: #d9f0ec;
+      --orange: #d97725;
+      --orange-soft: #fff0dd;
+      --gold: #b8872d;
+      --gold-soft: #fff5d9;
+      --red: #bf5546;
+      --red-soft: #ffe7e2;
+      --blue: #2f6ca6;
+      --blue-soft: #e5f0fb;
+      --purple: #7864ae;
+      --purple-soft: #eee9ff;
+      --green: #4b8f62;
+      --green-soft: #e2f3e5;
+      --brown: #8b6447;
+      --brown-soft: #f4e7dc;
+      --shadow: 0 22px 58px rgba(21, 54, 58, 0.16);
+      --shadow-soft: 0 10px 28px rgba(21, 54, 58, 0.10);
       --radius: 12px;
+      --rail: 390px;
     }
 
     * {
       box-sizing: border-box;
     }
 
-    html {
-      max-width: 100%;
-      overflow-x: clip;
-      scroll-behavior: smooth;
-    }
-
+    html,
     body {
+      height: 100%;
       margin: 0;
-      max-width: 100%;
-      overflow-x: clip;
-      background:
-        radial-gradient(circle at 8% 8%, rgba(255, 210, 140, 0.16), transparent 22rem),
-        radial-gradient(circle at 92% 22%, rgba(151, 132, 219, 0.10), transparent 24rem),
-        var(--paper);
+      background: var(--paper);
       color: var(--ink);
       font-family: "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", system-ui, sans-serif;
-      font-size: 15.5px;
-      line-height: 1.6;
+      font-size: 15px;
+      line-height: 1.62;
+      overflow: hidden;
     }
 
     button,
@@ -58,2387 +62,2119 @@
       font: inherit;
     }
 
-    a {
-      color: var(--ocean);
-      text-decoration-thickness: 1px;
-      text-underline-offset: 3px;
+    button {
+      color: inherit;
     }
 
-    .masthead {
+    :focus-visible {
+      outline: 3px solid rgba(25, 127, 123, 0.38);
+      outline-offset: 2px;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: var(--rail) minmax(0, 1fr);
+      height: 100dvh;
+      min-height: 100svh;
+    }
+
+    .rail {
       position: relative;
-      overflow: hidden;
-      padding: 52px clamp(18px, 4vw, 54px) 58px;
-      color: #f9f7f2;
+      z-index: 800;
+      display: flex;
+      min-width: 0;
+      height: 100dvh;
+      min-height: 100svh;
+      flex-direction: column;
+      border-right: 1px solid var(--line);
       background:
-        radial-gradient(circle at 82% 18%, rgba(255, 226, 181, 0.34) 0 1px, transparent 1.5px) 0 0 / 22px 22px,
-        radial-gradient(circle at 15% 85%, rgba(164, 226, 218, 0.28) 0 1px, transparent 1.5px) 0 0 / 26px 26px,
-        radial-gradient(circle at 74% 4%, rgba(138, 118, 200, 0.30), transparent 34%),
-        linear-gradient(135deg, #14505a 0%, #238a8c 56%, #e59a54 145%);
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(247, 245, 239, 0.98)),
+        radial-gradient(circle at 8% 4%, rgba(217, 240, 236, 0.72), transparent 22rem);
+      box-shadow: 12px 0 34px rgba(28, 58, 61, 0.08);
+      overflow: hidden;
     }
 
-    .masthead-inner {
-      max-width: 1180px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
-      gap: 48px;
-      align-items: end;
-    }
-
-    .eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin: 0 0 14px;
-      color: #a6e3dc;
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      margin: 0;
-      max-width: 15ch;
-      font-size: clamp(2.25rem, 5vw, 5rem);
-      line-height: 0.98;
-      text-wrap: balance;
-    }
-
-    .lede {
-      max-width: 60ch;
-      margin: 20px 0 0;
-      max-width: 58ch;
-      color: #d7e5e2;
-      font-size: clamp(1rem, 1.45vw, 1.1rem);
-    }
-
-    .quick-facts {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .fact {
-      min-height: 104px;
-      padding: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      border-radius: var(--radius);
-      background: rgba(255, 255, 255, 0.09);
-      backdrop-filter: blur(8px);
-    }
-
-    .fact strong {
-      display: block;
-      color: #fff;
-      font-size: 1.32rem;
-      line-height: 1.2;
-    }
-
-    .fact span {
-      display: block;
-      margin-top: 6px;
-      color: #c2d3cf;
-      font-size: 0.8rem;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 9px clamp(18px, 4vw, 54px);
+    .rail-header {
+      padding: 22px 20px 14px;
       border-bottom: 1px solid var(--line);
-      background: rgba(247, 244, 238, 0.9);
-      backdrop-filter: blur(18px);
+      background: rgba(255, 253, 248, 0.9);
+      backdrop-filter: blur(12px);
     }
 
-    .topbar-inner {
-      width: 100%;
-      max-width: 1180px;
-      min-width: 0;
-      margin: 0 auto;
+    .brand-row {
       display: flex;
-      align-items: center;
-      gap: 10px;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
     }
 
-    .topnav {
-      display: flex;
-      gap: 4px;
-      width: 100%;
-      min-width: 0;
-      max-width: 100%;
-      overflow-x: auto;
-      scrollbar-width: none;
+    .kicker {
+      margin: 0 0 3px;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
     }
 
-    .topnav::-webkit-scrollbar {
-      display: none;
-    }
-
-    .topnav a,
-    .action {
-      flex: 0 0 auto;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      min-height: 36px;
-      padding: 6px 10px;
-      border: 1px solid transparent;
-      border-radius: 9px;
-      color: var(--ink);
-      font-size: 0.84rem;
-      font-weight: 650;
-      text-decoration: none;
-      white-space: nowrap;
-      cursor: pointer;
-      background: transparent;
-    }
-
-    .topnav a:hover,
-    .action:hover {
-      background: var(--paper-deep);
-    }
-
-    .action {
-      border-color: var(--line);
-      background: var(--card);
-    }
-
-    .action.solid {
-      color: #fff;
-      border-color: var(--ocean);
-      background: var(--ocean);
-    }
-
-    .action[aria-pressed="true"] {
-      color: #fff;
-      border-color: var(--sun);
-      background: var(--sun);
-    }
-
-    .spacer {
-      flex: 1 1 auto;
-    }
-
-    main {
-      width: min(1180px, calc(100% - 36px));
-      max-width: 100%;
-      min-width: 0;
-      margin: 0 auto;
-      padding: 50px 0 100px;
-    }
-
-    .section {
-      max-width: 100%;
-      min-width: 0;
-      margin-top: 68px;
-      scroll-margin-top: 72px;
-    }
-
-    .section:first-child {
+    h1,
+    h2,
+    h3,
+    p {
       margin-top: 0;
     }
 
-    .section-head {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(220px, 0.55fr);
-      gap: 24px;
-      align-items: end;
-      padding-bottom: 16px;
-      border-bottom: 2px solid #1f3438;
-    }
-
-    h2 {
-      margin: 0;
-      font-size: clamp(1.5rem, 3vw, 2.35rem);
-      line-height: 1.15;
-      text-wrap: balance;
-    }
-
-    .section-note {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.9rem;
-      text-align: right;
-    }
-
-    .route-map {
-      margin-top: 26px;
-      padding: 24px 22px 18px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: var(--card);
-      box-shadow: var(--shadow);
-    }
-
-    .route-track {
-      display: grid;
-      grid-template-columns: repeat(8, minmax(112px, 1fr));
-      min-width: 760px;
-      align-items: start;
-    }
-
-    .route-scroll {
-      width: 100%;
-      max-width: 100%;
-      min-width: 0;
-      overflow-x: auto;
-      padding-bottom: 4px;
-    }
-
-    .route-stop {
-      position: relative;
-      padding-top: 36px;
+    h1 {
+      margin-bottom: 7px;
       color: var(--ink);
-      text-align: center;
+      font-size: clamp(24px, 2.4vw, 32px);
+      line-height: 1.14;
+      letter-spacing: -0.02em;
     }
 
-    .route-stop::before {
-      content: "";
-      position: absolute;
-      top: 14px;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--line);
-    }
-
-    .route-stop:first-child::before {
-      left: 50%;
-    }
-
-    .route-stop:last-child::before {
-      right: 50%;
-    }
-
-    .route-stop::after {
-      content: "";
-      position: absolute;
-      top: 8px;
-      left: calc(50% - 7px);
-      width: 14px;
-      height: 14px;
-      border: 3px solid var(--card);
-      border-radius: 50%;
-      background: #fff;
-      box-shadow: 0 0 0 1px var(--ocean);
-    }
-
-    .route-stop.home::after {
-      background: var(--sun);
-      box-shadow: 0 0 0 1px var(--sun);
-    }
-
-    .route-stop strong {
-      display: block;
-      font-size: 0.92rem;
-    }
-
-    .route-stop small {
-      display: block;
-      margin-top: 2px;
+    .subtitle {
+      margin-bottom: 0;
       color: var(--muted);
-      font-size: 0.78rem;
+      font-size: 13px;
     }
 
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 28px;
+    .overview-button,
+    .day-button,
+    .stop-button,
+    .option-button,
+    .photo-button,
+    .sheet-handle {
+      appearance: none;
       border: 0;
-      background: transparent;
-      border-radius: 0;
-      overflow: visible;
+      cursor: pointer;
+    }
+
+    .overview-button {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 7px;
+      min-height: 38px;
+      padding: 8px 11px;
+      border: 1px solid var(--line-strong);
+      border-radius: 9px;
+      background: var(--panel-strong);
+      color: var(--ink-soft);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .overview-button:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    .overview-button svg,
+    .line-icon {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 auto;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 2;
+    }
+
+    .trip-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 15px;
     }
 
     .stat {
-      min-height: 110px;
-      padding: 17px;
+      min-width: 0;
+      padding: 9px 10px;
       border: 1px solid var(--line);
-      border-radius: 13px;
-      background: var(--card);
-      box-shadow: var(--shadow-soft);
+      border-radius: 9px;
+      background: rgba(255, 255, 255, 0.74);
     }
 
     .stat b {
       display: block;
-      font-size: 1.35rem;
-      line-height: 1.2;
+      color: var(--ink);
+      font-size: 20px;
+      line-height: 1.1;
     }
 
     .stat span {
       display: block;
-      margin-top: 8px;
+      margin-top: 2px;
       color: var(--muted);
-      font-size: 0.84rem;
+      font-size: 11px;
     }
 
-    .grid-2,
-    .grid-3 {
+    .rail-scroll {
+      min-height: 0;
+      flex: 1 1 auto;
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+    }
+
+    .day-list {
       display: grid;
-      gap: 18px;
-      margin-top: 22px;
-    }
-
-    .grid-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .grid-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .decision {
-      min-height: 100%;
-      padding: 20px;
-      border: 1px solid var(--line);
-      border-top: 4px solid var(--ocean);
-      border-radius: 14px;
-      background: var(--card);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .decision.warn {
-      border-top-color: var(--hot);
-    }
-
-    .decision.offbeat {
-      border-top-color: var(--sun);
-    }
-
-    .decision h3 {
-      display: flex;
-      align-items: center;
       gap: 8px;
-      margin: 0 0 8px;
-      font-size: 1.03rem;
-    }
-
-    .decision p,
-    .decision ul {
       margin: 0;
-      color: #49555b;
-      font-size: 0.92rem;
-    }
-
-    .decision ul {
-      padding-left: 1.15rem;
-    }
-
-    .day-transport {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin: 18px 0 26px;
-    }
-
-    .day-transport p {
-      margin: 0;
-      padding: 13px 14px;
-      border: 1px solid #c7ded9;
-      border-radius: 11px;
-      background: #f4faf7;
-      color: #244b50;
-      font-size: 0.84rem;
-      line-height: 1.55;
-    }
-
-    .day-transport strong {
-      color: #0b555b;
-    }
-
-    .food-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 26px;
-    }
-
-    .food-card {
-      min-width: 0;
-      padding: 22px;
-      border: 1px solid var(--line);
-      border-top: 4px solid var(--sun);
-      border-radius: 14px;
-      background: var(--card);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .food-card h3 {
-      margin: 0 0 8px;
-      font-size: 1.08rem;
-    }
-
-    .food-price {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      padding: 4px 9px;
-      border: 1px solid #e4bd91;
-      border-radius: 999px;
-      background: #fff2e2;
-      color: #70451f;
-      font-size: 0.8rem;
-      font-weight: 800;
-    }
-
-    .food-list {
-      display: grid;
-      gap: 10px;
-      margin: 15px 0 0;
-      padding: 0;
+      padding: 14px 12px 22px;
       list-style: none;
     }
 
-    .food-list li {
-      padding-top: 10px;
-      border-top: 1px solid var(--line);
-    }
-
-    .food-list strong {
-      display: block;
-      color: var(--ink);
-      font-size: 0.94rem;
-    }
-
-    .food-list span {
-      display: block;
-      margin-top: 3px;
-      color: #5f6a70;
-      font-size: 0.84rem;
-      line-height: 1.55;
-    }
-
-    .food-advice {
-      margin: 15px 0 0;
-      padding-top: 12px;
-      border-top: 2px solid var(--ink);
-      color: #49555b;
-      font-size: 0.86rem;
-    }
-
-    .calendar {
-      margin-top: 26px;
+    .day-card {
+      position: relative;
       display: grid;
-      gap: 22px;
-    }
-
-    .day-tabs {
-      display: flex;
-      gap: 9px;
-      margin-top: 26px;
-      padding: 8px;
+      grid-template-columns: 54px minmax(0, 1fr);
+      gap: 10px;
+      width: 100%;
+      padding: 11px 11px 11px 8px;
       border: 1px solid var(--line);
-      border-radius: 16px;
-      background: var(--card);
-      overflow-x: auto;
-      scrollbar-width: none;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .day-tabs::-webkit-scrollbar {
-      display: none;
-    }
-
-    .day-tab {
-      flex: 1 0 136px;
-      display: grid;
-      gap: 3px;
-      min-height: 70px;
-      padding: 11px 14px;
-      border: 1px solid transparent;
-      border-radius: 11px;
-      background: transparent;
-      color: var(--ink);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.76);
       text-align: left;
-      cursor: pointer;
-      transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+      transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
     }
 
-    .day-tab:hover {
-      background: var(--paper-deep);
-      transform: translateY(-1px);
+    .day-card:hover {
+      border-color: var(--day-color);
+      background: #fff;
+      transform: translateX(2px);
     }
 
-    .day-tab[aria-selected="true"] {
-      border-color: var(--ocean);
-      background: linear-gradient(140deg, #22787b, #35a4a0);
-      color: #fff;
-      box-shadow: 0 8px 17px rgba(39, 124, 121, 0.22);
-    }
-
-    .day-tab strong {
-      font-size: 1rem;
-      line-height: 1.25;
-    }
-
-    .day-tab span {
-      color: var(--muted);
-      font-size: 0.74rem;
-      line-height: 1.32;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .day-tab[aria-selected="true"] span {
-      color: #d5eeee;
-    }
-
-    .calendar[data-view="single"] .day {
-      display: none;
-    }
-
-    .calendar[data-view="single"] .day.is-active {
-      display: block;
-      animation: day-in 230ms ease both;
-    }
-
-    @keyframes day-in {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .day {
-      display: block;
-      overflow: hidden;
-      padding: 0;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: var(--card);
-      box-shadow: var(--shadow);
-      scroll-margin-top: 76px;
-    }
-
-    .day.hot-day .day-badge {
-      color: #fff;
-      background: var(--hot);
-      border-color: var(--hot);
-    }
-
-    .day.offbeat-day .day-badge {
-      color: #fff;
-      background: var(--ocean);
-      border-color: var(--ocean);
-    }
-
-    .day-meta {
-      position: static;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 9px 12px;
-      padding: 14px 18px;
-      border-bottom: 1px solid var(--line);
-      background: linear-gradient(100deg, #e8f7f4, #fff6e8 62%, #f5f0ff);
-    }
-
-    .day-date {
-      margin: 0;
-      color: #17666b;
-      font-size: 1.12rem;
-      font-weight: 850;
-      line-height: 1.1;
-    }
-
-    .day-meta p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.8rem;
+    .day-card.is-active {
+      border-color: var(--day-color);
+      background: var(--day-soft);
+      box-shadow: inset 3px 0 0 var(--day-color);
     }
 
     .day-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-left: auto;
-      padding: 5px 10px;
-      border: 1px solid #b9d6d1;
-      border-radius: 999px;
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      align-self: start;
+      border: 1px solid color-mix(in srgb, var(--day-color) 55%, white);
+      border-radius: 50%;
       background: #fff;
-      color: #205c5a;
-      font-size: 0.76rem;
-      font-weight: 750;
+      color: var(--day-color);
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1;
+      box-shadow: 0 5px 13px rgba(21, 54, 58, 0.08);
     }
 
-    .day-content {
+    .day-badge small {
+      display: block;
+      font-size: 8px;
+      letter-spacing: 0.03em;
+    }
+
+    .day-main {
       min-width: 0;
-      padding: clamp(18px, 3vw, 30px);
     }
 
-    .day-title {
-      margin: 0;
-      max-width: 24ch;
-      font-size: clamp(1.35rem, 3vw, 2rem);
-      line-height: 1.2;
-      text-wrap: balance;
-    }
-
-    .day-summary {
-      max-width: 75ch;
-      margin: 12px 0 20px;
-      color: #49555b;
-      font-size: 0.97rem;
-    }
-
-    .route-chip {
-      display: inline-flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      align-items: center;
-      margin: 0 0 20px;
-      padding: 8px 12px;
-      border: 1px solid #bfded8;
-      border-radius: 10px;
-      background: #f0f8f5;
-      color: #285d5d;
-      font-size: 0.83rem;
-      font-weight: 650;
-    }
-
-    .reservation-strip {
+    .day-heading {
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px 10px;
-      margin: 0 0 22px;
-      padding: 13px 14px;
-      border: 1px solid #ead6bf;
-      border-radius: 12px;
-      background: #fffaf1;
-      color: #4d595f;
-      font-size: 0.82rem;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .day-heading strong {
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .day-heading em {
+      color: var(--muted);
+      font-size: 11px;
+      font-style: normal;
+      white-space: nowrap;
+    }
+
+    .day-route {
+      display: block;
+      margin-top: 4px;
+      color: var(--ink-soft);
+      font-size: 12px;
       line-height: 1.45;
     }
 
-    .reservation-strip strong {
-      color: var(--ink);
+    .day-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 7px;
     }
 
-    .reserve-badge {
+    .day-meta span {
       display: inline-flex;
       align-items: center;
-      min-height: 24px;
-      padding: 3px 8px;
+      min-height: 21px;
+      padding: 2px 6px;
       border-radius: 999px;
-      font-size: 0.73rem;
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.2;
+    }
+
+    .map-shell {
+      position: relative;
+      min-width: 0;
+      height: 100dvh;
+      min-height: 100svh;
+      background:
+        linear-gradient(135deg, rgba(231, 242, 239, 0.94), rgba(246, 239, 222, 0.92));
+      overflow: hidden;
+    }
+
+    #map {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: #dfe9e4;
+    }
+
+    .map-topbar {
+      position: absolute;
+      z-index: 500;
+      top: 18px;
+      right: 18px;
+      left: 18px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      pointer-events: none;
+    }
+
+    .map-title,
+    .map-actions {
+      pointer-events: auto;
+    }
+
+    .map-title {
+      max-width: min(540px, calc(100% - 220px));
+      padding: 10px 13px;
+      border: 1px solid rgba(216, 226, 222, 0.88);
+      border-radius: 10px;
+      background: rgba(255, 253, 248, 0.92);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+    }
+
+    .map-title strong {
+      display: block;
+      color: var(--ink);
+      font-size: 14px;
+    }
+
+    .map-title span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .map-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .map-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 38px;
+      padding: 8px 11px;
+      border: 1px solid rgba(216, 226, 222, 0.9);
+      border-radius: 9px;
+      background: rgba(255, 253, 248, 0.94);
+      box-shadow: var(--shadow-soft);
+      color: var(--ink-soft);
+      font-size: 12px;
       font-weight: 800;
       white-space: nowrap;
     }
 
-    .reserve-badge.required {
+    .map-action:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    .map-action[aria-pressed="true"] {
+      border-color: var(--teal);
+      background: var(--teal);
       color: #fff;
-      background: var(--hot);
     }
 
-    .reserve-badge.suggested {
-      color: #70451f;
-      background: var(--sun-soft);
-      border: 1px solid #e4bd91;
+    .map-legend {
+      position: absolute;
+      z-index: 500;
+      right: 18px;
+      bottom: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 8px;
+      max-width: min(470px, calc(100% - 36px));
+      padding: 8px 10px;
+      border: 1px solid rgba(216, 226, 222, 0.88);
+      border-radius: 9px;
+      background: rgba(255, 253, 248, 0.9);
+      box-shadow: var(--shadow-soft);
+      color: var(--muted);
+      font-size: 10px;
+      backdrop-filter: blur(12px);
     }
 
-    .reserve-badge.hotel {
-      color: #0c5a60;
-      background: var(--ocean-soft);
-      border: 1px solid #a9d8d6;
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
-    .reserve-badge.check {
-      color: #3d484d;
-      background: #e6e0d4;
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .map-status {
+      position: absolute;
+      z-index: 550;
+      top: 76px;
+      right: 18px;
+      max-width: min(420px, calc(100% - 36px));
+      padding: 9px 11px;
+      border: 1px solid rgba(191, 85, 70, 0.28);
+      border-radius: 9px;
+      background: rgba(255, 231, 226, 0.96);
+      box-shadow: var(--shadow-soft);
+      color: #7d382f;
+      font-size: 12px;
+    }
+
+    .map-status[hidden] {
+      display: none;
+    }
+
+    .leaflet-container {
+      font-family: inherit;
+    }
+
+    .leaflet-control-attribution {
+      margin: 0 5px 5px 0 !important;
+      border-radius: 6px 0 0 0;
+      background: rgba(255, 253, 248, 0.82) !important;
+      color: var(--muted) !important;
+      font-size: 9px !important;
+    }
+
+    .leaflet-control-attribution a {
+      color: var(--teal) !important;
+    }
+
+    .leaflet-control-zoom {
+      margin-top: 102px !important;
+      margin-right: 18px !important;
+      border: 1px solid rgba(216, 226, 222, 0.9) !important;
+      border-radius: 9px !important;
+      box-shadow: var(--shadow-soft) !important;
+      overflow: hidden;
+    }
+
+    .leaflet-control-zoom a {
+      color: var(--ink-soft) !important;
+      background: rgba(255, 253, 248, 0.96) !important;
+    }
+
+    .leaflet-popup-content-wrapper,
+    .leaflet-popup-tip {
+      color: var(--ink);
+      background: var(--panel);
+    }
+
+    .leaflet-popup-content-wrapper {
       border: 1px solid var(--line);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
     }
 
-    .reserve-detail {
+    .leaflet-popup-content {
+      margin: 12px 14px;
+      font-size: 12px;
+    }
+
+    .leaflet-popup-content strong {
       display: block;
-      margin-top: 5px;
-      color: #8a4d1d;
-      font-size: 0.82rem;
-      font-weight: 650;
+      font-size: 14px;
     }
 
-    .reserve-detail strong {
-      color: #8d2f27;
+    .route-line {
+      transition: opacity 160ms ease, stroke-opacity 160ms ease;
+    }
+
+    .distance-label {
+      border: 1px solid rgba(21, 54, 58, 0.13);
+      border-radius: 999px;
+      background: rgba(255, 253, 248, 0.94);
+      box-shadow: 0 4px 12px rgba(21, 54, 58, 0.12);
+      color: var(--ink);
+      font-size: 10px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+      padding: 4px 6px;
+    }
+
+    .stop-marker,
+    .stay-marker {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      place-items: center;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 5px 14px rgba(21, 54, 58, 0.24);
+      color: #fff;
+      font-weight: 900;
+      line-height: 1;
+      text-align: center;
+    }
+
+    .stop-marker {
+      background: var(--marker-color);
+      font-size: 12px;
+    }
+
+    .stay-marker {
+      background: var(--ink);
+      font-size: 16px;
+    }
+
+    .stay-marker::after {
+      content: "";
+      position: absolute;
+      right: 7px;
+      bottom: 4px;
+      left: 7px;
+      height: 4px;
+      border-radius: 999px;
+      background: #f4c34f;
+    }
+
+    .marker-dim {
+      opacity: 0.2;
+    }
+
+    .marker-active {
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.88));
+    }
+
+    .detail-panel {
+      position: absolute;
+      z-index: 520;
+      top: 86px;
+      bottom: 18px;
+      left: 18px;
+      display: flex;
+      width: min(430px, calc(100% - 36px));
+      flex-direction: column;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 253, 248, 0.96);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      overflow: hidden;
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .detail-panel[hidden] {
+      display: none;
+    }
+
+    .detail-scroll {
+      min-height: 0;
+      flex: 1 1 auto;
+      overflow: auto;
+      scrollbar-width: thin;
+      padding: 16px 17px 24px;
+    }
+
+    .detail-close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink-soft);
+      cursor: pointer;
+    }
+
+    .detail-kicker {
+      color: var(--teal);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .detail-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .detail-panel h2 {
+      margin: 2px 0 0;
+      color: var(--ink);
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    .detail-summary {
+      margin: 9px 0 0;
+      color: var(--ink-soft);
+      font-size: 13px;
+    }
+
+    .detail-route {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 12px;
+    }
+
+    .detail-route span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: var(--teal-soft);
+      color: #175e5b;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .detail-section {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .detail-section h3 {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 9px;
+      color: var(--ink);
+      font-size: 13px;
     }
 
     .timeline {
-      position: relative;
       display: grid;
-      gap: 16px;
+      gap: 0;
       margin: 0;
-      padding: 0 0 0 27px;
+      padding: 0;
       list-style: none;
-    }
-
-    .timeline::before {
-      content: "";
-      position: absolute;
-      top: 7px;
-      bottom: 7px;
-      left: 6px;
-      width: 2px;
-      background: var(--line);
     }
 
     .timeline li {
       position: relative;
       display: grid;
-      grid-template-columns: 76px minmax(0, 1fr);
-      gap: 13px;
-      min-width: 0;
+      grid-template-columns: 62px minmax(0, 1fr);
+      gap: 10px;
+      padding-bottom: 12px;
     }
 
     .timeline li::before {
       content: "";
       position: absolute;
-      top: 9px;
-      left: -26px;
-      width: 10px;
-      height: 10px;
-      border: 2px solid var(--card);
-      border-radius: 50%;
-      background: var(--card);
-      box-shadow: 0 0 0 1px var(--ocean);
+      top: 7px;
+      bottom: -2px;
+      left: 58px;
+      width: 1px;
+      background: var(--line);
     }
 
-    .timeline li.hot::before {
-      background: var(--hot);
-      box-shadow: 0 0 0 1px var(--hot);
+    .timeline li:last-child::before {
+      display: none;
     }
 
-    .timeline li.warn::before {
-      background: var(--sun);
-      box-shadow: 0 0 0 1px var(--sun);
+    .timeline time {
+      color: var(--day-color, var(--teal));
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.45;
     }
 
-    .time {
-      color: var(--ocean);
-      font-size: 0.84rem;
-      font-weight: 850;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .event {
-      min-width: 0;
-      padding: 0 0 14px;
-      border-bottom: 1px dashed #e6ded0;
-    }
-
-    .timeline li:last-child .event {
-      padding-bottom: 0;
-      border-bottom: 0;
-    }
-
-    .event strong {
+    .timeline strong {
       display: block;
-      font-size: 0.95rem;
-      line-height: 1.35;
+      color: var(--ink);
+      font-size: 12.5px;
+      line-height: 1.45;
     }
 
-    .event span {
-      color: #5f6a70;
-      font-size: 0.84rem;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 18px;
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      min-height: 24px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: #e6e0d4;
-      color: #3d484d;
-      font-size: 0.74rem;
-      font-weight: 700;
-    }
-
-    .tag.hot {
-      background: var(--hot-soft);
-      color: #8d2f27;
-    }
-
-    .tag.offbeat {
-      background: var(--ocean-soft);
-      color: #0c5a60;
-    }
-
-    .tag.sun {
-      background: var(--sun-soft);
-      color: #8a4d1d;
-    }
-
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      align-items: start;
-      margin-top: 20px;
-    }
-
-    .itinerary-photo {
-      min-width: 0;
-      margin: 0;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--card);
-    }
-
-    .photo-zoom {
+    .timeline span {
       display: block;
-      width: 100%;
-      padding: 0;
-      border: 0;
-      background: var(--paper-deep);
-      cursor: zoom-in;
-    }
-
-    .photo-zoom:focus-visible {
-      outline: 3px solid var(--sun);
-      outline-offset: -3px;
-    }
-
-    .itinerary-photo img {
-      display: block;
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      background: var(--paper-deep);
-    }
-
-    .photo-zoom::after {
-      position: absolute;
-      right: 9px;
-      bottom: 9px;
-      padding: 5px 8px;
-      border-radius: 5px;
-      color: #fff;
-      background: rgba(8, 18, 21, 0.74);
-      content: "点击放大";
-      font-size: 0.72rem;
-      font-weight: 700;
-      pointer-events: none;
-    }
-
-    .photo-zoom {
-      position: relative;
-    }
-
-    .itinerary-photo figcaption {
-      padding: 10px 11px 11px;
-      color: #5f6a70;
-      font-size: 0.78rem;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 11px;
       line-height: 1.5;
     }
 
-    .itinerary-photo figcaption strong {
+    .info-list {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .info-list li {
+      position: relative;
+      padding-left: 15px;
+      color: var(--ink-soft);
+      font-size: 12px;
+    }
+
+    .info-list li::before {
+      content: "";
+      position: absolute;
+      top: 0.62em;
+      left: 2px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--day-color, var(--teal));
+    }
+
+    .info-list strong {
+      color: var(--ink);
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .option-button {
+      min-height: 102px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+      text-align: left;
+    }
+
+    .option-button:hover,
+    .option-button.is-active {
+      border-color: var(--day-color);
+      background: var(--day-soft);
+    }
+
+    .option-button strong {
       display: block;
       color: var(--ink);
-      font-size: 0.86rem;
+      font-size: 12px;
+      line-height: 1.35;
     }
 
-    .itinerary-photo figcaption a {
-      color: var(--ocean);
+    .option-button span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 10.5px;
+      line-height: 1.45;
     }
 
-    .photo-grid .itinerary-photo:last-child:nth-child(odd) {
-      grid-column: 1 / -1;
+    .reservation-list {
+      display: grid;
+      gap: 7px;
+    }
+
+    .reservation {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 8px;
+      align-items: start;
+      padding: 8px 9px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    .reservation-icon {
+      display: grid;
+      width: 26px;
+      height: 26px;
+      place-items: center;
+      border-radius: 7px;
+      background: var(--gold-soft);
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .reservation strong {
+      display: block;
+      color: var(--ink);
+      font-size: 11.5px;
+      line-height: 1.4;
+    }
+
+    .reservation span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 10.5px;
+      line-height: 1.45;
+    }
+
+    .photo-strip {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .photo-item {
+      position: relative;
+      min-height: 104px;
+      margin: 0;
+      border-radius: 9px;
+      overflow: hidden;
+      background: var(--paper);
+    }
+
+    .photo-item img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 104px;
+      object-fit: cover;
+      transition: transform 180ms ease;
+    }
+
+    .photo-item:hover img {
+      transform: scale(1.03);
+    }
+
+    .photo-item figcaption {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding: 16px 7px 6px;
+      background: linear-gradient(transparent, rgba(15, 35, 38, 0.78));
+      color: #fff;
+      font-size: 10px;
+      line-height: 1.3;
+    }
+
+    .photo-button {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      background: transparent;
     }
 
     .lightbox {
       position: fixed;
+      z-index: 2000;
       inset: 0;
-      z-index: 1000;
       display: grid;
       place-items: center;
-      padding: clamp(12px, 3vw, 28px);
-      background: rgba(8, 18, 21, 0.92);
+      padding: 18px;
+      background: rgba(13, 30, 32, 0.84);
+      backdrop-filter: blur(8px);
     }
 
     .lightbox[hidden] {
       display: none;
     }
 
-    .lightbox-panel {
-      position: relative;
-      display: grid;
-      grid-template-rows: minmax(0, 1fr) auto;
-      width: min(1180px, 100%);
-      max-height: calc(100vh - 24px);
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: var(--radius);
-      background: #0f2025;
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
-    }
-
-    .lightbox-media {
-      display: flex;
-      min-height: 0;
-      align-items: center;
-      justify-content: center;
-      background: #081215;
-    }
-
-    .lightbox-image {
-      display: block;
-      width: auto;
-      height: auto;
-      max-width: 100%;
-      max-height: calc(100vh - 190px);
-      object-fit: contain;
-    }
-
-    .lightbox-caption {
-      padding: 14px 64px 16px 16px;
-      color: #d8e3e4;
-      background: #10252b;
-      font-size: 0.84rem;
-      line-height: 1.6;
-    }
-
-    .lightbox-caption strong {
-      display: block;
-      margin-bottom: 3px;
-      color: #fff;
-      font-size: 0.95rem;
-    }
-
-    .lightbox-caption p {
-      margin: 0;
-    }
-
-    .lightbox-caption a {
-      color: #8fd2d0;
+    .lightbox img {
+      max-width: min(1180px, 96vw);
+      max-height: 82vh;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 10px;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.38);
     }
 
     .lightbox-close {
       position: absolute;
-      top: 10px;
-      right: 10px;
-      display: inline-grid;
+      top: 16px;
+      right: 16px;
+      display: grid;
+      width: 38px;
+      height: 38px;
       place-items: center;
-      width: 40px;
-      height: 40px;
-      padding: 0;
-      border: 1px solid rgba(255, 255, 255, 0.34);
-      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 9px;
+      background: rgba(255, 255, 255, 0.12);
       color: #fff;
-      background: rgba(8, 18, 21, 0.78);
       cursor: pointer;
     }
 
-    .lightbox-close:hover,
-    .lightbox-close:focus-visible {
-      border-color: #fff;
-      background: rgba(13, 106, 115, 0.9);
-      outline: none;
-    }
-
-    body.lightbox-open {
-      overflow: hidden;
-    }
-
-    .table-wrap {
-      width: 100%;
-      max-width: 100%;
-      min-width: 0;
-      margin-top: 22px;
-      overflow-x: auto;
-      border: 1px solid var(--line);
-      border-radius: 13px;
-      background: var(--card);
-      box-shadow: var(--shadow-soft);
-    }
-
-    table {
-      width: max-content;
-      min-width: 700px;
-      max-width: none;
-      border-collapse: collapse;
-      font-size: 0.9rem;
-    }
-
-    th,
-    td {
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--line);
-      text-align: left;
-      vertical-align: top;
-    }
-
-    th {
-      position: sticky;
-      top: 0;
-      background: #f1f7f4;
-      font-size: 0.78rem;
-      letter-spacing: 0.03em;
-    }
-
-    tr:last-child td {
-      border-bottom: 0;
-    }
-
-    tbody tr:hover {
-      background: #fbf7f0;
-    }
-
-    .checklist {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 26px;
-      border: 0;
-      border-radius: 0;
-      overflow: visible;
-      background: transparent;
-    }
-
-    .check-item {
-      display: grid;
-      grid-template-columns: 24px minmax(0, 1fr);
-      gap: 10px;
-      align-items: start;
-      min-height: 74px;
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: var(--card);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .check-item input {
-      width: 18px;
-      height: 18px;
-      margin-top: 4px;
-      accent-color: var(--ocean);
-    }
-
-    .check-item strong {
-      display: block;
-      font-size: 0.94rem;
-    }
-
-    .check-item span {
-      display: block;
-      margin-top: 3px;
-      color: var(--muted);
-      font-size: 0.82rem;
-    }
-
-    .progress {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: 0.86rem;
-    }
-
-    .progress-track {
-      flex: 1 1 auto;
-      height: 8px;
-      border-radius: 999px;
-      overflow: hidden;
-      background: var(--paper-deep);
-    }
-
-    .progress-bar {
-      width: 0;
-      height: 100%;
-      background: var(--ocean);
-      transition: width 180ms ease;
-    }
-
-    .callout {
-      margin-top: 22px;
-      padding: 20px;
-      border-left: 6px solid var(--sun);
-      border-radius: 0 var(--radius) var(--radius) 0;
-      background: var(--card);
-      box-shadow: var(--shadow);
-    }
-
-    .callout.hot {
-      border-left-color: var(--hot);
-    }
-
-    .callout h3 {
-      margin: 0 0 7px;
-      font-size: 1.04rem;
-    }
-
-    .callout p,
-    .callout ul {
-      margin: 0;
-      color: #4d595f;
-      font-size: 0.92rem;
-    }
-
-    .callout ul {
-      padding-left: 1.15rem;
-    }
-
-    .footer {
-      padding: 28px clamp(18px, 4vw, 54px);
-      border-top: 1px solid var(--line);
-      background: #e7e1d5;
-      color: #5c666b;
-      font-size: 0.82rem;
-    }
-
-    .footer-inner {
-      max-width: 1180px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .icon {
-      width: 17px;
-      height: 17px;
-      flex: 0 0 auto;
-      stroke-width: 2;
-      vertical-align: -0.18em;
-    }
-
-    .hot-only .day:not(.hot-day) {
+    .sheet-handle {
       display: none;
     }
 
-    .hot-only-note {
+    .mobile-detail {
       display: none;
-      margin-top: 16px;
-      padding: 12px 14px;
-      border: 1px solid var(--sun);
-      border-radius: var(--radius);
-      background: var(--sun-soft);
-      color: #70451f;
-      font-size: 0.88rem;
     }
 
-    .hot-only .hot-only-note {
-      display: block;
+    .empty-state {
+      display: grid;
+      min-height: 160px;
+      place-items: center;
+      color: var(--muted);
+      text-align: center;
     }
 
-    @media (max-width: 980px) {
-      .masthead-inner,
-      .section-head {
-        grid-template-columns: 1fr;
+    @media (max-width: 1100px) {
+      :root {
+        --rail: 340px;
       }
 
-      .section-note {
-        text-align: left;
+      .detail-panel {
+        width: min(390px, calc(100% - 36px));
       }
 
-      .stats {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .map-title {
+        max-width: calc(100% - 210px);
       }
-
-      .grid-3 {
-        grid-template-columns: 1fr;
-      }
-
     }
 
-    @media (max-width: 760px) {
+    @media (max-width: 820px) {
       body {
-        font-size: 15px;
+        overflow: hidden;
       }
 
-      .masthead {
-        padding-top: 24px;
+      .app {
+        display: block;
+        height: 100dvh;
+        min-height: 100svh;
       }
 
-      .quick-facts,
-      .grid-2,
-      .food-grid,
-      .checklist {
-        grid-template-columns: 1fr;
-      }
-
-      .grid-2 > *,
-      .grid-3 > *,
-      .food-grid > *,
-      .calendar,
-      .day,
-      .day-meta,
-      .day-content {
-        min-width: 0;
-      }
-
-      .topbar {
-        align-items: stretch;
-      }
-
-      .topbar-inner {
-        flex-wrap: wrap;
-      }
-
-      .topnav {
-        order: 2;
-        width: 100%;
-      }
-
-      .spacer {
+      .rail {
         display: none;
       }
 
-      main {
-        width: min(100% - 24px, 1180px);
-        padding-top: 28px;
+      .map-shell {
+        height: 100dvh;
+        min-height: 100svh;
       }
 
-      .section {
-        margin-top: 46px;
-      }
-
-      .day {
-        grid-template-columns: 1fr;
-        gap: 13px;
-      }
-
-      .day-meta {
-        position: static;
-      }
-
-      .timeline li {
-        grid-template-columns: 64px minmax(0, 1fr);
-        gap: 10px;
-      }
-
-      .stats {
-        grid-template-columns: 1fr;
-      }
-
-      .reservation-strip {
+      .map-topbar {
+        top: 10px;
+        right: 10px;
+        left: 10px;
         align-items: flex-start;
       }
 
-      .progress {
-        flex-wrap: wrap;
+      .map-title {
+        max-width: calc(100% - 54px);
+        padding: 8px 10px;
       }
 
-      .progress-track {
-        order: 3;
-        flex-basis: 100%;
+      .map-title strong {
+        font-size: 12px;
       }
 
-      .photo-grid {
-        grid-template-columns: 1fr;
+      .map-title span {
+        font-size: 10px;
+      }
+
+      .map-actions {
+        flex-direction: column;
+        align-items: flex-end;
+      }
+
+      .map-action {
+        min-height: 34px;
+        padding: 6px 9px;
+        font-size: 11px;
+      }
+
+      .leaflet-control-zoom {
+        margin-top: 76px !important;
+        margin-right: 10px !important;
+      }
+
+      .map-legend {
+        right: 10px;
+        bottom: 178px;
+        left: 10px;
+        max-width: none;
+        padding: 6px 8px;
+      }
+
+      .map-status {
+        top: 62px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+      }
+
+      .detail-panel {
+        top: auto;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        max-height: min(74dvh, 680px);
+        border-right: 0;
+        border-bottom: 0;
+        border-left: 0;
+        border-radius: 16px 16px 0 0;
+        transform: translateY(0);
+      }
+
+      .detail-panel[hidden] {
+        display: none;
+      }
+
+      .sheet-handle {
+        display: grid;
+        width: 100%;
+        min-height: 28px;
+        place-items: center;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 253, 248, 0.96);
+        cursor: grab;
+      }
+
+      .sheet-handle::after {
+        content: "";
+        width: 42px;
+        height: 5px;
+        border-radius: 999px;
+        background: var(--line-strong);
+      }
+
+      .detail-scroll {
+        padding: 12px 14px calc(24px + env(safe-area-inset-bottom));
       }
     }
 
-    @media print {
-      :root {
-        --paper: #fff;
-        --card: #fff;
-        --line: #bbb;
+    @media (max-width: 430px) {
+      .map-title span {
+        display: none;
       }
 
-      body {
-        background: #fff;
-        font-size: 10.5pt;
+      .map-action .action-label {
+        display: none;
       }
 
-      .topbar,
-      .action,
-      .hot-only-note,
-      .lightbox,
-      .photo-zoom::after {
-        display: none !important;
+      .map-action {
+        width: 36px;
+        justify-content: center;
+        padding: 6px;
       }
 
-      .masthead {
-        padding: 20px 0;
-        background: #fff;
-        color: #111;
-        border-bottom: 2px solid #111;
+      .option-grid,
+      .photo-strip {
+        grid-template-columns: 1fr;
       }
 
-      .lede,
-      .eyebrow,
-      .fact span {
-        color: #444;
-      }
-
-      .fact {
-        border-color: #bbb;
-        background: #fff;
-      }
-
-      .fact strong {
-        color: #111;
-      }
-
-      main {
-        width: 100%;
-        padding: 20px 0;
-      }
-
-      .section,
-      .day {
-        break-inside: avoid;
-      }
-
-      .calendar[data-view="single"] .day {
-        display: grid !important;
-      }
-
-      .route-map,
-      .decision,
-      .food-card,
-      .itinerary-photo,
-      .table-wrap,
-      .callout,
-      .check-item {
-        box-shadow: none;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
+      .detail-panel h2 {
+        font-size: 19px;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      .progress-bar {
-        transition: none;
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
       }
     }
   </style>
 </head>
 <body>
-  <header class="masthead">
-    <div class="masthead-inner">
-      <div>
-        <p class="eyebrow">
-          <i class="icon" data-lucide="route" aria-hidden="true"></i>
-          2026 国庆 · 两人自驾 · 6 天 + 9/30 出发夜
-        </p>
-        <h1>江南山湖<br>6 天自驾路书</h1>
-        <p class="lede">
-          常熟 → 乌镇 → 宁波 → 神仙居 → 横店 → 绍兴 → 南浔 → 常熟，总里程约 850 公里。每天车程 1.5–3 小时，两人轮换驾驶，9 月 30 日 18:00 夜出发，10 月 6 日午间错峰返程。
-        </p>
-      </div>
-      <div class="quick-facts" aria-label="行程概览">
-        <div class="fact">
-          <strong>约 850 km</strong>
-          <span>全程总里程</span>
-        </div>
-        <div class="fact">
-          <strong>1.5–3 h</strong>
-          <span>每日车程，轻松不赶路</span>
-        </div>
-        <div class="fact">
-          <strong>2 人轮换</strong>
-          <span>自驾汽车，交替驾驶</span>
-        </div>
-        <div class="fact">
-          <strong>9/30 18:00</strong>
-          <span>夜出发，10/6 午间返程</span>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <nav class="topbar" aria-label="页面导航">
-    <div class="topbar-inner">
-      <div class="topnav">
-        <a href="#overview"><i class="icon" data-lucide="map" aria-hidden="true"></i>总览</a>
-        <a href="#calendar"><i class="icon" data-lucide="calendar-days" aria-hidden="true"></i>逐日路书</a>
-        <a href="#timing"><i class="icon" data-lucide="clock-3" aria-hidden="true"></i>时间表</a>
-        <a href="#food"><i class="icon" data-lucide="utensils" aria-hidden="true"></i>沿途美食</a>
-        <a href="#booking"><i class="icon" data-lucide="ticket-check" aria-hidden="true"></i>预约清单</a>
-        <a href="#stay-fuel"><i class="icon" data-lucide="hotel" aria-hidden="true"></i>住宿与加油</a>
-        <a href="#fallback"><i class="icon" data-lucide="shield-alert" aria-hidden="true"></i>应急</a>
-      </div>
-      <div class="spacer"></div>
-      <button class="action" id="dayViewToggle" type="button" aria-pressed="false">
-        <i class="icon" data-lucide="list" aria-hidden="true"></i>
-        <span id="dayViewLabel">展开全部</span>
-      </button>
-      <button class="action solid" id="printPlan" type="button">
-        <i class="icon" data-lucide="printer" aria-hidden="true"></i>
-        打印
-      </button>
-    </div>
-  </nav>
-
-  <main>
-    <section class="section" id="overview">
-      <div class="section-head">
-        <h2>一条顺时针江南环线</h2>
-        <p class="section-note">按指定顺序行进，不折返、不临时加站，两人轮换驾驶。</p>
-      </div>
-
-      <div class="route-map">
-        <div class="route-scroll">
-          <div class="route-track" aria-label="路线节点">
-            <div class="route-stop home"><strong>常熟</strong><small>9/30 18:00 出发</small></div>
-            <div class="route-stop"><strong>嘉兴乌镇</strong><small>9/30 夜抵 · 10/1 东栅</small></div>
-            <div class="route-stop"><strong>宁波</strong><small>10/1 晚到 · 10/2 天一阁</small></div>
-            <div class="route-stop"><strong>台州神仙居</strong><small>10/2 住白塔镇 · 10/3 早入园</small></div>
-            <div class="route-stop"><strong>金华横店</strong><small>10/3 晚到 · 10/4 秦王宫</small></div>
-            <div class="route-stop"><strong>绍兴</strong><small>10/4 晚到 · 10/5 古城</small></div>
-            <div class="route-stop"><strong>湖州南浔</strong><small>10/5 晚到 · 10/6 返程</small></div>
-            <div class="route-stop home"><strong>常熟</strong><small>10/6 午间错峰到家</small></div>
+  <div class="app">
+    <aside class="rail" aria-label="6 天行程导航">
+      <header class="rail-header">
+        <div class="brand-row">
+          <div>
+            <p class="kicker">2026 国庆自驾 · 地图路书</p>
+            <h1>常熟出发<br>浙江 6 天 5 晚</h1>
+            <p class="subtitle">乌镇 · 诸暨 · 横店 · 绍兴 · 嘉兴</p>
           </div>
+          <button class="overview-button" id="overviewButton" type="button" aria-pressed="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5 10 4l4 2.5L20 4v13.5L14 20l-4-2.5L4 20Z"/><path d="M10 4v13.5M14 6.5V20"/></svg>
+            全部路线
+          </button>
+        </div>
+        <div class="trip-stats" aria-label="行程数据">
+          <div class="stat"><b>6</b><span>天 5 晚</span></div>
+          <div class="stat"><b>3</b><span>住宿区</span></div>
+          <div class="stat"><b>≤140</b><span>单段公里</span></div>
+        </div>
+      </header>
+      <div class="rail-scroll">
+        <ol class="day-list" id="dayList"></ol>
+      </div>
+    </aside>
+
+    <main class="map-shell">
+      <div id="map" role="application" aria-label="常熟出发浙江 6 天自驾路线地图"></div>
+      <div class="map-status" id="mapStatus" role="status" hidden></div>
+
+      <div class="map-topbar">
+        <div class="map-title">
+          <strong id="mapTitle">全部路线 · 常熟 → 乌镇 → 诸暨 → 横店 → 绍兴 → 嘉兴 → 常熟</strong>
+          <span>点击日期、路线、景点或住宿查看中文详情</span>
+        </div>
+        <div class="map-actions">
+          <button class="map-action" id="mapOverviewButton" type="button" aria-pressed="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5 10 4l4 2.5L20 4v13.5L14 20l-4-2.5L4 20Z"/><path d="M10 4v13.5M14 6.5V20"/></svg>
+            <span class="action-label">全部路线</span>
+          </button>
+          <button class="map-action" id="toggleDetailButton" type="button" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h12M6 12h12M6 19h8"/></svg>
+            <span class="action-label">行程详情</span>
+          </button>
         </div>
       </div>
 
-      <div class="stats" aria-label="行程统计">
-        <div class="stat"><b>8 个节点</b><span>常熟出发并原路回到常熟</span></div>
-        <div class="stat"><b>6 天 + 夜出发</b><span>9/30 到乌镇，10/6 午间返程</span></div>
-        <div class="stat"><b>1 次换 1 城</b><span>每天只推进到下一站住宿</span></div>
-        <div class="stat"><b>两人轮换</b><span>每 2 小时左右交换驾驶</span></div>
-        <div class="stat"><b>重点预约</b><span>天一阁、神仙居、横店、鲁迅故里、南浔联票</span></div>
-      </div>
+      <aside class="detail-panel" id="detailPanel" aria-live="polite">
+        <button class="sheet-handle" id="sheetHandle" type="button" aria-label="收起或展开详情"></button>
+        <div class="detail-scroll" id="detailContent"></div>
+      </aside>
 
-      <div class="grid-3">
-        <article class="decision">
-          <h3><i class="icon" data-lucide="route" aria-hidden="true"></i>路线不折返</h3>
-          <p>按乌镇、宁波、神仙居、横店、绍兴、南浔的顺序推进，每天只换一次住宿，不回头补点。</p>
-        </article>
-        <article class="decision offbeat">
-          <h3><i class="icon" data-lucide="clock-3" aria-hidden="true"></i>控制驾驶强度</h3>
-          <p>每日车程 1.5–3 小时，两人轮换。神仙居日安排 7:30 早入园，其余日期不抢无效早起。</p>
-        </article>
-        <article class="decision warn">
-          <h3><i class="icon" data-lucide="ticket-check" aria-hidden="true"></i>热门项目先约</h3>
-          <p>国庆限流容易约满。所有热门景区建议提前 3 天完成预约，演出和索道还要提前选场次。</p>
-        </article>
-      </div>
-
-      <div class="callout hot">
-        <h3>两人自驾总提示</h3>
-        <ul>
-          <li>预约汇总：所有热门景区建议提前 3 天完成预约，国庆限流易约满。</li>
-          <li>错峰技巧：每日尽量 8 点前入园/出发，避开 9–11 点车流人流高峰。</li>
-          <li>美食避坑：海鲜排挡选明码标价的门店，景区小吃浅尝即可，正餐优先去市区本地人常去的餐馆。</li>
-          <li>物品准备：带好身份证、驾驶证、车载充电器、舒适的步行鞋，山区早晚温差大备薄外套。</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section" id="calendar">
-      <div class="section-head">
-        <h2>逐日路书</h2>
-        <p class="section-note">点击日期，只查看当天安排。需要通读时再展开全部。</p>
-      </div>
-
-      <div class="day-tabs" id="dayTabs" role="tablist" aria-label="选择日期"></div>
-
-      <div class="calendar" data-view="single">
-        <article class="day hot-day" id="day-0">
-          <div class="day-meta">
-            <p class="day-date">9/30</p>
-            <p>周三 · 出发夜</p>
-            <span class="day-badge"><i class="icon" data-lucide="car-front" aria-hidden="true"></i>常熟 → 乌镇</span>
-          </div>
-          <div class="day-content">
-            <h3 class="day-title">常熟 → 嘉兴乌镇：18:00 出发，夜游西栅</h3>
-            <p class="day-summary">18:00 从常熟出发走常台高速，全程约 110 公里，车程 1.5–2 小时；20:00 抵达乌镇西栅，办理入住后凭房卡办理景区临时出入证，夜游西栅提灯夜景、坐摇橹船。</p>
-            <div class="reservation-strip">
-              <span class="reserve-badge hotel">必须提前预订</span>
-              <span><strong>乌镇住宿：</strong>在「乌镇旅游官方预订网」提前预订东西栅联票和住宿；住西栅可买两日有效联票。</span>
-              <span class="reserve-badge required">单独预约</span>
-              <span><strong>木心美术馆：</strong>需单独预约，确定到馆日期后尽早办理。</span>
-            </div>
-            <p class="route-chip"><span>常熟</span><span>→</span><span>常台高速</span><span>→</span><span>乌镇西栅</span><span>→</span><span>约 110 km / 1.5–2 h</span></p>
-            <div class="day-transport">
-              <p><strong>主交通：</strong>两人自驾，从常熟直接到乌镇西栅。</p>
-              <p><strong>停车：</strong>停西栅景区官方停车场；住景区内民宿可凭房卡享停车优惠。</p>
-            </div>
-            <ol class="timeline">
-              <li>
-                <span class="time">18:00</span>
-                <div class="event">
-                  <strong>从常熟出发</strong>
-                  <span>走常台高速，全程约 110 公里，车程 1.5–2 小时。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">20:00</span>
-                <div class="event">
-                  <strong>抵达乌镇西栅、办理入住</strong>
-                  <span>入住后凭房卡办景区临时出入证，再开始夜游。</span>
-                  <span class="reserve-detail">西栅景区内住宿优先；确认停车场、出入证和次日东栅接驳。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">20:30–22:30</span>
-                <div class="event">
-                  <strong>夜游西栅、坐摇橹船</strong>
-                  <span>看提灯夜景，沿河慢走。夜宵可选书生羊肉面、嘉兴鲜肉大粽、定胜糕。</span>
-                </div>
-              </li>
-            </ol>
-            <div class="photo-grid">
-              <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="查看乌镇西栅夜景大图">
-                  <img src="./assets/images/wuzhen-xizha-night.jpg" alt="乌镇西栅水乡夜色与临河灯光" loading="lazy" decoding="async">
-                </button>
-                <figcaption><strong>乌镇西栅夜色</strong>入夜后沿河灯影层叠，适合抵达当晚慢慢走。图片：N509FZ，CC BY-SA 4.0，Wikimedia Commons。</figcaption>
-              </figure>
-              <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="查看乌镇水巷大图">
-                  <img src="./assets/images/wuzhen-waterway.jpg" alt="乌镇水巷、石桥与临水民居" loading="lazy" decoding="async">
-                </button>
-                <figcaption><strong>水巷与石桥</strong>第二天上午逛东栅时，顺着水巷看最经典的水乡尺度。图片：韩笃一，CC BY-SA 3.0，Wikimedia Commons。</figcaption>
-              </figure>
-            </div>
-            <div class="tags">
-              <span class="tag">110 km</span>
-              <span class="tag">夜游西栅</span>
-              <span class="tag">住西栅</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="day " id="day-1">
-          <div class="day-meta">
-            <p class="day-date">10/1</p>
-            <p>周四 · 水乡到港城</p>
-            <span class="day-badge"><i class="icon" data-lucide="waves" aria-hidden="true"></i>乌镇 → 宁波</span>
-          </div>
-          <div class="day-content">
-            <h3 class="day-title">嘉兴乌镇 → 宁波：上午东栅，晚上南塘老街</h3>
-            <p class="day-summary">上午深度游东栅，打卡茅盾故居、林家铺子、皮影戏馆、逢源双桥；14:00 出发前往宁波，全程 180 公里，车程 2–2.5 小时；晚上逛南塘老街，看三江口港口夜景。</p>
-            <div class="reservation-strip">
-              <span class="reserve-badge required">次日预约</span>
-              <span><strong>天一阁博物院：</strong>提前在「天一阁」微信公众号预约，建议约 8:30–9:30 时段错峰入园。</span>
-              <span class="reserve-badge hotel">住宿需预订</span>
-              <span><strong>宁波住宿：</strong>老城区车位紧张，优先选带免费车位的酒店。</span>
-            </div>
-            <p class="route-chip"><span>乌镇</span><span>→</span><span>东栅</span><span>→</span><span>宁波</span><span>→</span><span>约 180 km / 2–2.5 h</span></p>
-            <div class="day-transport">
-              <p><strong>主交通：</strong>14:00 从乌镇出发自驾去宁波。</p>
-              <p><strong>停车：</strong>宁波老城区车位紧张，优先选带免费车位的酒店，晚上尽量把车留在酒店。</p>
-            </div>
-            <ol class="timeline">
-              <li>
-                <span class="time">上午</span>
-                <div class="event">
-                  <strong>东栅深度游</strong>
-                  <span>打卡茅盾故居、林家铺子、皮影戏馆、逢源双桥。</span>
-                </div>
-              </li>
-              <li class="hot">
-                <span class="time">14:00</span>
-                <div class="event">
-                  <strong>乌镇 → 宁波</strong>
-                  <span>全程约 180 公里，正常车程 2–2.5 小时；两人可轮换驾驶。</span>
-                  <span class="reserve-detail">国庆按 2.5–3 小时预留，途中安排一次服务区休息。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">晚上</span>
-                <div class="event">
-                  <strong>南塘老街、三江口港口夜景</strong>
-                  <span>先逛南塘老街，再去三江口看港口夜景。</span>
-                </div>
-              </li>
-            </ol>
-            <div class="photo-grid">
-              <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="查看宁波三江口大图">
-                  <img src="./assets/images/ningbo-sanjiangkou.jpg" alt="宁波三江口江面与城市建筑" loading="lazy" decoding="async">
-                </button>
-                <figcaption><strong>宁波三江口</strong>甬江、姚江、奉化江在此交汇，傍晚看城市水岸线。图片：钉钉，CC BY-SA 4.0，Wikimedia Commons。</figcaption>
-              </figure>
-            </div>
-            <div class="tags">
-              <span class="tag">东栅</span>
-              <span class="tag">180 km</span>
-              <span class="tag">南塘老街</span>
-              <span class="tag">三江口</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="day " id="day-2">
-          <div class="day-meta">
-            <p class="day-date">10/2</p>
-            <p>周五 · 城市到仙居</p>
-            <span class="day-badge"><i class="icon" data-lucide="mountain" aria-hidden="true"></i>宁波 → 神仙居</span>
-          </div>
-          <div class="day-content">
-            <h3 class="day-title">宁波 → 台州神仙居：天一阁、月湖，再转仙居</h3>
-            <p class="day-summary">上午游天一阁博物院，逛尊经阁、东明草堂、天一池，顺路逛月湖公园；13:30 出发前往台州神仙居，全程 160 公里，车程 2.5–3 小时；晚上入住仙居县白塔镇酒店。</p>
-            <div class="reservation-strip">
-              <span class="reserve-badge required">提前 1 天预约</span>
-              <span><strong>神仙居大门票 + 南天索道：</strong>在「神仙居景区」官方公众号预订，建议买套票，选南门入园。</span>
-              <span class="reserve-badge hotel">住宿需预订</span>
-              <span><strong>仙居白塔镇：</strong>离景区南门约 10 分钟车程，减少次日早间车程。</span>
-            </div>
-            <p class="route-chip"><span>宁波</span><span>→</span><span>天一阁 / 月湖</span><span>→</span><span>仙居白塔镇</span><span>→</span><span>约 160 km / 2.5–3 h</span></p>
-            <div class="day-transport">
-              <p><strong>主交通：</strong>上午在宁波市区游览，13:30 出发自驾去仙居。</p>
-              <p><strong>停车：</strong>神仙居南门停车场车位多，停车 5 元/小时，20 元封顶。</p>
-            </div>
-            <ol class="timeline">
-              <li>
-                <span class="time">上午</span>
-                <div class="event">
-                  <strong>天一阁博物院</strong>
-                  <span>逛尊经阁、东明草堂、天一池；顺路逛月湖公园。</span>
-                  <span class="reserve-detail">按预约时段 8:30–9:30 入园，避开 9–11 点人流高峰。</span>
-                </div>
-              </li>
-              <li class="hot">
-                <span class="time">13:30</span>
-                <div class="event">
-                  <strong>宁波 → 台州神仙居</strong>
-                  <span>全程约 160 公里，车程 2.5–3 小时。</span>
-                  <span class="reserve-detail">两人轮换驾驶，途中服务区休息一次。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">晚上</span>
-                <div class="event">
-                  <strong>入住仙居县白塔镇</strong>
-                  <span>选离景区南门约 10 分钟车程的酒店，早点休息。</span>
-                </div>
-              </li>
-            </ol>
-            <div class="photo-grid">
-              <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="查看宁波天一阁大图">
-                  <img src="./assets/images/ningbo-tianyige.jpg" alt="宁波天一阁传统建筑与园林" loading="lazy" decoding="async">
-                </button>
-                <figcaption><strong>天一阁博物院</strong>中国现存最古老的藏书楼之一，适合按预约时段安静参观。图片：Nablazzz，CC BY-SA 3.0，Wikimedia Commons。</figcaption>
-              </figure>
-            </div>
-            <div class="tags">
-              <span class="tag">天一阁</span>
-              <span class="tag">月湖公园</span>
-              <span class="tag">160 km</span>
-              <span class="tag">白塔镇</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="day hot-day" id="day-3">
-          <div class="day-meta">
-            <p class="day-date">10/3</p>
-            <p>周六 · 神仙居主日</p>
-            <span class="day-badge"><i class="icon" data-lucide="sunrise" aria-hidden="true"></i>神仙居 → 横店</span>
-          </div>
-          <div class="day-content">
-            <h3 class="day-title">台州神仙居 → 金华横店：早入园，晚看梦幻谷</h3>
-            <p class="day-summary">7:30 早入园错峰，南天索道上山，走悬空栈道，打卡如意桥、观音峰、南天顶，全程游玩 5–6 小时；14:30 出发前往横店影视城，全程 120 公里，车程 1.5–2 小时；晚上逛梦幻谷景区，看《梦幻太极》《暴雨山洪》实景演出。</p>
-            <div class="reservation-strip">
-              <span class="reserve-badge required">提前预约</span>
-              <span><strong>神仙居：</strong>大门票 + 南天索道提前 1 天在官方公众号预订，建议买套票，南门入园。</span>
-              <span class="reserve-badge required">提前预约</span>
-              <span><strong>横店联票 + 梦幻谷：</strong>在「横店影视城」官方公众号预订，热门演出场次提前选座。</span>
-              <span class="reserve-badge hotel">住宿需预订</span>
-              <span><strong>横店住宿：</strong>优先合作酒店；各景区均有专属停车场，10 元/天，合作酒店一般送停车券。</span>
-            </div>
-            <p class="route-chip"><span>神仙居南门</span><span>→</span><span>南天索道</span><span>→</span><span>横店影视城</span><span>→</span><span>约 120 km / 1.5–2 h</span></p>
-            <div class="day-transport">
-              <p><strong>主交通：</strong>上午在神仙居，14:30 从景区出发自驾去横店。</p>
-              <p><strong>停车：</strong>神仙居选南门停车场；横店各景区均有专属停车场，10 元/天。</p>
-            </div>
-            <ol class="timeline">
-              <li>
-                <span class="time">7:30</span>
-                <div class="event">
-                  <strong>神仙居南门早入园</strong>
-                  <span>南天索道上山，走悬空栈道，打卡如意桥、观音峰、南天顶。</span>
-                  <span class="reserve-detail">全程游玩 5–6 小时；上山路线选南门更省力。</span>
-                </div>
-              </li>
-              <li class="hot">
-                <span class="time">14:30</span>
-                <div class="event">
-                  <strong>神仙居 → 横店影视城</strong>
-                  <span>全程约 120 公里，车程 1.5–2 小时。</span>
-                  <span class="reserve-detail">离开前补水、吃点东西，避免连续驾驶疲劳。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">晚上</span>
-                <div class="event">
-                  <strong>梦幻谷景区</strong>
-                  <span>看《梦幻太极》《暴雨山洪》实景演出。</span>
-                  <span class="reserve-detail">热门演出提前选座，提前 30 分钟到场。</span>
-                </div>
-              </li>
-            </ol>
-            <div class="photo-grid">
-              <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="查看神仙居山峰大图">
-                  <img src="./assets/images/shenxianju-peaks.jpg" alt="神仙居山峰、云雾与悬空栈道景观" loading="lazy" decoding="async">
-                </button>
-                <figcaption><strong>神仙居奇峰</strong>山峰立起、云雾流动，早入园更容易看到安静的山色。图片：钉钉，CC BY-SA 4.0，Wikimedia Commons。</figcaption>
-              </figure>
-              <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="查看神仙居桥梁大图">
-                  <img src="./assets/images/shenxianju-bridge.jpg" alt="神仙居山间桥梁与峡谷">
-                </button>
-                <figcaption><strong>山间天桥</strong>桥梁连接山壁，是神仙居游览里很有辨识度的一段路。图片：钉钉，CC BY-SA 4.0，Wikimedia Commons。</figcaption>
-              </figure>
-            </div>
-            <div class="tags">
-              <span class="tag">7:30 入园</span>
-              <span class="tag">南天索道</span>
-              <span class="tag">如意桥</span>
-              <span class="tag">梦幻谷</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="day " id="day-4">
-          <div class="day-meta">
-            <p class="day-date">10/4</p>
-            <p>周日 · 影视城到绍兴</p>
-            <span class="day-badge"><i class="icon" data-lucide="film" aria-hidden="true"></i>横店 → 绍兴</span>
-          </div>
-          <div class="day-content">
-            <h3 class="day-title">金华横店 → 绍兴：秦王宫取景地，夜游仓桥直街</h3>
-            <p class="day-summary">上午游秦王宫景区，打卡四海归一殿，看《帝国江山》球幕电影；时间充裕可加逛清明上河图。15:00 出发前往绍兴，全程 130 公里，车程 2 小时；晚上逛仓桥直街，坐乌篷船游环城河。</p>
-            <div class="reservation-strip">
-              <span class="reserve-badge required">次日免费预约</span>
-              <span><strong>鲁迅故里 + 沈园：</strong>提前在「绍兴市文旅集团」微信公众号免费预约，分时段入园。</span>
-              <span class="reserve-badge hotel">住宿需预订</span>
-              <span><strong>绍兴住宿：</strong>停鲁迅故里景区停车场，或选带免费车位的市区酒店。</span>
-            </div>
-            <p class="route-chip"><span>横店秦王宫</span><span>→</span><span>绍兴</span><span>→</span><span>约 130 km / 2 h</span></p>
-            <div class="day-transport">
-              <p><strong>主交通：</strong>上午在横店游览，15:00 出发自驾去绍兴。</p>
-              <p><strong>停车：</strong>停鲁迅故里景区停车场，或选择带免费车位的市区酒店。</p>
-            </div>
-            <ol class="timeline">
-              <li>
-                <span class="time">上午</span>
-                <div class="event">
-                  <strong>秦王宫景区</strong>
-                  <span>《琅琊榜》《陈情令》取景地，打卡四海归一殿，看《帝国江山》球幕电影。</span>
-                  <span class="reserve-detail">时间充裕可加逛清明上河图。</span>
-                </div>
-              </li>
-              <li class="hot">
-                <span class="time">15:00</span>
-                <div class="event">
-                  <strong>横店 → 绍兴</strong>
-                  <span>全程约 130 公里，车程 2 小时。</span>
-                  <span class="reserve-detail">两人轮换驾驶，避开傍晚疲劳时段。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">晚上</span>
-                <div class="event">
-                  <strong>仓桥直街、环城河乌篷船</strong>
-                  <span>逛仓桥直街，坐乌篷船游环城河。</span>
-                </div>
-              </li>
-            </ol>
-            <div class="photo-grid">
-              <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="查看横店秦王宫大殿大图">
-                  <img src="./assets/images/hengdian-qin-hall.jpg" alt="横店秦王宫四海归一殿建筑外观" loading="lazy" decoding="async">
-                </button>
-                <figcaption><strong>秦王宫大殿</strong>气势开阔的影视城场景，《琅琊榜》《陈情令》都在这里取景。图片：N509FZ，CC BY-SA 4.0，Wikimedia Commons。</figcaption>
-              </figure>
-              <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="查看横店秦王宫宫殿大图">
-                  <img src="./assets/images/hengdian-qin-palace.jpg" alt="横店秦王宫宫殿与广场" loading="lazy" decoding="async">
-                </button>
-                <figcaption><strong>秦王宫场景</strong>上午把主线走完，下午按点转场绍兴。图片：N509FZ，CC BY-SA 4.0，Wikimedia Commons。</figcaption>
-              </figure>
-              <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="查看绍兴仓桥直街大图">
-                  <img src="./assets/images/shaoxing-cangqiao.jpg" alt="绍兴仓桥直街河道与沿河民居" loading="lazy" decoding="async">
-                </button>
-                <figcaption><strong>仓桥直街</strong>抵达绍兴后的夜间慢游点，沿河走走就能感受到老城气息。图片：猫猫的日记本，CC BY-SA 4.0，Wikimedia Commons。</figcaption>
-              </figure>
-            </div>
-            <div class="tags">
-              <span class="tag">秦王宫</span>
-              <span class="tag">四海归一殿</span>
-              <span class="tag">130 km</span>
-              <span class="tag">仓桥直街</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="day " id="day-5">
-          <div class="day-meta">
-            <p class="day-date">10/5</p>
-            <p>周一 · 古城到南浔</p>
-            <span class="day-badge"><i class="icon" data-lucide="anchor" aria-hidden="true"></i>绍兴 → 南浔</span>
-          </div>
-          <div class="day-content">
-            <h3 class="day-title">绍兴 → 湖州南浔：鲁迅故里、东湖，夜看百间楼</h3>
-            <p class="day-summary">上午游鲁迅故里（百草园、三味书屋），步行游览沈园；下午去东湖景区，坐乌篷船穿采石岩洞；16:00 出发前往南浔古镇，全程 140 公里，车程 2–2.5 小时；晚上逛百间楼沿河夜景。</p>
-            <div class="reservation-strip">
-              <span class="reserve-badge required">免费预约</span>
-              <span><strong>鲁迅故里 + 沈园：</strong>提前在「绍兴市文旅集团」微信公众号免费预约，分时段入园。</span>
-              <span class="reserve-badge suggested">提前 1 天购票</span>
-              <span><strong>南浔核心景点联票：</strong>南浔古镇免大门票；小莲庄 + 嘉业藏书楼等核心联票提前 1 天线上买 75 元/人，2 日有效。</span>
-              <span class="reserve-badge hotel">住宿需预订</span>
-              <span><strong>南浔住宿：</strong>停南浔古镇南入口停车场，免费停车，步行约 5 分钟到百间楼。</span>
-            </div>
-            <p class="route-chip"><span>绍兴鲁迅故里</span><span>→</span><span>东湖</span><span>→</span><span>南浔古镇</span><span>→</span><span>约 140 km / 2–2.5 h</span></p>
-            <div class="day-transport">
-              <p><strong>主交通：</strong>上午在绍兴游览，16:00 出发自驾去南浔。</p>
-              <p><strong>停车：</strong>南浔古镇南入口停车场免费，步行约 5 分钟到百间楼。</p>
-            </div>
-            <ol class="timeline">
-              <li>
-                <span class="time">上午</span>
-                <div class="event">
-                  <strong>鲁迅故里 → 沈园</strong>
-                  <span>逛百草园、三味书屋，再步行到沈园。</span>
-                  <span class="reserve-detail">按预约时段分时入园。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">下午</span>
-                <div class="event">
-                  <strong>东湖景区</strong>
-                  <span>坐乌篷船穿采石岩洞。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">16:00</span>
-                <div class="event">
-                  <strong>绍兴 → 南浔古镇</strong>
-                  <span>全程约 140 公里，车程 2–2.5 小时。</span>
-                  <span class="reserve-detail">出发前在绍兴市区补满油。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">晚上</span>
-                <div class="event">
-                  <strong>百间楼沿河夜景</strong>
-                  <span>入住后沿河慢走，不赶第二个远距离景点。</span>
-                </div>
-              </li>
-            </ol>
-            <div class="photo-grid">
-              <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="查看绍兴鲁迅故里大图">
-                  <img src="./assets/images/shaoxing-luxun.jpg" alt="绍兴鲁迅故里传统建筑与戏台" loading="lazy" decoding="async">
-                </button>
-                <figcaption><strong>鲁迅故里</strong>百草园、三味书屋连成一条步行线，记得按预约时段入园。图片：wanghongliu，CC BY-SA 3.0，Wikimedia Commons。</figcaption>
-              </figure>
-              <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="查看绍兴东湖大图">
-                  <img src="./assets/images/shaoxing-east-lake.jpg" alt="绍兴东湖采石遗迹、湖面与岩壁" loading="lazy" decoding="async">
-                </button>
-                <figcaption><strong>绍兴东湖</strong>坐乌篷船穿行采石岩洞，是古城游览后很舒服的一段水上行程。图片：Logan Wenger，CC BY 2.0，Wikimedia Commons。</figcaption>
-              </figure>
-              <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="查看南浔百间楼大图">
-                  <img src="./assets/images/nanxun-baijianlou.jpg" alt="南浔百间楼沿河民居夜景" loading="lazy" decoding="async">
-                </button>
-                <figcaption><strong>南浔百间楼</strong>抵达南浔后沿河看夜景，水面和民居灯光很适合慢慢走。图片：钉钉，CC BY-SA 4.0，Wikimedia Commons。</figcaption>
-              </figure>
-            </div>
-            <div class="tags">
-              <span class="tag">鲁迅故里</span>
-              <span class="tag">沈园</span>
-              <span class="tag">东湖乌篷船</span>
-              <span class="tag">百间楼</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="day " id="day-6">
-          <div class="day-meta">
-            <p class="day-date">10/6</p>
-            <p>周二 · 错峰返程</p>
-            <span class="day-badge"><i class="icon" data-lucide="home" aria-hidden="true"></i>南浔 → 常熟</span>
-          </div>
-          <div class="day-content">
-            <h3 class="day-title">湖州南浔 → 返程常熟：午间错峰回家</h3>
-            <p class="day-summary">上午游小莲庄、嘉业藏书楼，再逛湖笔作坊体验文房文化；中午在古镇内吃太湖湖鲜；12:30 出发返程，全程 120 公里，车程 1.5–2 小时，避开 16 点后高速高峰。</p>
-            <div class="reservation-strip">
-              <span class="reserve-badge check">无需景区预约</span>
-              <span><strong>返程：</strong>当天不安排需要预约的新景区，重点确认车况和高速实时路况。</span>
-              <span class="reserve-badge suggested">联票 2 日有效</span>
-              <span><strong>南浔核心联票：</strong>若前一天未购票，当天可在官方线上渠道购买 75 元/人联票。</span>
-            </div>
-            <p class="route-chip"><span>南浔古镇</span><span>→</span><span>常台高速</span><span>→</span><span>常熟</span><span>→</span><span>约 120 km / 1.5–2 h</span></p>
-            <div class="day-transport">
-              <p><strong>主交通：</strong>12:30 从南浔出发自驾回常熟。</p>
-              <p><strong>路线：</strong>走常台高速，中途可在嘉兴服务区休整。</p>
-            </div>
-            <ol class="timeline">
-              <li>
-                <span class="time">上午</span>
-                <div class="event">
-                  <strong>小莲庄、嘉业藏书楼</strong>
-                  <span>逛私家园林和藏书楼，再去湖笔作坊体验文房文化。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">中午</span>
-                <div class="event">
-                  <strong>古镇内吃太湖湖鲜</strong>
-                  <span>推荐太湖三白、笋干老鸭煲、酱板鱼。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">12:30</span>
-                <div class="event">
-                  <strong>南浔 → 常熟</strong>
-                  <span>全程约 120 公里，车程 1.5–2 小时，避开 16 点后高速高峰。</span>
-                  <span class="reserve-detail">走常台高速，中途可在嘉兴服务区休整。</span>
-                </div>
-              </li>
-            </ol>
-            <div class="photo-grid">
-              <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="查看南浔小莲庄大图">
-                  <img src="./assets/images/nanxun-xiaolianzhuang.jpg" alt="南浔古镇小莲庄园林与水面" loading="lazy" decoding="async">
-                </button>
-                <figcaption><strong>小莲庄</strong>返程当天上午逛私家园林和嘉业藏书楼，午间错峰出发。图片：钉钉，CC BY-SA 4.0，Wikimedia Commons。</figcaption>
-              </figure>
-            </div>
-            <div class="tags">
-              <span class="tag">小莲庄</span>
-              <span class="tag">嘉业藏书楼</span>
-              <span class="tag">120 km</span>
-              <span class="tag">午间返程</span>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="timing">
-      <div class="section-head">
-        <h2>每日时间表</h2>
-        <p class="section-note">时间以正常路况估算，国庆按导航实时路况预留 30% 到 50% 余量。</p>
-      </div>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>日期</th><th>核心安排</th><th>关键时间</th><th>当天转场</th><th>晚了怎么办</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>9/30</td><td>常熟 → 乌镇西栅</td><td>18:00 出发，20:00 抵达</td><td>110 km / 1.5–2 h</td><td>晚到只办入住和夜游，不再加项目。</td></tr>
-            <tr><td>10/1</td><td>东栅 → 宁波南塘老街、三江口</td><td>14:00 出发去宁波</td><td>180 km / 2–2.5 h</td><td>东栅压缩到上午，宁波夜景正常保留。</td></tr>
-            <tr><td>10/2</td><td>天一阁、月湖 → 仙居白塔镇</td><td>8:30–9:30 天一阁，13:30 出发</td><td>160 km / 2.5–3 h</td><td>天一阁排队过长就逛月湖，按点转场。</td></tr>
-            <tr><td>10/3</td><td>神仙居 → 横店梦幻谷</td><td>7:30 入园，14:30 出发</td><td>120 km / 1.5–2 h</td><td>索道排队过长就删支线，确保 14:30 转场。</td></tr>
-            <tr><td>10/4</td><td>秦王宫 → 绍兴仓桥直街</td><td>15:00 出发去绍兴</td><td>130 km / 2 h</td><td>清明上河图只作加逛，不影响 15:00 发车。</td></tr>
-            <tr><td>10/5</td><td>鲁迅故里、沈园、东湖 → 南浔</td><td>16:00 出发去南浔</td><td>140 km / 2–2.5 h</td><td>东湖来不及就取消，优先保证南浔夜景。</td></tr>
-            <tr><td>10/6</td><td>小莲庄、嘉业藏书楼 → 常熟</td><td>12:30 出发返程</td><td>120 km / 1.5–2 h</td><td>午间出发，避开 16 点后高速高峰。</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="section" id="food">
-      <div class="section-head">
-        <h2>沿途美食</h2>
-        <p class="section-note">按路线顺序整理，景区店只浅尝，正餐优先市区本地餐馆。</p>
-      </div>
-
-      <div class="food-grid">
-        <article class="food-card">
-          <h3><i class="icon" data-lucide="soup" aria-hidden="true"></i>乌镇与嘉兴</h3>
-          <span class="food-price">夜宵 + 水乡菜</span>
-          <ul class="food-list">
-            <li><strong>夜宵：书生羊肉面、嘉兴鲜肉大粽、定胜糕</strong><span>抵达西栅后选 1–2 样，不用一次吃全。</span></li>
-            <li><strong>必尝：乌镇酱鸭、乌米饭、清蒸白水鱼、臭豆干</strong><span>水乡菜偏清淡，按两人食量少点。</span></li>
-          </ul>
-          <p class="food-advice"><strong>适合：</strong>9/30 夜游后吃夜宵，10/1 东栅午餐。</p>
-        </article>
-
-        <article class="food-card">
-          <h3><i class="icon" data-lucide="fish" aria-hidden="true"></i>宁波</h3>
-          <span class="food-price">小吃 + 海鲜正餐</span>
-          <ul class="food-list">
-            <li><strong>小吃：缸鸭狗宁波汤圆（黑芝麻猪油馅）、海苔味油赞子、年糕团</strong><span>南塘老街适合边走边吃。</span></li>
-            <li><strong>正餐：海鲜面、红膏炝蟹、慈城年糕炒蟹、腐皮包黄鱼</strong><span>海鲜排挡先看明码标价，再决定点单。</span></li>
-          </ul>
-          <p class="food-advice"><strong>适合：</strong>10/1 晚上南塘老街或 10/2 宁波午餐。</p>
-        </article>
-
-        <article class="food-card">
-          <h3><i class="icon" data-lucide="mountain" aria-hidden="true"></i>仙居与横店</h3>
-          <span class="food-price">山野主食 + 金华味</span>
-          <ul class="food-list">
-            <li><strong>仙居主食：仙居麦虾、食饼筒、浇头面</strong><span>适合登山前后补充体力。</span></li>
-            <li><strong>仙居特色：泡鲞、仙居三黄鸡、溪鱼豆腐</strong><span>白塔镇和仙居县城选择更多。</span></li>
-            <li><strong>横店：金华火腿煲、萝卜丝饼、义乌红糖麻花</strong><span>正餐可选沃面、上卢馄饨、本地土菜。</span></li>
-          </ul>
-          <p class="food-advice"><strong>适合：</strong>10/2 晚、10/3 登山后和横店晚餐。</p>
-        </article>
-
-        <article class="food-card">
-          <h3><i class="icon" data-lucide="wheat" aria-hidden="true"></i>绍兴与南浔</h3>
-          <span class="food-price">黄酒味 + 太湖湖鲜</span>
-          <ul class="food-list">
-            <li><strong>绍兴小吃：臭豆腐（配蒜酱）、黄酒棒冰、茴香豆、奶油小攀</strong><span>仓桥直街边走边尝。</span></li>
-            <li><strong>绍兴正餐：梅干菜扣肉、醉鸡、黄酒蒸蟹、嵊州豆腐年糕</strong><span>黄酒饮品后不要立即开车。</span></li>
-            <li><strong>南浔小吃：双交面（酥肉 + 爆鱼）、丁莲芳千张包、桔红糕</strong><span>适合早餐和路上点心。</span></li>
-            <li><strong>南浔正餐：太湖三白（银鱼、白鱼、白虾）、笋干老鸭煲、酱板鱼</strong><span>返程前吃一顿，午间错峰出发。</span></li>
-          </ul>
-          <p class="food-advice"><strong>适合：</strong>10/4–10/6。</p>
-        </article>
-      </div>
-
-      <div class="callout">
-        <h3>美食避坑</h3>
-        <ul>
-          <li>海鲜排挡选明码标价的门店，先确认按斤、按份还是按锅。</li>
-          <li>景区小吃浅尝即可，正餐优先去市区本地人常去的餐馆。</li>
-          <li>饮酒后绝不开车，含黄酒的正餐安排在住宿后或改由另一人驾驶。</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section" id="booking">
-      <div class="section-head">
-        <h2>预约与订房清单</h2>
-        <p class="section-note">热门景区建议提前 3 天完成预约，国庆限流容易约满。</p>
-      </div>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>日期 / 地点</th><th>是否预约</th><th>要预约什么</th><th>建议完成时间</th><th>备注</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>9/30 乌镇</td><td><span class="reserve-badge hotel">订房 + 联票</span></td><td>乌镇住宿、东西栅联票；木心美术馆</td><td>提前 3 天以上</td><td>「乌镇旅游官方预订网」预订；住西栅可买两日有效联票，木心美术馆单独预约。</td></tr>
-            <tr><td>10/1 宁波</td><td><span class="reserve-badge hotel">订房</span></td><td>宁波住宿；次日天一阁</td><td>10/1 前完成</td><td>老城区优先带免费车位的酒店；天一阁约 8:30–9:30。</td></tr>
-            <tr><td>10/2 神仙居</td><td><span class="reserve-badge required">必须预约</span></td><td>神仙居大门票 + 南天索道</td><td>提前 1 天</td><td>「神仙居景区」官方公众号，建议买套票，选南门入园。</td></tr>
-            <tr><td>10/3 横店</td><td><span class="reserve-badge required">必须预约</span></td><td>横店景区联票 + 梦幻谷</td><td>提前 3 天以上</td><td>「横店影视城」官方公众号，热门演出场次提前选座。</td></tr>
-            <tr><td>10/4–10/5 绍兴</td><td><span class="reserve-badge suggested">免费预约</span></td><td>鲁迅故里 + 沈园</td><td>提前 1–3 天</td><td>「绍兴市文旅集团」微信公众号免费预约，分时段入园。</td></tr>
-            <tr><td>10/5–10/6 南浔</td><td><span class="reserve-badge suggested">建议购票</span></td><td>南浔核心景点联票</td><td>提前 1 天</td><td>古镇免大门票；小莲庄 + 嘉业藏书楼等联票 75 元/人，2 日有效。</td></tr>
-            <tr><td>全程住宿</td><td><span class="reserve-badge hotel">必须预订</span></td><td>乌镇、宁波、仙居、横店、绍兴、南浔</td><td>9/27 前优先锁房</td><td>确认停车、免费取消、晚到保留和房型。</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="callout hot">
-        <h3>预约顺序</h3>
-        <p>先锁乌镇住宿和联票，再订宁波、仙居、横店、绍兴、南浔住宿；随后依次完成神仙居、横店、天一阁、鲁迅故里和南浔联票。</p>
-      </div>
-
-      <div class="checklist" id="bookingChecklist">
-        <label class="check-item"><input type="checkbox" data-key="booking-wuzhen-hotel"><span><strong>乌镇住宿与东西栅联票</strong><span>官方预订网完成；住西栅可买两日有效联票，并预约木心美术馆。</span></span></label>
-        <label class="check-item"><input type="checkbox" data-key="booking-ningbo-hotel"><span><strong>宁波住宿</strong><span>老城区优先带免费车位，确认晚到保留。</span></span></label>
-        <label class="check-item"><input type="checkbox" data-key="booking-tianyige"><span><strong>天一阁博物院</strong><span>「天一阁」微信公众号预约，建议 8:30–9:30 时段。</span></span></label>
-        <label class="check-item"><input type="checkbox" data-key="booking-xianju-hotel"><span><strong>仙居白塔镇住宿</strong><span>离景区南门约 10 分钟车程，确认停车。</span></span></label>
-        <label class="check-item"><input type="checkbox" data-key="booking-shenxianju"><span><strong>神仙居门票与南天索道</strong><span>提前 1 天官方公众号预约，建议套票、南门入园。</span></span></label>
-        <label class="check-item"><input type="checkbox" data-key="booking-hengdian"><span><strong>横店联票与梦幻谷</strong><span>官方公众号预订，热门演出提前选座。</span></span></label>
-        <label class="check-item"><input type="checkbox" data-key="booking-shaoxing-hotel"><span><strong>绍兴住宿</strong><span>鲁迅故里停车场附近，或选带免费车位的市区酒店。</span></span></label>
-        <label class="check-item"><input type="checkbox" data-key="booking-shaoxing-reserve"><span><strong>鲁迅故里与沈园</strong><span>「绍兴市文旅集团」微信公众号免费预约，分时段入园。</span></span></label>
-        <label class="check-item"><input type="checkbox" data-key="booking-nanxun-hotel"><span><strong>南浔住宿与核心联票</strong><span>南入口免费停车；联票 75 元/人，提前 1 天购买，2 日有效。</span></span></label>
-        <label class="check-item"><input type="checkbox" data-key="booking-car-check"><span><strong>车辆检查与证件</strong><span>身份证、驾驶证、胎压、玻璃水、灯光、车载充电器、步行鞋和薄外套。</span></span></label>
-      </div>
-
-      <div class="progress" aria-live="polite">
-        <span id="progressText">已完成 0 / 10</span>
-        <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
-        <button class="action" id="resetProgress" type="button"><i class="icon" data-lucide="rotate-ccw" aria-hidden="true"></i>清空勾选</button>
-      </div>
-    </section>
-
-    <section class="section" id="stay-fuel">
-      <div class="section-head">
-        <h2>住宿与加油</h2>
-        <p class="section-note">每天只换一次住宿；市区加油优先，不赌国庆服务区排队。</p>
-      </div>
-
-      <div class="grid-2">
-        <div>
-          <h3>住宿位置</h3>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>日期</th><th>住哪里</th><th>订房关键词</th></tr></thead>
-              <tbody>
-                <tr><td>9/30</td><td>乌镇西栅</td><td>景区内住宿、官方停车、房卡出入证、两日联票</td></tr>
-                <tr><td>10/1</td><td>宁波</td><td>老城区或地铁沿线、免费车位、离南塘老街不远</td></tr>
-                <tr><td>10/2</td><td>仙居白塔镇</td><td>离神仙居南门约 10 分钟车程、停车方便</td></tr>
-                <tr><td>10/3</td><td>横店</td><td>影视城合作酒店、停车券、近梦幻谷</td></tr>
-                <tr><td>10/4</td><td>绍兴</td><td>鲁迅故里附近、免费车位、方便夜游仓桥直街</td></tr>
-                <tr><td>10/5</td><td>南浔</td><td>南入口停车场附近、步行 5 分钟到百间楼</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div>
-          <h3>加油节点</h3>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>时间</th><th>加油位置</th><th>执行规则</th></tr></thead>
-              <tbody>
-                <tr><td>9/30 出发前</td><td>常熟</td><td>直接加满，夜间减少途中停留。</td></tr>
-                <tr><td>10/1 转场前</td><td>嘉兴或乌镇</td><td>去宁波前保持半箱以上。</td></tr>
-                <tr><td>10/2 转场前</td><td>宁波市区</td><td>去神仙居前加满，山区少临时找站。</td></tr>
-                <tr><td>10/3 转场前</td><td>仙居县城或横店方向</td><td>离开神仙居先补油，再上高速。</td></tr>
-                <tr><td>10/4 转场前</td><td>横店或绍兴方向</td><td>保持半箱以上，避免晚间排队。</td></tr>
-                <tr><td>10/5 转场前</td><td>绍兴市区</td><td>去南浔前加满。</td></tr>
-                <tr><td>10/6 出发前</td><td>南浔</td><td>返程前补满，在嘉兴服务区休整。</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div class="callout">
-        <h3>两人轮换驾驶规则</h3>
-        <ul>
-          <li>每 2 小时左右轮换一次，山区和夜间不把驾驶任务压在一个人身上。</li>
-          <li>午后 13:00–15:00 容易犯困，提前进服务区休息或换人。</li>
-          <li>出现连续打哈欠、车道偏移或忘记前几分钟路况，立即停车休息。</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section" id="fallback">
-      <div class="section-head">
-        <h2>应急与调整</h2>
-        <p class="section-note">住宿和转场优先，景点可以按天气、排队和体力临时删减。</p>
-      </div>
-
-      <div class="grid-3">
-        <article class="decision"><h3><i class="icon" data-lucide="cloud-rain" aria-hidden="true"></i>下雨</h3><p>神仙居可缩短栈道行程，绍兴改看博物馆和古城街巷；南浔古镇雨中游览注意石板路防滑。</p></article>
-        <article class="decision warn"><h3><i class="icon" data-lucide="wind" aria-hidden="true"></i>大风</h3><p>索道和山区栈道可能临时停运。出发前看神仙居官方公告，停运时改为山下景点或直接转场。</p></article>
-        <article class="decision offbeat"><h3><i class="icon" data-lucide="traffic-cone" aria-hidden="true"></i>高速拥堵</h3><p>10/6 午间返程，若导航显示 16 点后拥堵加剧，可提前到 11:30 出发，不再加景点。</p></article>
-        <article class="decision warn"><h3><i class="icon" data-lucide="battery-warning" aria-hidden="true"></i>疲劳</h3><p>立即换人驾驶或进服务区休息。当天下午景点可直接取消，住宿不能临时硬赶。</p></article>
-        <article class="decision"><h3><i class="icon" data-lucide="users" aria-hidden="true"></i>排队过长</h3><p>超过 30 分钟就删支线，热门演出和索道优先按预约时段执行，避免拖垮后续转场。</p></article>
-        <article class="decision offbeat"><h3><i class="icon" data-lucide="phone-call" aria-hidden="true"></i>应急电话</h3><p>报警 110，急救 120，交通事故 122，高速公路救援 12122。保险公司和道路救援电话提前存入手机。</p></article>
-      </div>
-
-      <div class="callout hot">
-        <h3>出发前 24 小时再核对</h3>
-        <ul>
-          <li>核对乌镇联票、天一阁、神仙居、横店、鲁迅故里和南浔联票的预约状态。</li>
-          <li>查神仙居索道、横店演出场次和南浔核心景点是否有临时调整。</li>
-          <li>确认六晚住宿全部支持停车，并核对 9/30 乌镇晚到入住。</li>
-          <li>检查身份证、驾驶证、车辆状况和 10/6 高速实时路况。</li>
-        </ul>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-      <span>常熟出发 · 江南山湖 6 天自驾路书</span>
-      <span>两人轮换 · 轻松不赶路 · 更新于 2026-09-25 · 路线和预约信息以官方当天公告为准</span>
-    </div>
-  </footer>
-
-  <div class="lightbox" id="photoLightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle" hidden>
-    <div class="lightbox-panel">
-      <button class="lightbox-close" id="lightboxClose" type="button" aria-label="关闭图片预览"><i class="icon" data-lucide="x" aria-hidden="true"></i></button>
-      <div class="lightbox-media"><img class="lightbox-image" id="lightboxImage" src="" alt=""></div>
-      <div class="lightbox-caption"><strong id="lightboxTitle"></strong><p id="lightboxCredit"></p></div>
-    </div>
+      <div class="map-legend" id="legend" aria-label="日期颜色图例"></div>
+    </main>
   </div>
 
-  <script src="./lucide.min.js" defer></script>
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="关闭大图">×</button>
+    <img id="lightboxImage" alt="">
+  </div>
+
+  <script src="./leaflet.js"></script>
   <script>
-    (() => {
-      const storageKey = "changshu-roadbook-checks-v1";
-      const checkboxes = [...document.querySelectorAll("#bookingChecklist input[type='checkbox']")];
-      const progressText = document.getElementById("progressText");
-      const progressBar = document.getElementById("progressBar");
-      const calendar = document.querySelector("#calendar .calendar");
-      const dayTabs = document.getElementById("dayTabs");
-      const dayViewToggle = document.getElementById("dayViewToggle");
-      const dayViewLabel = document.getElementById("dayViewLabel");
-      const printButton = document.getElementById("printPlan");
-      const resetButton = document.getElementById("resetProgress");
-      const days = [...calendar.querySelectorAll(".day")];
+    (function () {
+      "use strict";
 
-      function loadChecks() {
-        let saved = {};
-        try {
-          saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
-        } catch {
-          saved = {};
-        }
-        checkboxes.forEach((box) => {
-          box.checked = Boolean(saved[box.dataset.key]);
+      var DAY_COLORS = {
+        d1: { color: "#197f7b", soft: "#d9f0ec" },
+        d2: { color: "#2f6ca6", soft: "#e5f0fb" },
+        d3: { color: "#bf5546", soft: "#ffe7e2" },
+        d4: { color: "#7864ae", soft: "#eee9ff" },
+        d5: { color: "#b8872d", soft: "#fff5d9" },
+        d6: { color: "#4b8f62", soft: "#e2f3e5" }
+      };
+
+      var TRIP = {
+        title: "常熟→浙江 6 天 5 晚自驾行程",
+        subtitle: "10.1–10.6 最终调整版",
+        assumptions: [
+          "第一天按 10/1 日行程出发，不增加 9/30 夜间提前出发。",
+          "住宿按实际行程执行为临浦 1 晚、横店 3 晚、绍兴 1 晚，共 5 晚。",
+          "横店 10/4 的圆明新园·春苑与梦幻谷为并列二选一方案。"
+        ],
+        days: [
+          {
+            id: "d1",
+            date: "10/1",
+            weekday: "第一天",
+            title: "常熟 → 乌镇 → 临浦",
+            route: "常熟 → 乌镇东栅/西栅 → 临浦",
+            summary: "早出发避堵，白天逛乌镇东西栅，晚上转场临浦。",
+            distance: "122 km + 75 km",
+            duration: "约 3.2 h",
+            stay: "临浦",
+            stops: [
+              { name: "常熟", lat: 31.6540, lng: 120.7520, kind: "start" },
+              { name: "乌镇东栅", lat: 30.7442, lng: 120.4875, kind: "sight" },
+              { name: "乌镇西栅", lat: 30.7458, lng: 120.4918, kind: "sight" },
+              { name: "临浦", lat: 30.0490, lng: 120.2140, kind: "stay", stay: true }
+            ],
+            segments: [
+              { from: "常熟", to: "乌镇东栅", distance: "122 km / 2 h", time: "约 2 小时" },
+              { from: "乌镇西栅", to: "临浦", distance: "75 km / 1.2 h", time: "约 1.2 小时" }
+            ],
+            timeline: [
+              { time: "07:00 前", title: "常熟出发", detail: "尽量早走，避开国庆首波高峰。" },
+              { time: "09:00–12:00", title: "乌镇东栅", detail: "看原生水乡、茅盾故居，感受老镇生活气。" },
+              { time: "12:00–13:30", title: "东栅午饭", detail: "尝定胜糕、酱鸭、萝卜丝饼。" },
+              { time: "14:00–19:30", title: "乌镇西栅", detail: "坐摇橹船、看灯光秀，傍晚留到夜景。" },
+              { time: "20:00–21:30", title: "转场临浦", detail: "约 75 km，入住杭州萧山临浦镇。" }
+            ],
+            highlights: [
+              "乌镇按东栅加西栅联票安排，白天到夜景一次逛完。",
+              "西栅夜景是当天重点，建议把晚饭放在西栅或回东栅后早一点吃。",
+              "晚上到临浦，尽量选带免费停车场的酒店。"
+            ],
+            food: ["乌镇酱鸭", "定胜糕", "萝卜丝饼"],
+            parking: "乌镇景区外围停车场按次收费；临浦酒店确认免费停车和晚到保留。",
+            reservations: [
+              { title: "乌镇东西栅联票", detail: "提前 1–3 天，乌镇旅游公众号。", type: "required" },
+              { title: "临浦住宿", detail: "提前 7 天订，确认免费停车与晚到保留。", type: "hotel" }
+            ],
+            photos: [
+              { src: "./assets/images/wuzhen-waterway.jpg", alt: "乌镇水巷与临河民居", label: "乌镇水乡" },
+              { src: "./assets/images/wuzhen-xizha-night.jpg", alt: "乌镇西栅夜景", label: "西栅夜景" }
+            ]
+          },
+          {
+            id: "d2",
+            date: "10/2",
+            weekday: "第二天",
+            title: "临浦 → 诸暨 → 横店",
+            route: "临浦 → 五泄风景区 → 西施故里 → 横店",
+            summary: "五泄看瀑布，下午西施故里，傍晚转场横店。",
+            distance: "65 km + 20 km + 75 km",
+            duration: "约 3.2 h",
+            stay: "横店",
+            stops: [
+              { name: "临浦", lat: 30.0490, lng: 120.2140, kind: "stay", stay: true },
+              { name: "五泄风景区", lat: 29.7300, lng: 120.0700, kind: "sight" },
+              { name: "西施故里", lat: 29.7050, lng: 120.2350, kind: "sight" },
+              { name: "横店", lat: 29.1590, lng: 120.3280, kind: "stay", stay: true }
+            ],
+            segments: [
+              { from: "临浦", to: "五泄风景区", distance: "65 km / 1 h", time: "约 1 小时" },
+              { from: "五泄风景区", to: "西施故里", distance: "20 km / 25 min", time: "约 25 分钟" },
+              { from: "西施故里", to: "横店", distance: "75 km / 1.5 h", time: "约 1.5 小时" }
+            ],
+            timeline: [
+              { time: "08:00", title: "临浦出发", detail: "9 点前到五泄错峰入园。" },
+              { time: "09:00–12:00", title: "五泄风景区", detail: "坐船进湖，看五级瀑布。" },
+              { time: "12:00–13:30", title: "景区门口午饭", detail: "清蒸溪鱼、笋干烧肉、农家土菜。" },
+              { time: "15:00–18:00", title: "西施故里", detail: "看浣纱江日落、古越建筑群。" },
+              { time: "19:00–20:30", title: "转场横店", detail: "入住横店万盛街核心区，连住 3 晚。" }
+            ],
+            highlights: [
+              "五泄尽量早到，船进湖和瀑布步道留足时间。",
+              "西施故里傍晚光线更适合看浣纱江和古越建筑。",
+              "横店住万盛街核心区，后两天去各景区都只需 5–10 分钟。"
+            ],
+            food: ["次坞打面", "西施豆腐", "诸暨农家土菜"],
+            parking: "五泄和西施故里按景区停车场停放；横店酒店确认免费停车。",
+            reservations: [
+              { title: "五泄风景区门票", detail: "提前 1 天，诸暨文旅公众号。", type: "suggested" },
+              { title: "横店住宿", detail: "提前 7 天订，连住 3 晚并确认免费停车。", type: "hotel" }
+            ],
+            photos: []
+          },
+          {
+            id: "d3",
+            date: "10/3",
+            weekday: "第三天",
+            title: "横店一日游",
+            route: "秦王宫 → 清明上河图 → 广州街·香港街",
+            summary: "横店经典景区一日串联，白天拍照，晚上看民国夜景。",
+            distance: "景区间 5–10 min",
+            duration: "横店内短途",
+            stay: "横店",
+            stops: [
+              { name: "横店住宿区", lat: 29.1590, lng: 120.3280, kind: "stay", stay: true },
+              { name: "秦王宫", lat: 29.1575, lng: 120.3160, kind: "sight" },
+              { name: "清明上河图", lat: 29.1550, lng: 120.3350, kind: "sight" },
+              { name: "广州街·香港街", lat: 29.1680, lng: 120.3120, kind: "sight" }
+            ],
+            segments: [
+              { from: "横店住宿区", to: "秦王宫", distance: "5–10 min", time: "横店内" },
+              { from: "秦王宫", to: "清明上河图", distance: "5–10 min", time: "横店内" },
+              { from: "清明上河图", to: "广州街·香港街", distance: "5–10 min", time: "横店内" }
+            ],
+            timeline: [
+              { time: "09:00–11:30", title: "秦王宫", detail: "看《帝国江山》演出，打卡影视取景地。" },
+              { time: "12:00–13:30", title: "回镇上吃饭 + 午休", detail: "避开正午太阳。" },
+              { time: "14:00–16:00", title: "清明上河图", detail: "看《汴梁一梦》演出，逛宋代市井。" },
+              { time: "17:00–20:00", title: "广州街·香港街", detail: "逛民国夜景和沉浸式街头演出。" }
+            ],
+            highlights: [
+              "秦王宫和清明上河图安排在白天，广州街·香港街留到傍晚亮灯后。",
+              "中午回镇上吃饭和休息，避免连续暴晒。",
+              "住在万盛街核心区，各景区门口停车后按演出时间走。"
+            ],
+            food: ["金华砂锅", "煲仔饭", "横店本地小馆"],
+            parking: "横店各景区均有停车场；当天尽量用同一处停车区域，减少反复找车位。",
+            reservations: [
+              { title: "横店影视城联票", detail: "提前 2 天，横店影视城公众号。", type: "required" },
+              { title: "演出场次", detail: "出发前确认《帝国江山》《汴梁一梦》当天场次。", type: "suggested" }
+            ],
+            photos: [
+              { src: "./assets/images/hengdian-qin-hall.jpg", alt: "横店秦王宫大殿", label: "秦王宫" },
+              { src: "./assets/images/hengdian-qin-palace.jpg", alt: "横店秦王宫建筑群", label: "横店影视城" }
+            ]
+          },
+          {
+            id: "d4",
+            date: "10/4",
+            weekday: "第四天",
+            title: "横店深度游",
+            route: "明清宫苑 → 圆明新园·春苑 或 梦幻谷",
+            summary: "上午明清宫苑，下午在皇家园林复刻与游乐夜场之间二选一。",
+            distance: "景区间 5–10 min",
+            duration: "横店内短途",
+            stay: "横店",
+            stops: [
+              { name: "横店住宿区", lat: 29.1590, lng: 120.3280, kind: "stay", stay: true },
+              { name: "明清宫苑", lat: 29.1770, lng: 120.3230, kind: "sight" },
+              { name: "圆明新园·春苑", lat: 29.1870, lng: 120.3370, kind: "sight", option: "a" },
+              { name: "梦幻谷", lat: 29.1480, lng: 120.3450, kind: "sight", option: "b" }
+            ],
+            segments: [
+              { from: "横店住宿区", to: "明清宫苑", distance: "5–10 min", time: "横店内" },
+              { from: "明清宫苑", to: "圆明新园·春苑", distance: "5–10 min", time: "横店内", option: "a" },
+              { from: "横店住宿区", to: "梦幻谷", distance: "5–10 min", time: "横店内", option: "b" }
+            ],
+            timeline: [
+              { time: "09:30–12:00", title: "明清宫苑", detail: "看《八旗马战》，打卡故宫同款建筑群。" },
+              { time: "12:30–14:00", title: "镇上吃午饭 + 休息", detail: "金华砂锅、煲仔饭。" },
+              { time: "14:30 后", title: "二选一", detail: "圆明新园·春苑或梦幻谷。" },
+              { time: "晚上", title: "早休息", detail: "为第二天横店至绍兴赶路养精神。" }
+            ],
+            highlights: [
+              "圆明新园·春苑更适合拍照和慢逛，人少景美出片。",
+              "梦幻谷更偏游乐项目与夜场灯会，适合喜欢热闹和玩乐。",
+              "两条分支同为可选，不替用户预设当天路线。"
+            ],
+            food: ["金华砂锅", "煲仔饭", "横店镇上夜宵"],
+            parking: "横店各景区有停车场；从住宿区出发约 5–10 分钟。",
+            reservations: [
+              { title: "横店联票", detail: "提前 2 天，横店影视城公众号。", type: "required" },
+              { title: "二选一方案", detail: "当天按体力和天气选择春苑或梦幻谷。", type: "suggested" }
+            ],
+            photos: [],
+            options: [
+              {
+                id: "a",
+                name: "圆明新园·春苑",
+                detail: "皇家园林复刻，节奏慢，适合拍照和安静逛园。",
+                highlights: ["皇家园林复刻", "人少景美出片", "适合慢逛"]
+              },
+              {
+                id: "b",
+                name: "梦幻谷",
+                detail: "游乐项目加夜场灯会，适合喜欢玩乐和热闹氛围。",
+                highlights: ["游乐项目", "夜场灯会", "适合多人同行"]
+              }
+            ]
+          },
+          {
+            id: "d5",
+            date: "10/5",
+            weekday: "第五天",
+            title: "横店 → 绍兴",
+            route: "横店 → 绍兴越城区 → 东湖风景区 → 仓桥直街",
+            summary: "睡到自然醒再出发，下午看东湖采石奇景，晚上逛仓桥直街。",
+            distance: "140 km + 市区短途",
+            duration: "约 2 h + 市区 15 min",
+            stay: "绍兴",
+            stops: [
+              { name: "横店", lat: 29.1590, lng: 120.3280, kind: "stay", stay: true },
+              { name: "绍兴越城区", lat: 30.0000, lng: 120.5900, kind: "stay", stay: true },
+              { name: "东湖风景区", lat: 30.0007, lng: 120.6250, kind: "sight" },
+              { name: "仓桥直街", lat: 29.9975, lng: 120.5790, kind: "sight" }
+            ],
+            segments: [
+              { from: "横店", to: "绍兴越城区", distance: "140 km / 2 h", time: "约 2 小时" },
+              { from: "绍兴越城区", to: "东湖风景区", distance: "15 min", time: "市区短途" },
+              { from: "东湖风景区", to: "仓桥直街", distance: "15 min", time: "市区短途" }
+            ],
+            timeline: [
+              { time: "10:00", title: "横店出发", detail: "睡懒觉避开上午出行高峰。" },
+              { time: "12:00–13:30", title: "绍兴越城区", detail: "酒店入住和午饭。" },
+              { time: "14:00–16:30", title: "东湖风景区", detail: "看千年采石形成的天下第一水石盆景，可坐乌篷船穿洞。" },
+              { time: "17:30–20:30", title: "仓桥直街", detail: "吃臭豆腐、黄酒棒冰，看临河夜景。" },
+              { time: "21:00", title: "返回酒店", detail: "短车程或步行可达。" }
+            ],
+            highlights: [
+              "东湖的奇石峭壁、水巷岩洞和常熟园林、乌镇水乡风格不同。",
+              "当晚住越城区古城核心区，仓桥直街夜游后回酒店方便。",
+              "绍兴酒店优先选带免费停车场的。"
+            ],
+            food: ["绍三鲜", "霉干菜扣肉", "臭豆腐", "黄酒棒冰"],
+            parking: "选越城区带免费车位的酒店，晚上尽量把车留在酒店。",
+            reservations: [
+              { title: "绍兴东湖门票", detail: "提前 1–2 天，绍兴市文旅集团公众号，票价 50 元。", type: "required" },
+              { title: "绍兴住宿", detail: "提前 7 天订，优先鲁迅中路沿线或仓桥直街周边。", type: "hotel" }
+            ],
+            photos: [
+              { src: "./assets/images/shaoxing-east-lake.jpg", alt: "绍兴东湖采石奇景", label: "绍兴东湖" },
+              { src: "./assets/images/shaoxing-cangqiao.jpg", alt: "绍兴仓桥直街临河老街", label: "仓桥直街" }
+            ]
+          },
+          {
+            id: "d6",
+            date: "10/6",
+            weekday: "第六天",
+            title: "返程 · 嘉兴逛吃版",
+            route: "绍兴 → 嘉兴月河 → 斜西街烧麦 → 可选子城遗址公园 → 常熟",
+            summary: "返程拆成两段，先在月河老街和斜西街逛吃，再回常熟。",
+            distance: "90 km + 80 km",
+            duration: "约 2.7 h",
+            stay: "返程",
+            stops: [
+              { name: "绍兴", lat: 30.0000, lng: 120.5900, kind: "stay", stay: true },
+              { name: "月河历史街区", lat: 30.7740, lng: 120.7550, kind: "sight" },
+              { name: "斜西街烧麦", lat: 30.7650, lng: 120.7480, kind: "food" },
+              { name: "子城遗址公园", lat: 30.7660, lng: 120.7620, kind: "optional" },
+              { name: "常熟", lat: 31.6540, lng: 120.7520, kind: "end" }
+            ],
+            segments: [
+              { from: "绍兴", to: "月河历史街区", distance: "90 km / 1.5 h", time: "约 1.5 小时" },
+              { from: "月河历史街区", to: "斜西街烧麦", distance: "1.5 km", time: "短途" },
+              { from: "月河历史街区", to: "子城遗址公园", distance: "1 km", time: "可选" },
+              { from: "月河历史街区", to: "常熟", distance: "80 km / 1.2 h", time: "约 1.2 小时" }
+            ],
+            timeline: [
+              { time: "08:00", title: "绍兴出发", detail: "早走避返程高峰。" },
+              { time: "09:30–11:00", title: "月河历史街区", detail: "免费逛老街、古桥河道、花鸟市场和老字号。" },
+              { time: "11:00–12:00", title: "斜西街烧麦", detail: "离月河约 1.5 km，冬笋鲜肉烧麦配粉丝汤。" },
+              { time: "12:00–13:00", title: "嘉兴市区午饭", detail: "可顺路带点粽子。" },
+              { time: "13:00", title: "返程常熟", detail: "约 80 km，下午 2 点多到家，避开晚高峰。" },
+              { time: "可选", title: "子城遗址公园", detail: "免费，离月河约 1 km，看千年古城墙和谯楼。" }
+            ],
+            highlights: [
+              "嘉兴段避开园林类景点，换成月河老街加烧麦的轻松逛吃。",
+              "月河历史街区免费，不用预约；斜西街烧麦国庆饭点可能排队。",
+              "返程分成绍兴到嘉兴、嘉兴到常熟两段，每段都在 100 公里以内。"
+            ],
+            food: ["冬笋鲜肉烧麦", "鲜肉粽子", "嘉兴酱鸭", "粉丝汤"],
+            parking: "月河周边按现场停车指引；斜西街短停后步行前往烧麦店。",
+            reservations: [
+              { title: "月河历史街区", detail: "免费，不用预约，直接进。", type: "free" },
+              { title: "斜西街烧麦", detail: "不用预约，国庆饭点可能排队。", type: "free" },
+              { title: "子城遗址公园", detail: "免费，可选加逛，离月河约 1 km。", type: "free" }
+            ],
+            photos: []
+          }
+        ],
+        stays: [
+          {
+            id: "stay-linpu",
+            name: "临浦",
+            label: "第 1 晚",
+            lat: 30.0490,
+            lng: 120.2140,
+            price: "180–320 元/晚",
+            area: "杭州萧山临浦镇",
+            advice: ["推荐临浦开元名庭或临浦大酒店。", "乌镇与诸暨之间，方便平分车程。", "比景区住宿便宜约 30%–50%。"],
+            parking: "下单前确认免费停车场。"
+          },
+          {
+            id: "stay-hengdian",
+            name: "横店",
+            label: "第 2–4 晚",
+            lat: 29.1590,
+            lng: 120.3280,
+            price: "220–350 元/晚",
+            area: "横店万盛街核心区",
+            advice: ["影视大道沿线或万盛街中段。", "各景区几何中心，到哪都 5–10 分钟。", "连住 3 晚，不用搬行李。"],
+            parking: "下单前确认免费停车场。"
+          },
+          {
+            id: "stay-shaoxing",
+            name: "绍兴",
+            label: "第 5 晚",
+            lat: 30.0000,
+            lng: 120.5900,
+            price: "230–300 元/晚",
+            area: "绍兴越城区古城核心",
+            advice: ["鲁迅中路沿线或仓桥直街周边。", "到东湖、仓桥直街都近。", "吃饭逛街方便。"],
+            parking: "优先选带免费停车场、支持晚到保留的酒店。"
+          }
+        ]
+      };
+
+      var dom = {
+        dayList: document.getElementById("dayList"),
+        detailPanel: document.getElementById("detailPanel"),
+        detailContent: document.getElementById("detailContent"),
+        mapTitle: document.getElementById("mapTitle"),
+        mapStatus: document.getElementById("mapStatus"),
+        legend: document.getElementById("legend"),
+        overviewButtons: [
+          document.getElementById("overviewButton"),
+          document.getElementById("mapOverviewButton")
+        ],
+        toggleDetailButton: document.getElementById("toggleDetailButton"),
+        sheetHandle: document.getElementById("sheetHandle"),
+        lightbox: document.getElementById("lightbox"),
+        lightboxImage: document.getElementById("lightboxImage"),
+        lightboxClose: document.getElementById("lightboxClose")
+      };
+
+      var state = {
+        activeDayId: null,
+        activeOptionId: null,
+        activeSelection: null,
+        detailOpen: false,
+        mapReady: false,
+        tileFailures: 0,
+        tileSuccesses: 0
+      };
+
+      var map;
+      var tileLayer;
+      var dayLayerGroups = {};
+      var segmentLayers = [];
+      var markerRecords = [];
+      var allBounds;
+
+      var dayById = TRIP.days.reduce(function (acc, day) {
+        acc[day.id] = day;
+        return acc;
+      }, {});
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, function (char) {
+          return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char];
         });
-        updateProgress();
       }
 
-      function saveChecks() {
-        const data = {};
-        checkboxes.forEach((box) => {
-          data[box.dataset.key] = box.checked;
-        });
-        localStorage.setItem(storageKey, JSON.stringify(data));
-        updateProgress();
+      function colorFor(dayId) {
+        return DAY_COLORS[dayId] || DAY_COLORS.d1;
       }
 
-      function updateProgress() {
-        const done = checkboxes.filter((box) => box.checked).length;
-        const total = checkboxes.length;
-        progressText.textContent = `已完成 ${done} / ${total}`;
-        progressBar.style.width = `${total ? (done / total) * 100 : 0}%`;
+      function iconSvg(name) {
+        var icons = {
+          route: '<path d="M4 6.5 10 4l4 2.5L20 4v13.5L14 20l-4-2.5L4 20Z"/><path d="M10 4v13.5M14 6.5V20"/>',
+          clock: '<circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.8 2"/>',
+          car: '<path d="M5 16h14M7 16v2M17 16v2M6 16l1.2-5h9.6L18 16"/><path d="M7.5 13h9"/>',
+          pin: '<path d="M12 21s6-5.2 6-11a6 6 0 0 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/>',
+          bed: '<path d="M4 19V7"/><path d="M4 11h16v8"/><path d="M4 15h16"/><path d="M8 11V8h6a3 3 0 0 1 3 3v0"/>',
+          food: '<path d="M7 4v7a3 3 0 0 0 6 0V4"/><path d="M7 6h6"/><path d="M12 4v16"/><path d="M17 4v16"/><path d="M17 4c2 1.5 2 4.5 0 6"/>',
+          ticket: '<path d="M4 7h16v4a2 2 0 0 0 0 4v2H4v-2a2 2 0 0 0 0-4Z"/><path d="M9 7v10"/>',
+          camera: '<path d="M4 8h3l2-3h6l2 3h3v10H4Z"/><circle cx="12" cy="13" r="3"/>',
+          info: '<circle cx="12" cy="12" r="9"/><path d="M12 10v6M12 7h.01"/>'
+        };
+        return '<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">' + (icons[name] || icons.info) + '</svg>';
       }
 
-      checkboxes.forEach((box) => {
-        box.addEventListener("change", saveChecks);
-      });
+      function renderLegend() {
+        var html = TRIP.days.map(function (day) {
+          var c = colorFor(day.id);
+          return '<span class="legend-item"><i class="legend-dot" style="color:' + c.color + '"></i>' + day.date + '</span>';
+        }).join("");
+        dom.legend.innerHTML = html;
+      }
 
-      resetButton.addEventListener("click", () => {
-        checkboxes.forEach((box) => {
-          box.checked = false;
-        });
-        saveChecks();
-      });
+      function renderDayList() {
+        dom.dayList.innerHTML = TRIP.days.map(function (day) {
+          var c = colorFor(day.id);
+          return (
+            '<li>' +
+              '<button class="day-button day-card" type="button" data-day="' + day.id + '" style="--day-color:' + c.color + ';--day-soft:' + c.soft + '">' +
+                '<span class="day-badge">' + escapeHtml(day.date) + '<small>' + escapeHtml(day.weekday) + '</small></span>' +
+                '<span class="day-main">' +
+                  '<span class="day-heading"><strong>' + escapeHtml(day.title) + '</strong><em>' + escapeHtml(day.duration) + '</em></span>' +
+                  '<span class="day-route">' + escapeHtml(day.route) + '</span>' +
+                  '<span class="day-meta"><span>' + escapeHtml(day.distance) + '</span><span>住' + escapeHtml(day.stay) + '</span></span>' +
+                '</span>' +
+              '</button>' +
+            '</li>'
+          );
+        }).join("");
 
-      printButton.addEventListener("click", () => window.print());
+        dom.dayList.addEventListener("click", function (event) {
+          var button = event.target.closest("[data-day]");
+          if (!button) return;
+          selectDay(button.getAttribute("data-day"), true);
+        });
+      }
 
-      function setActiveDay(dayId, shouldScroll) {
-        calendar.dataset.view = "single";
-        days.forEach((day) => {
-          day.classList.toggle("is-active", day.id === dayId);
+      function popupHtml(title, detail) {
+        return '<strong>' + escapeHtml(title) + '</strong><span>' + escapeHtml(detail || "") + '</span>';
+      }
+
+      function distanceLabelIcon(text) {
+        return L.divIcon({
+          className: "",
+          html: '<span class="distance-label">' + escapeHtml(text) + '</span>',
+          iconSize: null,
+          iconAnchor: [28, 12]
         });
-        dayTabs.querySelectorAll(".day-tab").forEach((tab) => {
-          tab.setAttribute("aria-selected", String(tab.dataset.target === dayId));
+      }
+
+      function stopIcon(dayId, stop, index, isActive) {
+        var c = colorFor(dayId);
+        var label = stop.kind === "start" ? "始" : stop.kind === "end" ? "终" : stop.kind === "food" ? "食" : stop.kind === "optional" ? "选" : (index + 1);
+        return L.divIcon({
+          className: "marker-wrap" + (state.activeDayId && !isActive ? " marker-dim" : "") + (isActive ? " marker-active" : ""),
+          html: '<span class="stop-marker" style="--marker-color:' + c.color + '">' + escapeHtml(label) + '</span>',
+          iconSize: [30, 30],
+          iconAnchor: [15, 15],
+          popupAnchor: [0, -14]
         });
-        dayViewToggle.setAttribute("aria-pressed", "false");
-        dayViewLabel.textContent = "展开全部";
-        if (shouldScroll) {
-          document.getElementById("calendar").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function stayIcon(isActive) {
+        return L.divIcon({
+          className: "marker-wrap" + (state.activeDayId && !isActive ? " marker-dim" : "") + (isActive ? " marker-active" : ""),
+          html: '<span class="stay-marker">住</span>',
+          iconSize: [34, 34],
+          iconAnchor: [17, 17],
+          popupAnchor: [0, -16]
+        });
+      }
+
+      function linePoints(segment) {
+        var from = findStop(segment.from);
+        var to = findStop(segment.to);
+        if (!from || !to) return [];
+        var start = [from.lat, from.lng];
+        var end = [to.lat, to.lng];
+        var bend = segment.curve;
+        if (bend === undefined) bend = 0.15;
+        var mid = [
+          (start[0] + end[0]) / 2 + (end[1] - start[1]) * bend * 0.04,
+          (start[1] + end[1]) / 2 - (end[0] - start[0]) * bend * 0.04
+        ];
+        return [start, mid, end];
+      }
+
+      function findStop(name) {
+        var found = null;
+        TRIP.days.some(function (day) {
+          return day.stops.some(function (stop) {
+            if (stop.name === name) {
+              found = stop;
+              return true;
+            }
+            return false;
+          });
+        });
+        return found;
+      }
+
+      function initMap() {
+        map = L.map("map", {
+          zoomControl: true,
+          attributionControl: true,
+          preferCanvas: true,
+          worldCopyJump: true
+        }).setView([30.55, 120.55], 7);
+
+        var shortLabels = L.tileLayer("https://basemaps.cartocdn.com/zh_cn_voyager/{z}/{x}/{y}.png", {
+          subdomains: "abcd",
+          maxZoom: 19,
+          attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+        });
+
+        shortLabels.on("tileerror", function () {
+          state.tileFailures += 1;
+          updateMapStatus();
+        });
+        shortLabels.on("tileload", function () {
+          state.tileSuccesses += 1;
+          if (state.tileSuccesses > 3) {
+            dom.mapStatus.hidden = true;
+          }
+        });
+
+        tileLayer = shortLabels;
+        tileLayer.addTo(map);
+        state.mapReady = true;
+        renderMapLayers();
+      }
+
+      function updateMapStatus() {
+        if (state.tileSuccesses > 3) return;
+        dom.mapStatus.hidden = false;
+        dom.mapStatus.textContent = "在线底图暂时不可用，路线、距离和行程详情仍可正常查看。";
+      }
+
+      function renderMapLayers() {
+        Object.keys(dayLayerGroups).forEach(function (key) {
+          if (dayLayerGroups[key]) map.removeLayer(dayLayerGroups[key]);
+        });
+        dayLayerGroups = {};
+        segmentLayers = [];
+        markerRecords = [];
+
+        TRIP.days.forEach(function (day) {
+          var group = L.layerGroup().addTo(map);
+          dayLayerGroups[day.id] = group;
+          var c = colorFor(day.id);
+
+          day.segments.forEach(function (segment) {
+            var points = linePoints(segment);
+            if (!points.length) return;
+            var line = L.polyline(points, {
+              color: c.color,
+              weight: 5,
+              opacity: 0.86,
+              lineCap: "round",
+              lineJoin: "round",
+              className: "route-line"
+            }).addTo(group);
+            line.bindPopup(popupHtml(segment.from + " → " + segment.to, segment.distance + " · " + segment.time));
+            line.on("click", function () {
+              selectDay(day.id, true, segment);
+            });
+            if (segment.option) {
+              line.setStyle({ dashArray: "7 8", weight: 4 });
+            }
+            segmentLayers.push({ dayId: day.id, segment: segment, layer: line });
+
+            var labelPoint = points[Math.floor(points.length / 2)];
+            var label = L.marker(labelPoint, {
+              icon: distanceLabelIcon(segment.distance),
+              interactive: true,
+              keyboard: false
+            }).addTo(group);
+            label.bindPopup(popupHtml(segment.from + " → " + segment.to, segment.distance + " · " + segment.time));
+            label.on("click", function () {
+              selectDay(day.id, true, segment);
+            });
+          });
+
+          day.stops.forEach(function (stop, index) {
+            var isActive = state.activeDayId === day.id;
+            var icon = stop.stay ? stayIcon(isActive) : stopIcon(day.id, stop, index, isActive);
+            var marker = L.marker([stop.lat, stop.lng], {
+              icon: icon,
+              title: stop.name,
+              alt: stop.name,
+              riseOnHover: true
+            }).addTo(group);
+            marker.bindPopup(popupHtml(stop.name, stop.kind === "stay" ? "住宿区 · " + day.date : day.date + " · " + day.title));
+            marker.on("click", function () {
+              if (stop.stay) {
+                selectStay(stop.name, true);
+              } else {
+                selectDay(day.id, true, stop);
+              }
+            });
+            markerRecords.push({ dayId: day.id, stop: stop, marker: marker, iconBase: stop.stay ? "stay" : "stop" });
+          });
+        });
+
+        TRIP.stays.forEach(function (stay) {
+          var isActive = state.activeSelection && state.activeSelection.type === "stay" && state.activeSelection.id === stay.id;
+          var marker = L.marker([stay.lat, stay.lng], {
+            icon: stayIcon(isActive),
+            title: stay.name,
+            alt: stay.name,
+            zIndexOffset: 400
+          }).addTo(map);
+          marker.bindPopup(popupHtml(stay.name, stay.label + " · " + stay.area + " · " + stay.price));
+          marker.on("click", function () {
+            selectStay(stay.name, true);
+          });
+          markerRecords.push({ dayId: null, stayId: stay.id, marker: marker, iconBase: "stay" });
+        });
+
+        allBounds = L.latLngBounds([]);
+        Object.keys(dayLayerGroups).forEach(function (dayId) {
+          var bounds = dayLayerGroups[dayId].getLayers().reduce(function (acc, layer) {
+            if (layer.getBounds) acc.extend(layer.getBounds());
+            if (layer.getLatLng) acc.extend(layer.getLatLng());
+            return acc;
+          }, L.latLngBounds([]));
+          if (bounds.isValid()) allBounds.extend(bounds);
+        });
+        applyVisualState();
+      }
+
+      function selectDay(dayId, openDetail, selection) {
+        state.activeDayId = dayId;
+        state.activeOptionId = null;
+        state.activeSelection = selection ? { type: "stop", id: selection.name || dayId, value: selection } : { type: "day", id: dayId };
+        if (openDetail) state.detailOpen = true;
+        updateActiveUi();
+        renderDetail();
+        fitDay(dayId);
+        updateOverviewPressed();
+      }
+
+      function selectStay(name, openDetail) {
+        var stay = TRIP.stays.find(function (item) { return item.name === name; });
+        if (!stay) return;
+        state.activeDayId = null;
+        state.activeSelection = { type: "stay", id: stay.id, value: stay };
+        if (openDetail) state.detailOpen = true;
+        updateActiveUi();
+        renderDetail();
+        if (state.mapReady) {
+          map.flyTo([stay.lat, stay.lng], Math.max(map.getZoom(), 10), { duration: 0.5 });
+        }
+        updateOverviewPressed();
+      }
+
+      function selectOverview() {
+        state.activeDayId = null;
+        state.activeOptionId = null;
+        state.activeSelection = null;
+        state.detailOpen = false;
+        updateActiveUi();
+        renderDetail();
+        if (state.mapReady && allBounds && allBounds.isValid()) {
+          map.fitBounds(allBounds.pad(0.12), { animate: true });
+        }
+        updateOverviewPressed();
+      }
+
+      function fitDay(dayId) {
+        if (!state.mapReady) return;
+        var group = dayLayerGroups[dayId];
+        if (!group) return;
+        var bounds = L.latLngBounds([]);
+        group.getLayers().forEach(function (layer) {
+          if (layer.getBounds) bounds.extend(layer.getBounds());
+          if (layer.getLatLng) bounds.extend(layer.getLatLng());
+        });
+        if (bounds.isValid()) {
+          map.fitBounds(bounds.pad(0.22), { maxZoom: 11, animate: true });
         }
       }
 
-      function buildDayTabs() {
-        dayTabs.replaceChildren();
-        days.forEach((day, index) => {
-          const date = day.querySelector(".day-date");
-          const title = day.querySelector(".day-title");
-          const badge = day.querySelector(".day-badge");
-          const button = document.createElement("button");
-          button.type = "button";
-          button.className = "day-tab";
-          button.dataset.target = day.id;
-          button.setAttribute("role", "tab");
-          button.setAttribute("aria-controls", day.id);
-          button.innerHTML = `<strong>${date ? date.textContent : `第 ${index} 天`}</strong><span>${badge ? badge.textContent.trim() : (title ? title.textContent : "")}</span>`;
-          button.addEventListener("click", () => setActiveDay(day.id, true));
-          dayTabs.append(button);
+      function selectOption(dayId, optionId) {
+        var day = dayById[dayId];
+        if (!day) return;
+        state.activeDayId = dayId;
+        state.activeOptionId = optionId;
+        var option = (day.options || []).find(function (item) { return item.id === optionId; });
+        state.activeSelection = { type: "option", id: optionId, value: option };
+        state.detailOpen = true;
+        updateActiveUi();
+        renderDetail();
+        fitOption(dayId, optionId);
+        updateOverviewPressed();
+      }
+
+      function fitOption(dayId, optionId) {
+        if (!state.mapReady) return;
+        var day = dayById[dayId];
+        if (!day) return;
+        var bounds = L.latLngBounds([]);
+        day.stops.forEach(function (stop) {
+          if (stop.option && stop.option !== optionId) return;
+          bounds.extend([stop.lat, stop.lng]);
         });
-        if (days[0]) {
-          setActiveDay(days[0].id, false);
+        if (bounds.isValid()) {
+          map.fitBounds(bounds.pad(0.22), { maxZoom: 12, animate: true });
         }
       }
 
-      dayViewToggle.addEventListener("click", () => {
-        const showAll = calendar.dataset.view !== "all";
-        calendar.dataset.view = showAll ? "all" : "single";
-        if (showAll) {
-          days.forEach((day) => day.classList.remove("is-active"));
-        } else if (days[0]) {
-          days[0].classList.add("is-active");
-        }
-        dayViewToggle.setAttribute("aria-pressed", String(showAll));
-        dayViewLabel.textContent = showAll ? "只看一天" : "展开全部";
-      });
-
-      loadChecks();
-      buildDayTabs();
-      if (window.lucide) {
-        window.lucide.createIcons();
-      }
-    })();
-
-    window.addEventListener("load", () => {
-      if (window.lucide) {
-        window.lucide.createIcons();
-      }
-    });
-  </script>
-  <script>
-    (() => {
-      const lightbox = document.getElementById("photoLightbox");
-      const lightboxImage = document.getElementById("lightboxImage");
-      const lightboxTitle = document.getElementById("lightboxTitle");
-      const lightboxCredit = document.getElementById("lightboxCredit");
-      const closeButton = document.getElementById("lightboxClose");
-      const zoomButtons = [...document.querySelectorAll(".photo-zoom")];
-      let lastTrigger = null;
-
-      function closeLightbox() {
-        lightbox.hidden = true;
-        document.body.classList.remove("lightbox-open");
-        lightboxImage.removeAttribute("src");
-        document.removeEventListener("keydown", onKeydown);
-        if (lastTrigger) {
-          lastTrigger.focus();
-        }
+      function updateActiveUi() {
+        Array.prototype.forEach.call(dom.dayList.querySelectorAll("[data-day]"), function (button) {
+          var active = button.getAttribute("data-day") === state.activeDayId;
+          button.classList.toggle("is-active", active);
+          button.setAttribute("aria-pressed", active ? "true" : "false");
+        });
+        updateOverviewPressed();
+        applyVisualState();
       }
 
-      function onKeydown(event) {
-        if (event.key === "Escape") {
-          closeLightbox();
-        }
+      function updateOverviewPressed() {
+        var overview = !state.activeDayId && !state.activeSelection;
+        dom.overviewButtons.forEach(function (button) {
+          if (!button) return;
+          button.setAttribute("aria-pressed", overview ? "true" : "false");
+        });
+        dom.toggleDetailButton.setAttribute("aria-pressed", state.detailOpen ? "true" : "false");
+        dom.detailPanel.hidden = !state.detailOpen;
       }
 
-      function openLightbox(button) {
-        const image = button.querySelector("img");
-        const figure = button.closest(".itinerary-photo");
-        const caption = figure ? figure.querySelector("figcaption") : null;
-        const title = caption ? caption.querySelector("strong") : null;
-        if (!image || !caption) {
+      function applyVisualState() {
+        Object.keys(dayLayerGroups).forEach(function (dayId) {
+          var active = !state.activeDayId || state.activeDayId === dayId;
+          var c = colorFor(dayId);
+          dayLayerGroups[dayId].eachLayer(function (layer) {
+            if (layer.setStyle) {
+              layer.setStyle({
+                opacity: active ? 0.88 : 0.16,
+                fillOpacity: active ? 0.2 : 0.04,
+                color: c.color
+              });
+            }
+            if (layer.getElement) {
+              var el = layer.getElement();
+              if (el) el.style.opacity = active ? "1" : "0.22";
+            }
+          });
+        });
+        markerRecords.forEach(function (record) {
+          var active = !state.activeDayId || record.dayId === state.activeDayId || state.activeSelection && state.activeSelection.type === "stay";
+          var el = record.marker.getElement();
+          if (el) {
+            el.classList.toggle("marker-dim", !active);
+            el.classList.toggle("marker-active", Boolean(state.activeDayId && record.dayId === state.activeDayId));
+          }
+        });
+      }
+
+      function renderDetail() {
+        if (!state.detailOpen) {
+          dom.detailContent.innerHTML = "";
           return;
         }
 
-        lastTrigger = button;
-        lightboxImage.src = image.currentSrc || image.src;
-        lightboxImage.alt = image.alt;
-        lightboxTitle.textContent = title ? title.textContent : image.alt;
-        lightboxCredit.replaceChildren(...[...caption.childNodes]
-          .filter((node) => node !== title)
-          .map((node) => node.cloneNode(true)));
-        lightbox.hidden = false;
-        document.body.classList.add("lightbox-open");
-        closeButton.focus();
-        document.addEventListener("keydown", onKeydown);
+        if (state.activeSelection && state.activeSelection.type === "stay") {
+          renderStayDetail(state.activeSelection.value);
+          return;
+        }
+
+        if (state.activeSelection && state.activeSelection.type === "option") {
+          renderOptionDetail(state.activeDayId, state.activeSelection.value);
+          return;
+        }
+
+        if (state.activeDayId) {
+          renderDayDetail(dayById[state.activeDayId]);
+          return;
+        }
+
+        renderOverviewDetail();
       }
 
-      zoomButtons.forEach((button) => {
-        button.addEventListener("click", () => openLightbox(button));
-      });
+      function detailHead(day, kicker, title) {
+        var c = colorFor(day.id);
+        return (
+          '<div class="detail-head">' +
+            '<div>' +
+              '<div class="detail-kicker">' + escapeHtml(kicker) + '</div>' +
+              '<h2>' + escapeHtml(title) + '</h2>' +
+            '</div>' +
+            '<button class="detail-close" type="button" data-close-detail aria-label="关闭详情">×</button>' +
+          '</div>'
+        );
+      }
 
-      closeButton.addEventListener("click", closeLightbox);
-      lightbox.addEventListener("click", (event) => {
-        if (event.target === lightbox) {
-          closeLightbox();
+      function renderDayDetail(day) {
+        var c = colorFor(day.id);
+        var optionText = day.options ? renderOptions(day) : "";
+        var photos = renderPhotos(day.photos);
+        dom.detailContent.style.setProperty("--day-color", c.color);
+        dom.detailContent.innerHTML =
+          detailHead(day, day.date + " · " + day.weekday, day.title) +
+          '<p class="detail-summary">' + escapeHtml(day.summary) + '</p>' +
+          '<div class="detail-route">' + day.route.split("→").map(function (part) { return '<span>' + escapeHtml(part.trim()) + '</span>'; }).join("") + '</div>' +
+          '<section class="detail-section">' +
+            '<h3>' + iconSvg("clock") + '当天时间轴</h3>' +
+            '<ol class="timeline">' + day.timeline.map(function (item) {
+              return '<li><time>' + escapeHtml(item.time) + '</time><div><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml(item.detail) + '</span></div></li>';
+            }).join("") + '</ol>' +
+          '</section>' +
+          optionText +
+          '<section class="detail-section">' +
+            '<h3>' + iconSvg("route") + '路线与距离</h3>' +
+            '<ul class="info-list">' +
+              day.segments.map(function (segment) {
+                return '<li><strong>' + escapeHtml(segment.from + " → " + segment.to) + '</strong>：' + escapeHtml(segment.distance) + ' · ' + escapeHtml(segment.time) + '</li>';
+              }).join("") +
+            '</ul>' +
+          '</section>' +
+          '<section class="detail-section">' +
+            '<h3>' + iconSvg("info") + '当天重点</h3>' +
+            '<ul class="info-list">' + day.highlights.map(function (item) { return '<li>' + escapeHtml(item) + '</li>'; }).join("") + '</ul>' +
+          '</section>' +
+          '<section class="detail-section">' +
+            '<h3>' + iconSvg("food") + '沿途美食</h3>' +
+            '<ul class="info-list"><li>' + day.food.map(escapeHtml).join("、") + '</li></ul>' +
+            '<ul class="info-list"><li><strong>停车：</strong>' + escapeHtml(day.parking) + '</li></ul>' +
+          '</section>' +
+          '<section class="detail-section">' +
+            '<h3>' + iconSvg("ticket") + '预约提醒</h3>' +
+            renderReservations(day.reservations) +
+          '</section>' +
+          (photos ? '<section class="detail-section"><h3>' + iconSvg("camera") + '沿途实景</h3>' + photos + '</section>' : '');
+        bindDetailEvents();
+      }
+
+      function renderOptions(day) {
+        return (
+          '<section class="detail-section">' +
+            '<h3>' + iconSvg("route") + '10/4 二选一方案</h3>' +
+            '<div class="option-grid">' +
+              day.options.map(function (option) {
+                return '<button class="option-button" type="button" data-option="' + option.id + '" data-day-option="' + day.id + '">' +
+                  '<strong>' + escapeHtml(option.name) + '</strong>' +
+                  '<span>' + escapeHtml(option.detail) + '</span>' +
+                '</button>';
+              }).join("") +
+            '</div>' +
+          '</section>'
+        );
+      }
+
+      function renderOptionDetail(dayId, option) {
+        var day = dayById[dayId];
+        if (!day || !option) return;
+        var c = colorFor(dayId);
+        dom.detailContent.style.setProperty("--day-color", c.color);
+        dom.detailContent.innerHTML =
+          detailHead(day, day.date + " · 方案详情", option.name) +
+          '<p class="detail-summary">' + escapeHtml(option.detail) + '</p>' +
+          '<div class="detail-route"><span>' + escapeHtml(day.title) + '</span><span>可选方案</span></div>' +
+          '<section class="detail-section">' +
+            '<h3>' + iconSvg("info") + '方案亮点</h3>' +
+            '<ul class="info-list">' + option.highlights.map(function (item) { return '<li>' + escapeHtml(item) + '</li>'; }).join("") + '</ul>' +
+          '</section>' +
+          renderOptions(day) +
+          '<section class="detail-section">' +
+            '<h3>' + iconSvg("clock") + '当天其余安排</h3>' +
+            '<ol class="timeline">' + day.timeline.slice(0, 2).map(function (item) {
+              return '<li><time>' + escapeHtml(item.time) + '</time><div><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml(item.detail) + '</span></div></li>';
+            }).join("") + '</ol>' +
+          '</section>' +
+          '<section class="detail-section">' +
+            '<h3>' + iconSvg("ticket") + '预约提醒</h3>' +
+            renderReservations(day.reservations) +
+          '</section>';
+        bindDetailEvents();
+      }
+
+      function renderStayDetail(stay) {
+        dom.detailContent.style.setProperty("--day-color", "#b8872d");
+        dom.detailContent.innerHTML =
+          '<div class="detail-head">' +
+            '<div><div class="detail-kicker">住宿区 · ' + escapeHtml(stay.label) + '</div><h2>' + escapeHtml(stay.name) + '</h2></div>' +
+            '<button class="detail-close" type="button" data-close-detail aria-label="关闭详情">×</button>' +
+          '</div>' +
+          '<p class="detail-summary">' + escapeHtml(stay.area) + ' · ' + escapeHtml(stay.price) + '</p>' +
+          '<div class="detail-route"><span>住宿区</span><span>' + escapeHtml(stay.label) + '</span></div>' +
+          '<section class="detail-section">' +
+            '<h3>' + iconSvg("bed") + '住宿建议</h3>' +
+            '<ul class="info-list">' + stay.advice.map(function (item) { return '<li>' + escapeHtml(item) + '</li>'; }).join("") + '</ul>' +
+          '</section>' +
+          '<section class="detail-section">' +
+            '<h3>' + iconSvg("car") + '停车与预订</h3>' +
+            '<ul class="info-list"><li>' + escapeHtml(stay.parking) + '</li><li>推荐区域：' + escapeHtml(stay.area) + '</li></ul>' +
+          '</section>';
+        bindDetailEvents();
+      }
+
+      function renderOverviewDetail() {
+        dom.detailContent.style.setProperty("--day-color", "var(--teal)");
+        dom.detailContent.innerHTML =
+          '<div class="detail-head">' +
+            '<div><div class="detail-kicker">全程总览</div><h2>六天地图中转路线</h2></div>' +
+            '<button class="detail-close" type="button" data-close-detail aria-label="关闭详情">×</button>' +
+          '</div>' +
+          '<p class="detail-summary">单日单程基本 100 公里内，住两景点中间省费用，行程不重复。</p>' +
+          '<section class="detail-section">' +
+            '<h3>' + iconSvg("pin") + '三个住宿区</h3>' +
+            '<ul class="info-list">' + TRIP.stays.map(function (stay) { return '<li><strong>' + escapeHtml(stay.name) + '</strong>：' + escapeHtml(stay.label + " · " + stay.price) + '</li>'; }).join("") + '</ul>' +
+          '</section>' +
+          '<section class="detail-section">' +
+            '<h3>' + iconSvg("info") + '行程说明</h3>' +
+            '<ul class="info-list">' + TRIP.assumptions.map(function (item) { return '<li>' + escapeHtml(item) + '</li>'; }).join("") + '</ul>' +
+          '</section>';
+        bindDetailEvents();
+      }
+
+      function renderReservations(items) {
+        return '<div class="reservation-list">' + items.map(function (item) {
+          var symbol = item.type === "hotel" ? "房" : item.type === "free" ? "免" : "约";
+          return '<div class="reservation"><span class="reservation-icon">' + symbol + '</span><div><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml(item.detail) + '</span></div></div>';
+        }).join("") + '</div>';
+      }
+
+      function renderPhotos(photos) {
+        if (!photos || !photos.length) return "";
+        return '<div class="photo-strip">' + photos.map(function (photo) {
+          return '<figure class="photo-item"><img src="' + escapeHtml(photo.src) + '" alt="' + escapeHtml(photo.alt) + '" loading="lazy" decoding="async"><figcaption>' + escapeHtml(photo.label) + '</figcaption><button class="photo-button" type="button" data-photo="' + escapeHtml(photo.src) + '" data-photo-alt="' + escapeHtml(photo.alt) + '" aria-label="查看' + escapeHtml(photo.label) + '大图"></button></figure>';
+        }).join("") + '</div>';
+      }
+
+      function bindDetailEvents() {
+        var close = dom.detailContent.querySelector("[data-close-detail]");
+        if (close) close.addEventListener("click", closeDetail);
+        Array.prototype.forEach.call(dom.detailContent.querySelectorAll("[data-option]"), function (button) {
+          button.addEventListener("click", function () {
+            selectOption(button.getAttribute("data-day-option"), button.getAttribute("data-option"));
+          });
+          if (state.activeOptionId === button.getAttribute("data-option")) {
+            button.classList.add("is-active");
+          }
+        });
+        Array.prototype.forEach.call(dom.detailContent.querySelectorAll("[data-photo]"), function (button) {
+          button.addEventListener("click", function () {
+            openLightbox(button.getAttribute("data-photo"), button.getAttribute("data-photo-alt"));
+          });
+        });
+      }
+
+      function openLightbox(src, alt) {
+        dom.lightboxImage.src = src;
+        dom.lightboxImage.alt = alt || "";
+        dom.lightbox.hidden = false;
+        dom.lightboxClose.focus();
+      }
+
+      function closeLightbox() {
+        dom.lightbox.hidden = true;
+        dom.lightboxImage.removeAttribute("src");
+      }
+
+      function closeDetail() {
+        state.detailOpen = false;
+        updateOverviewPressed();
+        renderDetail();
+      }
+
+      function toggleDetail() {
+        state.detailOpen = !state.detailOpen;
+        if (state.detailOpen && !state.activeDayId && !state.activeSelection) {
+          renderOverviewDetail();
         }
-      });
+        updateOverviewPressed();
+        renderDetail();
+      }
+
+      function handleKeyboard(event) {
+        if (event.target && /INPUT|TEXTAREA|SELECT/.test(event.target.tagName)) return;
+        var index = TRIP.days.findIndex(function (day) { return day.id === state.activeDayId; });
+        if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+          event.preventDefault();
+          selectDay(TRIP.days[(index + 1 + TRIP.days.length) % TRIP.days.length].id, true);
+        } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+          event.preventDefault();
+          selectDay(TRIP.days[(index <= 0 ? TRIP.days.length - 1 : index - 1)].id, true);
+        } else if (event.key === "Escape") {
+          if (!dom.lightbox.hidden) closeLightbox();
+          else if (state.detailOpen) closeDetail();
+          else selectOverview();
+        }
+      }
+
+      function bindControls() {
+        dom.overviewButtons.forEach(function (button) {
+          if (button) button.addEventListener("click", selectOverview);
+        });
+        dom.toggleDetailButton.addEventListener("click", toggleDetail);
+        dom.sheetHandle.addEventListener("click", toggleDetail);
+        dom.lightboxClose.addEventListener("click", closeLightbox);
+        dom.lightbox.addEventListener("click", function (event) {
+          if (event.target === dom.lightbox) closeLightbox();
+        });
+        document.addEventListener("keydown", handleKeyboard);
+      }
+
+      renderLegend();
+      renderDayList();
+      bindControls();
+      renderOverviewDetail();
+      updateOverviewPressed();
+      initMap();
     })();
   </script>
 </body>
