@@ -1,7 +1,23 @@
 {
   "project": "常熟出发 6 天自驾路书（浙江版）",
-  "source": "Wikimedia Commons",
+  "source": "Wikimedia Commons plus locally generated editorial illustrations",
   "updated": "2026-09-26",
+  "generatedIllustrations": {
+    "note": "以下文件为本地生成的编辑示意图，不是实拍照片；页面中会标注“示意图”，实际外观和口味请以现场为准。",
+    "files": [
+      "assets/images/food-cake.png",
+      "assets/images/food-casserole.png",
+      "assets/images/food-duck.png",
+      "assets/images/food-noodle.png",
+      "assets/images/food-pancake.png",
+      "assets/images/food-popsicle.png",
+      "assets/images/food-shaomai.png",
+      "assets/images/food-tofu.png",
+      "assets/images/place-mountain.png",
+      "assets/images/place-palace.png",
+      "assets/images/place-waterway.png"
+    ]
+  },
   "images": [
     {
       "file": "assets/images/wuzhen-xizha-night.jpg",

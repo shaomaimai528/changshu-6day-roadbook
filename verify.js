@@ -44,13 +44,29 @@ async function runViewport(browser, viewport) {
   if (viewport.name === "mobile") {
     await assert(await page.locator(".rail").isHidden(), "移动端仍显示桌面行程栏", failures);
     await assert(await page.locator("#map").isVisible(), "移动端地图不可见", failures);
-    await page.locator("#toggleDetailButton").click();
+    await assert(await page.locator("#mobileDaybar").isVisible(), "移动端日期条不可见", failures);
+    await assert((await page.locator(".mobile-day-chip").count()) === 6, "移动端日期条不是 6 天", failures);
+
+    for (const dayId of ["d1", "d2", "d3", "d4", "d5", "d6"]) {
+      await page.locator(`.mobile-day-chip[data-day-chip="${dayId}"]`).click();
+      await page.waitForTimeout(120);
+      await assert(await page.locator(`.mobile-day-chip[data-day-chip="${dayId}"]`).getAttribute("aria-selected") === "true", `移动端 ${dayId} 未高亮`, failures);
+      await assert((await page.locator("#mobileBrief").innerText()).length > 10, `移动端 ${dayId} 速览为空`, failures);
+    }
+
+    await page.locator('.mobile-day-chip[data-day-chip="d1"]').click();
+    await page.waitForTimeout(120);
+    await page.locator("#mobileBrief [data-open-day]").click();
     await page.waitForTimeout(250);
-    await assert(await page.locator("#detailPanel").isVisible(), "移动端详情面板不能展开", failures);
-    await assert((await page.locator("#detailContent").innerText()).includes("六天地图中转路线"), "移动端总览详情缺失", failures);
+    await assert(await page.locator("#detailPanel").isVisible(), "移动端当天详情不能展开", failures);
+    const mobileDetailText = await page.locator("#detailContent").innerText();
+    await assert(mobileDetailText.includes("122 km / 2 h"), "移动端 10/1 路线距离缺失", failures);
+    await assert(mobileDetailText.includes("当天时间轴"), "移动端当天时间轴缺失", failures);
+    await assert(mobileDetailText.includes("预约提醒"), "移动端预约提醒缺失", failures);
+
     await page.locator("#sheetHandle").click();
     await page.waitForTimeout(250);
-    await assert(await page.locator("#detailPanel").isHidden(), "移动端详情面板不能收起", failures);
+    await assert(await page.locator("#detailPanel").isHidden(), "移动端当天详情不能收起", failures);
   } else {
     await assert(await page.locator(".rail").isVisible(), "桌面行程栏不可见", failures);
     for (const dayId of ["d1", "d2", "d3", "d4", "d5", "d6"]) {
@@ -95,7 +111,9 @@ async function runViewport(browser, viewport) {
     await assert(!visibleText.includes(oldTerm), `页面仍含旧路线词：${oldTerm}`, failures);
   }
   if (viewport.name === "mobile") {
-    await page.locator("#toggleDetailButton").click();
+    await page.locator('.mobile-day-chip[data-day-chip="d1"]').click();
+    await page.waitForTimeout(120);
+    await page.locator("#mobileBrief [data-open-day]").click();
     await page.waitForTimeout(250);
     await assert(await page.locator("#detailPanel").isVisible(), "移动端详情面板不能展开", failures);
   } else {
@@ -105,7 +123,29 @@ async function runViewport(browser, viewport) {
     await page.waitForTimeout(200);
   }
   visibleText = await page.locator("#detailContent").innerText();
-  await assert(visibleText.includes("临浦") && visibleText.includes("横店") && visibleText.includes("绍兴"), "住宿区域文字缺失", failures);
+  await assert(visibleText.includes("临浦"), "10/1 住宿信息缺失", failures);
+
+  if (viewport.name === "mobile") {
+    await page.locator("#sheetHandle").click();
+    await page.waitForTimeout(200);
+    for (const [dayId, stay] of [["d2", "横店"], ["d5", "绍兴"]]) {
+      await page.locator(`.mobile-day-chip[data-day-chip="${dayId}"]`).click();
+      await page.waitForTimeout(120);
+      await page.locator("#mobileBrief [data-open-day]").click();
+      await page.waitForTimeout(200);
+      await assert((await page.locator("#detailContent").innerText()).includes(stay), `${dayId} 住宿信息缺失`, failures);
+      await page.locator("#sheetHandle").click();
+      await page.waitForTimeout(200);
+    }
+  } else {
+    await page.locator("#toggleDetailButton").click();
+    await page.waitForTimeout(200);
+    for (const [dayId, stay] of [["d2", "横店"], ["d5", "绍兴"]]) {
+      await page.locator(`.rail-scroll [data-day="${dayId}"]`).click();
+      await page.waitForTimeout(150);
+      await assert((await page.locator("#detailContent").innerText()).includes(stay), `${dayId} 住宿信息缺失`, failures);
+    }
+  }
 
   const screenshot = path.join(OUT_DIR, `${viewport.name}.png`);
   await page.screenshot({ path: screenshot, fullPage: false });

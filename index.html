@@ -330,8 +330,7 @@
       min-width: 0;
       height: 100dvh;
       min-height: 100svh;
-      background:
-        linear-gradient(135deg, rgba(231, 242, 239, 0.94), rgba(246, 239, 222, 0.92));
+      background: #dfe9e4;
       overflow: hidden;
     }
 
@@ -340,6 +339,69 @@
       inset: 0;
       z-index: 0;
       background: #dfe9e4;
+    }
+
+    .mobile-daybar {
+      position: absolute;
+      z-index: 560;
+      top: 0;
+      right: 0;
+      left: 0;
+      display: none;
+      gap: 8px;
+      padding: 10px 10px 12px;
+      background: linear-gradient(180deg, rgba(255, 253, 248, 0.98) 62%, rgba(255, 253, 248, 0));
+      overflow-x: auto;
+      scrollbar-width: none;
+      pointer-events: auto;
+    }
+
+    .mobile-daybar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .mobile-day-chip {
+      flex: 0 0 auto;
+      min-width: 78px;
+      padding: 8px 10px 7px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--ink-soft);
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 140ms ease, background 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+    }
+
+    .mobile-day-chip b {
+      display: block;
+      color: var(--day-color);
+      font-size: 15px;
+      line-height: 1.1;
+    }
+
+    .mobile-day-chip small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .mobile-day-chip.is-active {
+      border-color: var(--day-color);
+      background: var(--day-soft);
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--day-color) 22%, transparent), 0 6px 14px rgba(21, 54, 58, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .mobile-day-chip.is-active small {
+      color: var(--day-color);
+    }
+
+    .mobile-day-chip.is-relative {
+      box-shadow: inset 0 -3px 0 var(--day-color), 0 0 0 2px rgba(25, 127, 123, 0.12);
     }
 
     .map-topbar {
@@ -468,6 +530,162 @@
       display: none;
     }
 
+    .mobile-brief {
+      position: absolute;
+      z-index: 555;
+      right: 10px;
+      bottom: 10px;
+      left: 10px;
+      display: none;
+      overflow: hidden;
+      border: 1px solid rgba(216, 226, 222, 0.95);
+      border-radius: 14px;
+      background: rgba(255, 253, 248, 0.97);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      flex-direction: column;
+    }
+
+    .mobile-brief[hidden] {
+      display: none;
+    }
+
+    .mobile-brief-head {
+      display: flex;
+      flex: 0 0 auto;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px 10px;
+    }
+
+    .mobile-brief-head b {
+      display: block;
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.25;
+    }
+
+    .mobile-brief-head small {
+      display: block;
+      margin-top: 3px;
+      color: var(--day-color, var(--teal));
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .mobile-brief-next {
+      margin-top: 8px;
+      padding: 8px 14px 10px;
+      border-top: 1px solid var(--line);
+      color: var(--ink-soft);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .mobile-brief-next strong {
+      color: var(--ink);
+    }
+
+    .mobile-brief-body {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .mobile-brief-notes {
+      margin: 0;
+      padding: 8px 14px 10px;
+      border-top: 1px solid var(--line);
+      color: var(--ink-soft);
+      font-size: 11.5px;
+      line-height: 1.5;
+    }
+
+    .mobile-brief-notes b {
+      color: var(--ink);
+    }
+
+    .mobile-brief-notes ul {
+      display: grid;
+      gap: 5px;
+      margin: 6px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .mobile-brief-notes li {
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .mobile-brief-notes li::before {
+      content: "";
+      position: absolute;
+      top: 0.6em;
+      left: 1px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--day-color, var(--teal));
+    }
+
+    .mobile-brief-expand {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 5px;
+      min-height: 34px;
+      padding: 6px 11px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--day-color, var(--teal));
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .mobile-brief-steps {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0 14px 12px;
+      list-style: none;
+    }
+
+    .mobile-brief-steps li {
+      display: grid;
+      grid-template-columns: 64px minmax(0, 1fr);
+      gap: 8px;
+      padding: 6px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .mobile-brief-steps time {
+      color: var(--day-color, var(--teal));
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.45;
+    }
+
+    .mobile-brief-steps strong {
+      display: block;
+      color: var(--ink);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .mobile-brief-steps span {
+      display: block;
+      margin-top: 1px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
     .leaflet-container {
       font-family: inherit;
     }
@@ -525,16 +743,28 @@
     }
 
     .distance-label {
-      border: 1px solid rgba(21, 54, 58, 0.13);
+      display: block;
+      min-width: 148px;
+      max-width: 232px;
+      border: 1px solid rgba(21, 54, 58, 0.18);
       border-radius: 999px;
-      background: rgba(255, 253, 248, 0.94);
-      box-shadow: 0 4px 12px rgba(21, 54, 58, 0.12);
+      background: rgba(255, 253, 248, 0.97);
+      box-shadow: 0 5px 14px rgba(21, 54, 58, 0.16);
       color: var(--ink);
-      font-size: 10px;
-      font-weight: 800;
-      line-height: 1;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.3;
       white-space: nowrap;
-      padding: 4px 6px;
+      padding: 5px 9px;
+      text-align: center;
+    }
+
+    .distance-label small {
+      display: block;
+      margin-top: 2px;
+      color: var(--teal);
+      font-size: 10px;
+      font-weight: 900;
     }
 
     .stop-marker,
@@ -669,6 +899,39 @@
       color: #175e5b;
       font-size: 11px;
       font-weight: 800;
+    }
+
+    .stay-callout,
+    .segment-detail {
+      display: grid;
+      gap: 6px;
+      margin-top: 10px;
+      padding: 11px 12px;
+      border-radius: 9px;
+    }
+
+    .stay-callout {
+      border: 1px solid rgba(25, 127, 123, 0.2);
+      border-left: 4px solid var(--day-color, var(--teal));
+      background: rgba(25, 127, 123, 0.06);
+    }
+
+    .segment-detail {
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .stay-callout strong,
+    .segment-detail strong {
+      color: var(--ink);
+      font-size: 14px;
+    }
+
+    .stay-callout span,
+    .segment-detail span {
+      color: var(--ink-soft);
+      font-size: 12px;
+      line-height: 1.45;
     }
 
     .detail-section {
@@ -853,6 +1116,91 @@
       gap: 8px;
     }
 
+    .food-photo-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .food-photo {
+      position: relative;
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      margin: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .food-photo-media {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      background: var(--paper);
+    }
+
+    .food-photo-visual {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: var(--paper);
+    }
+
+    .food-photo-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 38%, rgba(255, 255, 255, 0.72), transparent 34%),
+        radial-gradient(circle at 70% 62%, rgba(255, 255, 255, 0.35), transparent 30%);
+    }
+
+    .food-photo img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: var(--paper);
+    }
+
+    .food-photo-media b {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: rgba(23, 52, 58, 0.72);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    .food-photo figcaption {
+      padding: 6px 7px 7px;
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    .food-photo figcaption span {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .food-disclaimer {
+      margin: 8px 0 10px;
+      color: var(--muted);
+      font-size: 10.5px;
+      line-height: 1.5;
+    }
+
     .photo-item {
       position: relative;
       min-height: 104px;
@@ -983,14 +1331,14 @@
       }
 
       .map-topbar {
-        top: 10px;
+        top: 74px;
         right: 10px;
         left: 10px;
         align-items: flex-start;
       }
 
       .map-title {
-        max-width: calc(100% - 54px);
+        max-width: 100%;
         padding: 8px 10px;
       }
 
@@ -1003,8 +1351,7 @@
       }
 
       .map-actions {
-        flex-direction: column;
-        align-items: flex-end;
+        display: none;
       }
 
       .map-action {
@@ -1014,23 +1361,33 @@
       }
 
       .leaflet-control-zoom {
-        margin-top: 76px !important;
+        margin-top: 132px !important;
         margin-right: 10px !important;
       }
 
       .map-legend {
-        right: 10px;
-        bottom: 178px;
-        left: 10px;
-        max-width: none;
-        padding: 6px 8px;
+        display: none;
       }
 
       .map-status {
-        top: 62px;
+        top: 132px;
         right: 10px;
         left: 10px;
         max-width: none;
+      }
+
+      .mobile-daybar {
+        display: flex;
+      }
+
+      .mobile-brief {
+        display: flex;
+        max-height: min(58vh, calc(100dvh - 190px));
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+
+      .mobile-brief:not([hidden]) {
+        display: flex;
       }
 
       .detail-panel {
@@ -1039,12 +1396,11 @@
         bottom: 0;
         left: 0;
         width: 100%;
-        max-height: min(74dvh, 680px);
+        max-height: calc(100dvh - 60px);
         border-right: 0;
         border-bottom: 0;
         border-left: 0;
         border-radius: 16px 16px 0 0;
-        transform: translateY(0);
       }
 
       .detail-panel[hidden] {
@@ -1054,7 +1410,7 @@
       .sheet-handle {
         display: grid;
         width: 100%;
-        min-height: 28px;
+        min-height: 34px;
         place-items: center;
         border-bottom: 1px solid var(--line);
         background: rgba(255, 253, 248, 0.96);
@@ -1063,14 +1419,22 @@
 
       .sheet-handle::after {
         content: "";
-        width: 42px;
+        width: 46px;
         height: 5px;
         border-radius: 999px;
-        background: var(--line-strong);
+        background: var(--teal);
+        opacity: 0.55;
       }
 
       .detail-scroll {
         padding: 12px 14px calc(24px + env(safe-area-inset-bottom));
+      }
+
+      .leaflet-control-attribution {
+        margin: 0 4px 4px 0 !important;
+        background: rgba(255, 253, 248, 0.62) !important;
+        font-size: 8px !important;
+        opacity: 0.72;
       }
     }
 
@@ -1079,18 +1443,13 @@
         display: none;
       }
 
-      .map-action .action-label {
-        display: none;
-      }
-
-      .map-action {
-        width: 36px;
-        justify-content: center;
-        padding: 6px;
+      .map-topbar {
+        top: 66px;
       }
 
       .option-grid,
-      .photo-strip {
+      .photo-strip,
+      .food-photo-strip {
         grid-template-columns: 1fr;
       }
 
@@ -1140,6 +1499,8 @@
       <div id="map" role="application" aria-label="常熟出发浙江 6 天自驾路线地图"></div>
       <div class="map-status" id="mapStatus" role="status" hidden></div>
 
+      <div class="mobile-daybar" id="mobileDaybar" role="tablist" aria-label="按日期查看行程"></div>
+
       <div class="map-topbar">
         <div class="map-title">
           <strong id="mapTitle">全部路线 · 常熟 → 乌镇 → 诸暨 → 横店 → 绍兴 → 嘉兴 → 常熟</strong>
@@ -1161,6 +1522,8 @@
         <button class="sheet-handle" id="sheetHandle" type="button" aria-label="收起或展开详情"></button>
         <div class="detail-scroll" id="detailContent"></div>
       </aside>
+
+      <section class="mobile-brief" id="mobileBrief" aria-label="每日行程速览"></section>
 
       <div class="map-legend" id="legend" aria-label="日期颜色图例"></div>
     </main>
@@ -1185,6 +1548,39 @@
         d6: { color: "#4b8f62", soft: "#e2f3e5" }
       };
 
+      var FOOD_PHOTOS = {
+        d1: [
+          { label: "酱鸭", note: "乌镇酱鸭", src: "./assets/images/food-duck.png" },
+          { label: "定胜糕", note: "软糯米糕", src: "./assets/images/food-cake.png" },
+          { label: "萝卜丝饼", note: "现炸小吃", src: "./assets/images/food-pancake.png" }
+        ],
+        d2: [
+          { label: "次坞打面", note: "诸暨手打面", src: "./assets/images/food-noodle.png" },
+          { label: "西施豆腐", note: "嫩豆腐煲", src: "./assets/images/food-tofu.png" },
+          { label: "笋干烧肉", note: "农家土菜", src: "./assets/images/food-casserole.png" }
+        ],
+        d3: [
+          { label: "金华砂锅", note: "热汤砂锅", src: "./assets/images/food-casserole.png" },
+          { label: "煲仔饭", note: "锅巴饭", src: "./assets/images/food-pancake.png" },
+          { label: "横店小馆", note: "本地家常菜", src: "./assets/images/food-duck.png" }
+        ],
+        d4: [
+          { label: "金华砂锅", note: "演出后暖胃", src: "./assets/images/food-casserole.png" },
+          { label: "煲仔饭", note: "方便快捷", src: "./assets/images/food-pancake.png" },
+          { label: "横店夜宵", note: "镇上小馆", src: "./assets/images/food-noodle.png" }
+        ],
+        d5: [
+          { label: "臭豆腐", note: "绍兴味", src: "./assets/images/food-tofu.png" },
+          { label: "黄酒棒冰", note: "特色冷饮", src: "./assets/images/food-popsicle.png" },
+          { label: "绍三鲜", note: "老城家常菜", src: "./assets/images/food-casserole.png" }
+        ],
+        d6: [
+          { label: "冬笋鲜肉烧麦", note: "斜西街招牌", src: "./assets/images/food-shaomai.png" },
+          { label: "鲜肉粽子", note: "嘉兴特产", src: "./assets/images/food-cake.png" },
+          { label: "粉丝汤", note: "配烧麦", src: "./assets/images/food-noodle.png" }
+        ]
+      };
+
       var TRIP = {
         title: "常熟→浙江 6 天 5 晚自驾行程",
         subtitle: "10.1–10.6 最终调整版",
@@ -1197,6 +1593,7 @@
           {
             id: "d1",
             date: "10/1",
+            shortLabel: "乌镇",
             weekday: "第一天",
             title: "常熟 → 乌镇 → 临浦",
             route: "常熟 → 乌镇东栅/西栅 → 临浦",
@@ -1240,6 +1637,7 @@
           {
             id: "d2",
             date: "10/2",
+            shortLabel: "诸暨",
             weekday: "第二天",
             title: "临浦 → 诸暨 → 横店",
             route: "临浦 → 五泄风景区 → 西施故里 → 横店",
@@ -1276,11 +1674,15 @@
               { title: "五泄风景区门票", detail: "提前 1 天，诸暨文旅公众号。", type: "suggested" },
               { title: "横店住宿", detail: "提前 7 天订，连住 3 晚并确认免费停车。", type: "hotel" }
             ],
-            photos: []
+            photos: [
+              { src: "./assets/images/place-mountain.png", alt: "五泄山水与瀑布步道示意图", label: "五泄山水示意", note: "示意图" },
+              { src: "./assets/images/place-waterway.png", alt: "西施故里临水街巷示意图", label: "西施故里示意", note: "示意图" }
+            ]
           },
           {
             id: "d3",
             date: "10/3",
+            shortLabel: "横店",
             weekday: "第三天",
             title: "横店一日游",
             route: "秦王宫 → 清明上河图 → 广州街·香港街",
@@ -1324,6 +1726,7 @@
           {
             id: "d4",
             date: "10/4",
+            shortLabel: "横店",
             weekday: "第四天",
             title: "横店深度游",
             route: "明清宫苑 → 圆明新园·春苑 或 梦幻谷",
@@ -1359,7 +1762,10 @@
               { title: "横店联票", detail: "提前 2 天，横店影视城公众号。", type: "required" },
               { title: "二选一方案", detail: "当天按体力和天气选择春苑或梦幻谷。", type: "suggested" }
             ],
-            photos: [],
+            photos: [
+              { src: "./assets/images/hengdian-qin-palace.jpg", alt: "横店明清宫苑建筑群", label: "明清宫苑" },
+              { src: "./assets/images/hengdian-qin-hall.jpg", alt: "横店影视城宫殿建筑", label: "横店影视城" }
+            ],
             options: [
               {
                 id: "a",
@@ -1378,6 +1784,7 @@
           {
             id: "d5",
             date: "10/5",
+            shortLabel: "绍兴",
             weekday: "第五天",
             title: "横店 → 绍兴",
             route: "横店 → 绍兴越城区 → 东湖风景区 → 仓桥直街",
@@ -1422,6 +1829,7 @@
           {
             id: "d6",
             date: "10/6",
+            shortLabel: "嘉兴",
             weekday: "第六天",
             title: "返程 · 嘉兴逛吃版",
             route: "绍兴 → 嘉兴月河 → 斜西街烧麦 → 可选子城遗址公园 → 常熟",
@@ -1462,7 +1870,10 @@
               { title: "斜西街烧麦", detail: "不用预约，国庆饭点可能排队。", type: "free" },
               { title: "子城遗址公园", detail: "免费，可选加逛，离月河约 1 km。", type: "free" }
             ],
-            photos: []
+            photos: [
+              { src: "./assets/images/place-waterway.png", alt: "嘉兴月河历史街区临水老街示意图", label: "月河老街示意", note: "示意图" },
+              { src: "./assets/images/food-shaomai.png", alt: "冬笋鲜肉烧麦配粉丝汤示意图", label: "斜西街烧麦示意", note: "示意图" }
+            ]
           }
         ],
         stays: [
@@ -1504,6 +1915,8 @@
 
       var dom = {
         dayList: document.getElementById("dayList"),
+        mobileDaybar: document.getElementById("mobileDaybar"),
+        mobileBrief: document.getElementById("mobileBrief"),
         detailPanel: document.getElementById("detailPanel"),
         detailContent: document.getElementById("detailContent"),
         mapTitle: document.getElementById("mapTitle"),
@@ -1599,16 +2012,80 @@
         });
       }
 
+      function renderMobileDaybar() {
+        dom.mobileDaybar.innerHTML = TRIP.days.map(function (day) {
+          var c = colorFor(day.id);
+          return (
+            '<button class="mobile-day-chip" type="button" role="tab" data-day-chip="' + day.id + '" ' +
+              'style="--day-color:' + c.color + ';--day-soft:' + c.soft + '" aria-selected="false">' +
+              '<b>' + escapeHtml(day.date) + '</b>' +
+              '<small>' + escapeHtml(day.shortLabel || day.route.split("→")[0].trim()) + '</small>' +
+            '</button>'
+          );
+        }).join("");
+        dom.mobileDaybar.addEventListener("click", function (event) {
+          var button = event.target.closest("[data-day-chip]");
+          if (!button) return;
+          selectDay(button.getAttribute("data-day-chip"), false);
+        });
+      }
+
+      function renderMobileBrief() {
+        var day = dayById[state.activeDayId];
+        dom.mobileBrief.hidden = Boolean(state.detailOpen);
+        if (!day) {
+          dom.mobileBrief.innerHTML =
+            '<div class="mobile-brief-head">' +
+              '<div><b>点一天，查看当天安排</b><small>10/1 – 10/6</small></div>' +
+              '<button class="mobile-brief-expand" type="button" data-open-overview>全程总览</button>' +
+            '</div>' +
+            '<div class="mobile-brief-body">' +
+              '<div class="mobile-brief-next">先选上方任意日期，就能看当天几点做什么、路线距离、美食和注意事项。</div>' +
+            '</div>';
+          var overviewButton = dom.mobileBrief.querySelector("[data-open-overview]");
+          if (overviewButton) overviewButton.addEventListener("click", selectOverview);
+          return;
+        }
+        var c = colorFor(day.id);
+        dom.mobileBrief.style.setProperty("--day-color", c.color);
+        var next = TRIP.days[TRIP.days.indexOf(day) + 1];
+        dom.mobileBrief.innerHTML =
+          '<div class="mobile-brief-head">' +
+            '<div><b>' + escapeHtml(day.date + " " + day.weekday + " · " + day.title) + '</b>' +
+            '<small>' + escapeHtml(day.distance + " · " + day.duration + " · 住" + day.stay) + '</small></div>' +
+            '<button class="mobile-brief-expand" type="button" data-open-day>' + '看全过程</button>' +
+          '</div>' +
+          '<div class="mobile-brief-body">' +
+            '<ol class="mobile-brief-steps">' +
+              day.timeline.map(function (item) {
+                return '<li><time>' + escapeHtml(item.time) + '</time><div><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml(item.detail) + '</span></div></li>';
+              }).join("") +
+            '</ol>' +
+            '<div class="mobile-brief-notes">' +
+              '<b>当天注意事项</b>' +
+              '<ul>' + day.reservations.map(function (r) {
+                return '<li><strong>' + escapeHtml(r.title) + '</strong>：' + escapeHtml(r.detail) + '</li>';
+              }).join("") + '</ul>' +
+            '</div>' +
+            (next
+              ? '<div class="mobile-brief-next"><strong>接着看 ' + escapeHtml(next.date) + '：</strong>' + escapeHtml(next.title + " · " + next.summary) + '</div>'
+              : '<div class="mobile-brief-next"><strong>10/6：</strong>嘉兴逛吃后返回常熟，行程结束。</div>') +
+          '</div>';
+        var openDay = dom.mobileBrief.querySelector("[data-open-day]");
+        if (openDay) openDay.addEventListener("click", function () { selectDay(day.id, true); });
+      }
+
       function popupHtml(title, detail) {
         return '<strong>' + escapeHtml(title) + '</strong><span>' + escapeHtml(detail || "") + '</span>';
       }
 
-      function distanceLabelIcon(text) {
+      function distanceLabelIcon(segment) {
         return L.divIcon({
           className: "",
-          html: '<span class="distance-label">' + escapeHtml(text) + '</span>',
+          html: '<span class="distance-label">' + escapeHtml(segment.from + " → " + segment.to) +
+            '<small>' + escapeHtml(segment.distance + " · " + segment.time) + '</small></span>',
           iconSize: null,
-          iconAnchor: [28, 12]
+          iconAnchor: [52, 18]
         });
       }
 
@@ -1735,7 +2212,7 @@
 
             var labelPoint = points[Math.floor(points.length / 2)];
             var label = L.marker(labelPoint, {
-              icon: distanceLabelIcon(segment.distance),
+              icon: distanceLabelIcon(segment),
               interactive: true,
               keyboard: false
             }).addTo(group);
@@ -1797,7 +2274,7 @@
         state.activeDayId = dayId;
         state.activeOptionId = null;
         state.activeSelection = selection ? { type: "stop", id: selection.name || dayId, value: selection } : { type: "day", id: dayId };
-        if (openDetail) state.detailOpen = true;
+        state.detailOpen = Boolean(openDetail);
         updateActiveUi();
         renderDetail();
         fitDay(dayId);
@@ -1879,8 +2356,14 @@
           button.classList.toggle("is-active", active);
           button.setAttribute("aria-pressed", active ? "true" : "false");
         });
+        Array.prototype.forEach.call(dom.mobileDaybar.querySelectorAll("[data-day-chip]"), function (button) {
+          var active = button.getAttribute("data-day-chip") === state.activeDayId;
+          button.classList.toggle("is-active", active);
+          button.setAttribute("aria-selected", active ? "true" : "false");
+        });
         updateOverviewPressed();
         applyVisualState();
+        renderMobileBrief();
       }
 
       function updateOverviewPressed() {
@@ -1891,6 +2374,7 @@
         });
         dom.toggleDetailButton.setAttribute("aria-pressed", state.detailOpen ? "true" : "false");
         dom.detailPanel.hidden = !state.detailOpen;
+        dom.mobileBrief.hidden = state.detailOpen;
       }
 
       function applyVisualState() {
@@ -1962,11 +2446,20 @@
         var c = colorFor(day.id);
         var optionText = day.options ? renderOptions(day) : "";
         var photos = renderPhotos(day.photos);
+        var foodPhotos = renderFoodPhotos(day.id);
+        var selectedSegment = state.activeSelection && state.activeSelection.type === "stop" && state.activeSelection.value && state.activeSelection.value.from
+          ? state.activeSelection.value
+          : null;
+        var stay = TRIP.stays.find(function (item) { return item.name === day.stay; });
         dom.detailContent.style.setProperty("--day-color", c.color);
         dom.detailContent.innerHTML =
           detailHead(day, day.date + " · " + day.weekday, day.title) +
           '<p class="detail-summary">' + escapeHtml(day.summary) + '</p>' +
           '<div class="detail-route">' + day.route.split("→").map(function (part) { return '<span>' + escapeHtml(part.trim()) + '</span>'; }).join("") + '</div>' +
+          (selectedSegment
+            ? '<div class="segment-detail"><strong>' + escapeHtml(selectedSegment.from + " → " + selectedSegment.to) + '</strong><span>距离：' + escapeHtml(selectedSegment.distance) + '</span><span>预计用时：' + escapeHtml(selectedSegment.time) + '</span></div>'
+            : '') +
+          renderStayCallout(day, stay) +
           '<section class="detail-section">' +
             '<h3>' + iconSvg("clock") + '当天时间轴</h3>' +
             '<ol class="timeline">' + day.timeline.map(function (item) {
@@ -1989,6 +2482,8 @@
           '<section class="detail-section">' +
             '<h3>' + iconSvg("food") + '沿途美食</h3>' +
             '<ul class="info-list"><li>' + day.food.map(escapeHtml).join("、") + '</li></ul>' +
+            foodPhotos +
+            '<p class="food-disclaimer">菜品与地点图片中的手绘内容为本地生成的示意图，用于辅助识别，实际外观和口味以现场为准。</p>' +
             '<ul class="info-list"><li><strong>停车：</strong>' + escapeHtml(day.parking) + '</li></ul>' +
           '</section>' +
           '<section class="detail-section">' +
@@ -1997,6 +2492,16 @@
           '</section>' +
           (photos ? '<section class="detail-section"><h3>' + iconSvg("camera") + '沿途实景</h3>' + photos + '</section>' : '');
         bindDetailEvents();
+      }
+
+      function renderStayCallout(day, stay) {
+        if (day.id === "d6") {
+          return '<div class="stay-callout"><strong>今晚：返程回家</strong><span>10/6 当晚不安排住宿，嘉兴逛吃后返回常熟。</span></div>';
+        }
+        if (!stay) return "";
+        return '<div class="stay-callout"><strong>今晚住：' + escapeHtml(stay.name) + ' · ' + escapeHtml(stay.label) + '</strong>' +
+          '<span>' + escapeHtml(stay.area + " · " + stay.price) + '</span>' +
+          '<span>' + escapeHtml(stay.parking) + '</span></div>';
       }
 
       function renderOptions(day) {
@@ -2091,7 +2596,18 @@
       function renderPhotos(photos) {
         if (!photos || !photos.length) return "";
         return '<div class="photo-strip">' + photos.map(function (photo) {
-          return '<figure class="photo-item"><img src="' + escapeHtml(photo.src) + '" alt="' + escapeHtml(photo.alt) + '" loading="lazy" decoding="async"><figcaption>' + escapeHtml(photo.label) + '</figcaption><button class="photo-button" type="button" data-photo="' + escapeHtml(photo.src) + '" data-photo-alt="' + escapeHtml(photo.alt) + '" aria-label="查看' + escapeHtml(photo.label) + '大图"></button></figure>';
+          return '<figure class="photo-item"><img src="' + escapeHtml(photo.src) + '" alt="' + escapeHtml(photo.alt) + '" loading="lazy" decoding="async"><figcaption>' + escapeHtml(photo.label) + (photo.note ? ' · ' + escapeHtml(photo.note) : '') + '</figcaption><button class="photo-button" type="button" data-photo="' + escapeHtml(photo.src) + '" data-photo-alt="' + escapeHtml(photo.alt) + '" aria-label="查看' + escapeHtml(photo.label) + '大图"></button></figure>';
+        }).join("") + '</div>';
+      }
+
+      function renderFoodPhotos(dayId) {
+        var foods = FOOD_PHOTOS[dayId];
+        if (!foods || !foods.length) return "";
+        return '<div class="food-photo-strip">' + foods.map(function (food) {
+          return '<figure class="food-photo">' +
+            '<div class="food-photo-media"><img src="' + escapeHtml(food.src) + '" alt="' + escapeHtml(food.label + "示意图") + '" loading="lazy" decoding="async"><b>示意图</b></div>' +
+            '<figcaption>' + escapeHtml(food.label) + '<br><span>' + escapeHtml(food.note) + '</span></figcaption>' +
+          '</figure>';
         }).join("") + '</div>';
       }
 
@@ -2171,8 +2687,10 @@
 
       renderLegend();
       renderDayList();
+      renderMobileDaybar();
       bindControls();
       renderOverviewDetail();
+      renderMobileBrief();
       updateOverviewPressed();
       initMap();
     })();
