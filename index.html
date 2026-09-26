@@ -4,26 +4,29 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <title>常熟出发 6 天自驾路书 | 苏北鲁南不早起版</title>
-  <meta name="description" content="从常熟出发的 6 天油车自驾路书：9/30 直达连云港，不早起，串联日照、沂水、临沂。">
+  <title>常熟出发 6 天自驾路书 | 乌镇 · 宁波 · 神仙居 · 横店 · 绍兴 · 南浔</title>
+  <meta name="description" content="常熟出发的两人民俗山水 6 天自驾路书：乌镇、宁波、神仙居、横店、绍兴、南浔，总里程约 850 公里。">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <style>
     :root {
-      --paper: #f3f0e8;
-      --paper-deep: #e5dfd1;
-      --ink: #17262b;
-      --muted: #667178;
-      --ocean: #0d6a73;
-      --ocean-soft: #d9eeed;
-      --sun: #d9772f;
-      --sun-soft: #f7e3cf;
-      --hot: #bd4438;
-      --hot-soft: #f7dfdc;
-      --line: #d2cabd;
-      --card: #fffdf8;
-      --success: #2c7a52;
-      --shadow: 0 18px 45px rgba(23, 38, 43, 0.08);
-      --radius: 8px;
+      --paper: #fbfaf7;
+      --paper-deep: #eef3f2;
+      --ink: #1d2e36;
+      --muted: #68757c;
+      --ocean: #238a8c;
+      --ocean-soft: #dff5f2;
+      --sun: #f0a24f;
+      --sun-soft: #fff0d8;
+      --hot: #ee7065;
+      --hot-soft: #ffe5e1;
+      --lavender: #8a76c8;
+      --lavender-soft: #eee9ff;
+      --line: #d9e3e1;
+      --card: #fffefa;
+      --success: #459a74;
+      --shadow: 0 22px 52px rgba(44, 77, 83, 0.10);
+      --shadow-soft: 0 10px 26px rgba(44, 77, 83, 0.07);
+      --radius: 12px;
     }
 
     * {
@@ -40,11 +43,14 @@
       margin: 0;
       max-width: 100%;
       overflow-x: clip;
-      background: var(--paper);
+      background:
+        radial-gradient(circle at 8% 8%, rgba(255, 210, 140, 0.16), transparent 22rem),
+        radial-gradient(circle at 92% 22%, rgba(151, 132, 219, 0.10), transparent 24rem),
+        var(--paper);
       color: var(--ink);
       font-family: "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", system-ui, sans-serif;
-      font-size: 16px;
-      line-height: 1.65;
+      font-size: 15.5px;
+      line-height: 1.6;
     }
 
     button,
@@ -59,9 +65,15 @@
     }
 
     .masthead {
-      background: var(--ink);
-      color: #f7f2e8;
-      padding: 34px clamp(18px, 4vw, 54px) 40px;
+      position: relative;
+      overflow: hidden;
+      padding: 52px clamp(18px, 4vw, 54px) 58px;
+      color: #f9f7f2;
+      background:
+        radial-gradient(circle at 82% 18%, rgba(255, 226, 181, 0.34) 0 1px, transparent 1.5px) 0 0 / 22px 22px,
+        radial-gradient(circle at 15% 85%, rgba(164, 226, 218, 0.28) 0 1px, transparent 1.5px) 0 0 / 26px 26px,
+        radial-gradient(circle at 74% 4%, rgba(138, 118, 200, 0.30), transparent 34%),
+        linear-gradient(135deg, #14505a 0%, #238a8c 56%, #e59a54 145%);
     }
 
     .masthead-inner {
@@ -69,7 +81,7 @@
       margin: 0 auto;
       display: grid;
       grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
-      gap: 38px;
+      gap: 48px;
       align-items: end;
     }
 
@@ -77,55 +89,56 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      margin: 0 0 10px;
-      color: #8fd2d0;
-      font-size: 0.82rem;
+      margin: 0 0 14px;
+      color: #a6e3dc;
+      font-size: 0.78rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
     h1 {
       margin: 0;
       max-width: 15ch;
-      font-size: clamp(2rem, 5vw, 4.6rem);
-      line-height: 1.02;
-      letter-spacing: -0.035em;
+      font-size: clamp(2.25rem, 5vw, 5rem);
+      line-height: 0.98;
+      text-wrap: balance;
     }
 
     .lede {
       max-width: 60ch;
-      margin: 18px 0 0;
-      color: #d8dedc;
-      font-size: clamp(1rem, 1.5vw, 1.12rem);
+      margin: 20px 0 0;
+      max-width: 58ch;
+      color: #d7e5e2;
+      font-size: clamp(1rem, 1.45vw, 1.1rem);
     }
 
     .quick-facts {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+      gap: 12px;
     }
 
     .fact {
-      min-height: 96px;
-      padding: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      min-height: 104px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
       border-radius: var(--radius);
-      background: rgba(255, 255, 255, 0.045);
+      background: rgba(255, 255, 255, 0.09);
+      backdrop-filter: blur(8px);
     }
 
     .fact strong {
       display: block;
       color: #fff;
-      font-size: 1.3rem;
+      font-size: 1.32rem;
       line-height: 1.2;
     }
 
     .fact span {
       display: block;
       margin-top: 6px;
-      color: #b9c4c2;
-      font-size: 0.82rem;
+      color: #c2d3cf;
+      font-size: 0.8rem;
     }
 
     .topbar {
@@ -135,10 +148,10 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 10px clamp(18px, 4vw, 54px);
+      padding: 9px clamp(18px, 4vw, 54px);
       border-bottom: 1px solid var(--line);
-      background: rgba(243, 240, 232, 0.94);
-      backdrop-filter: blur(14px);
+      background: rgba(247, 244, 238, 0.9);
+      backdrop-filter: blur(18px);
     }
 
     .topbar-inner {
@@ -172,12 +185,12 @@
       align-items: center;
       justify-content: center;
       gap: 7px;
-      min-height: 38px;
-      padding: 7px 11px;
+      min-height: 36px;
+      padding: 6px 10px;
       border: 1px solid transparent;
-      border-radius: 7px;
+      border-radius: 9px;
       color: var(--ink);
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       font-weight: 650;
       text-decoration: none;
       white-space: nowrap;
@@ -216,13 +229,13 @@
       max-width: 100%;
       min-width: 0;
       margin: 0 auto;
-      padding: 44px 0 90px;
+      padding: 50px 0 100px;
     }
 
     .section {
       max-width: 100%;
       min-width: 0;
-      margin-top: 60px;
+      margin-top: 68px;
       scroll-margin-top: 72px;
     }
 
@@ -235,36 +248,36 @@
       grid-template-columns: minmax(0, 1fr) minmax(220px, 0.55fr);
       gap: 24px;
       align-items: end;
-      padding-bottom: 15px;
-      border-bottom: 2px solid var(--ink);
+      padding-bottom: 16px;
+      border-bottom: 2px solid #1f3438;
     }
 
     h2 {
       margin: 0;
-      font-size: clamp(1.45rem, 3vw, 2.3rem);
+      font-size: clamp(1.5rem, 3vw, 2.35rem);
       line-height: 1.15;
-      letter-spacing: -0.02em;
+      text-wrap: balance;
     }
 
     .section-note {
       margin: 0;
       color: var(--muted);
-      font-size: 0.93rem;
+      font-size: 0.9rem;
       text-align: right;
     }
 
     .route-map {
-      margin-top: 24px;
-      padding: 22px;
+      margin-top: 26px;
+      padding: 24px 22px 18px;
       border: 1px solid var(--line);
-      border-radius: var(--radius);
+      border-radius: 16px;
       background: var(--card);
       box-shadow: var(--shadow);
     }
 
     .route-track {
       display: grid;
-      grid-template-columns: repeat(7, minmax(106px, 1fr));
+      grid-template-columns: repeat(8, minmax(112px, 1fr));
       min-width: 760px;
       align-items: start;
     }
@@ -279,7 +292,7 @@
 
     .route-stop {
       position: relative;
-      padding-top: 34px;
+      padding-top: 36px;
       color: var(--ink);
       text-align: center;
     }
@@ -311,7 +324,7 @@
       height: 14px;
       border: 3px solid var(--card);
       border-radius: 50%;
-      background: var(--ocean);
+      background: #fff;
       box-shadow: 0 0 0 1px var(--ocean);
     }
 
@@ -322,7 +335,7 @@
 
     .route-stop strong {
       display: block;
-      font-size: 0.96rem;
+      font-size: 0.92rem;
     }
 
     .route-stop small {
@@ -335,18 +348,21 @@
     .stats {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 1px;
+      gap: 10px;
       margin-top: 28px;
-      border: 1px solid var(--line);
-      background: var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
+      border: 0;
+      background: transparent;
+      border-radius: 0;
+      overflow: visible;
     }
 
     .stat {
-      min-height: 108px;
+      min-height: 110px;
       padding: 17px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
       background: var(--card);
+      box-shadow: var(--shadow-soft);
     }
 
     .stat b {
@@ -382,8 +398,9 @@
       padding: 20px;
       border: 1px solid var(--line);
       border-top: 4px solid var(--ocean);
-      border-radius: var(--radius);
+      border-radius: 14px;
       background: var(--card);
+      box-shadow: var(--shadow-soft);
     }
 
     .decision.warn {
@@ -415,19 +432,19 @@
 
     .day-transport {
       display: grid;
-      gap: 7px;
-      margin-top: 14px;
-      padding: 14px 16px;
-      border: 1px solid #b9d9d7;
-      border-left: 5px solid var(--ocean);
-      border-radius: var(--radius);
-      background: var(--ocean-soft);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 18px 0 26px;
     }
 
     .day-transport p {
       margin: 0;
+      padding: 13px 14px;
+      border: 1px solid #c7ded9;
+      border-radius: 11px;
+      background: #f4faf7;
       color: #244b50;
-      font-size: 0.87rem;
+      font-size: 0.84rem;
       line-height: 1.55;
     }
 
@@ -438,17 +455,18 @@
     .food-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 22px;
+      gap: 16px;
+      margin-top: 26px;
     }
 
     .food-card {
       min-width: 0;
-      padding: 20px;
+      padding: 22px;
       border: 1px solid var(--line);
       border-top: 4px solid var(--sun);
-      border-radius: var(--radius);
+      border-radius: 14px;
       background: var(--card);
+      box-shadow: var(--shadow-soft);
     }
 
     .food-card h3 {
@@ -463,7 +481,7 @@
       padding: 4px 9px;
       border: 1px solid #e4bd91;
       border-radius: 999px;
-      background: var(--sun-soft);
+      background: #fff2e2;
       color: #70451f;
       font-size: 0.8rem;
       font-weight: 800;
@@ -510,12 +528,96 @@
       gap: 22px;
     }
 
-    .day {
+    .day-tabs {
+      display: flex;
+      gap: 9px;
+      margin-top: 26px;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--card);
+      overflow-x: auto;
+      scrollbar-width: none;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .day-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .day-tab {
+      flex: 1 0 136px;
       display: grid;
-      grid-template-columns: 170px minmax(0, 1fr);
-      gap: 24px;
-      padding-top: 22px;
-      border-top: 1px solid var(--line);
+      gap: 3px;
+      min-height: 70px;
+      padding: 11px 14px;
+      border: 1px solid transparent;
+      border-radius: 11px;
+      background: transparent;
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+      transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+    }
+
+    .day-tab:hover {
+      background: var(--paper-deep);
+      transform: translateY(-1px);
+    }
+
+    .day-tab[aria-selected="true"] {
+      border-color: var(--ocean);
+      background: linear-gradient(140deg, #22787b, #35a4a0);
+      color: #fff;
+      box-shadow: 0 8px 17px rgba(39, 124, 121, 0.22);
+    }
+
+    .day-tab strong {
+      font-size: 1rem;
+      line-height: 1.25;
+    }
+
+    .day-tab span {
+      color: var(--muted);
+      font-size: 0.74rem;
+      line-height: 1.32;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .day-tab[aria-selected="true"] span {
+      color: #d5eeee;
+    }
+
+    .calendar[data-view="single"] .day {
+      display: none;
+    }
+
+    .calendar[data-view="single"] .day.is-active {
+      display: block;
+      animation: day-in 230ms ease both;
+    }
+
+    @keyframes day-in {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .day {
+      display: block;
+      overflow: hidden;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--card);
+      box-shadow: var(--shadow);
       scroll-margin-top: 76px;
     }
 
@@ -532,49 +634,62 @@
     }
 
     .day-meta {
-      align-self: start;
-      position: sticky;
-      top: 76px;
+      position: static;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px 12px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(100deg, #e8f7f4, #fff6e8 62%, #f5f0ff);
     }
 
     .day-date {
       margin: 0;
-      font-size: 1.35rem;
+      color: #17666b;
+      font-size: 1.12rem;
+      font-weight: 850;
       line-height: 1.1;
     }
 
     .day-meta p {
-      margin: 7px 0 0;
+      margin: 0;
       color: var(--muted);
-      font-size: 0.84rem;
+      font-size: 0.8rem;
     }
 
     .day-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      margin-top: 12px;
-      padding: 4px 8px;
-      border: 1px solid var(--line);
+      margin-left: auto;
+      padding: 5px 10px;
+      border: 1px solid #b9d6d1;
       border-radius: 999px;
-      background: var(--card);
+      background: #fff;
+      color: #205c5a;
       font-size: 0.76rem;
       font-weight: 750;
     }
 
     .day-content {
       min-width: 0;
+      padding: clamp(18px, 3vw, 30px);
     }
 
     .day-title {
       margin: 0;
-      font-size: clamp(1.15rem, 2vw, 1.55rem);
-      line-height: 1.32;
+      max-width: 24ch;
+      font-size: clamp(1.35rem, 3vw, 2rem);
+      line-height: 1.2;
+      text-wrap: balance;
     }
 
     .day-summary {
-      margin: 8px 0 18px;
+      max-width: 75ch;
+      margin: 12px 0 20px;
       color: #49555b;
+      font-size: 0.97rem;
     }
 
     .route-chip {
@@ -582,13 +697,13 @@
       flex-wrap: wrap;
       gap: 7px;
       align-items: center;
-      margin: 0 0 18px;
-      padding: 7px 10px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      background: #ebe6db;
-      color: #3d494f;
-      font-size: 0.82rem;
+      margin: 0 0 20px;
+      padding: 8px 12px;
+      border: 1px solid #bfded8;
+      border-radius: 10px;
+      background: #f0f8f5;
+      color: #285d5d;
+      font-size: 0.83rem;
       font-weight: 650;
     }
 
@@ -596,14 +711,14 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 8px;
-      margin: -6px 0 18px;
-      padding: 10px 12px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--card);
+      gap: 8px 10px;
+      margin: 0 0 22px;
+      padding: 13px 14px;
+      border: 1px solid #ead6bf;
+      border-radius: 12px;
+      background: #fffaf1;
       color: #4d595f;
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       line-height: 1.45;
     }
 
@@ -660,9 +775,9 @@
     .timeline {
       position: relative;
       display: grid;
-      gap: 15px;
+      gap: 16px;
       margin: 0;
-      padding: 0 0 0 26px;
+      padding: 0 0 0 27px;
       list-style: none;
     }
 
@@ -679,20 +794,21 @@
     .timeline li {
       position: relative;
       display: grid;
-      grid-template-columns: 74px minmax(0, 1fr);
-      gap: 14px;
+      grid-template-columns: 76px minmax(0, 1fr);
+      gap: 13px;
+      min-width: 0;
     }
 
     .timeline li::before {
       content: "";
       position: absolute;
-      top: 8px;
+      top: 9px;
       left: -26px;
       width: 10px;
       height: 10px;
       border: 2px solid var(--card);
       border-radius: 50%;
-      background: var(--ocean);
+      background: var(--card);
       box-shadow: 0 0 0 1px var(--ocean);
     }
 
@@ -708,18 +824,31 @@
 
     .time {
       color: var(--ocean);
-      font-weight: 800;
+      font-size: 0.84rem;
+      font-weight: 850;
       font-variant-numeric: tabular-nums;
+    }
+
+    .event {
+      min-width: 0;
+      padding: 0 0 14px;
+      border-bottom: 1px dashed #e6ded0;
+    }
+
+    .timeline li:last-child .event {
+      padding-bottom: 0;
+      border-bottom: 0;
     }
 
     .event strong {
       display: block;
-      font-size: 0.97rem;
+      font-size: 0.95rem;
+      line-height: 1.35;
     }
 
     .event span {
       color: #5f6a70;
-      font-size: 0.87rem;
+      font-size: 0.84rem;
     }
 
     .tags {
@@ -935,8 +1064,9 @@
       margin-top: 22px;
       overflow-x: auto;
       border: 1px solid var(--line);
-      border-radius: var(--radius);
+      border-radius: 13px;
       background: var(--card);
+      box-shadow: var(--shadow-soft);
     }
 
     table {
@@ -958,7 +1088,7 @@
     th {
       position: sticky;
       top: 0;
-      background: #e9e3d7;
+      background: #f1f7f4;
       font-size: 0.78rem;
       letter-spacing: 0.03em;
     }
@@ -968,18 +1098,18 @@
     }
 
     tbody tr:hover {
-      background: #f6f1e7;
+      background: #fbf7f0;
     }
 
     .checklist {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1px;
-      margin-top: 22px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
-      background: var(--line);
+      gap: 10px;
+      margin-top: 26px;
+      border: 0;
+      border-radius: 0;
+      overflow: visible;
+      background: transparent;
     }
 
     .check-item {
@@ -989,7 +1119,10 @@
       align-items: start;
       min-height: 74px;
       padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
       background: var(--card);
+      box-shadow: var(--shadow-soft);
     }
 
     .check-item input {
@@ -1269,6 +1402,10 @@
         break-inside: avoid;
       }
 
+      .calendar[data-view="single"] .day {
+        display: grid !important;
+      }
+
       .route-map,
       .decision,
       .food-card,
@@ -1302,29 +1439,29 @@
       <div>
         <p class="eyebrow">
           <i class="icon" data-lucide="route" aria-hidden="true"></i>
-          2026 国庆 · 6 天假期 + 9/30 夜出发
+          2026 国庆 · 两人自驾 · 6 天 + 9/30 出发夜
         </p>
-        <h1>苏北鲁南<br>不早起路书</h1>
+        <h1>江南山湖<br>6 天自驾路书</h1>
         <p class="lede">
-          从常熟出发，油车 2 人，一人驾驶。9/30 晚直接开到连云港，不再在盐城中转；主线约 1226 公里。全程不设清晨闹钟，热门景点集中在 3 天，并按国庆人流预留排队和堵车余量。
+          常熟 → 乌镇 → 宁波 → 神仙居 → 横店 → 绍兴 → 南浔 → 常熟，总里程约 850 公里。每天车程 1.5–3 小时，两人轮换驾驶，9 月 30 日 18:00 夜出发，10 月 6 日午间错峰返程。
         </p>
       </div>
       <div class="quick-facts" aria-label="行程概览">
         <div class="fact">
-          <strong>1226 km</strong>
-          <span>主线里程，景区接驳另计</span>
+          <strong>约 850 km</strong>
+          <span>全程总里程</span>
         </div>
         <div class="fact">
-          <strong>约 14.5 h</strong>
-          <span>纯驾驶时间，国庆需加 20% 到 50%</span>
+          <strong>1.5–3 h</strong>
+          <span>每日车程，轻松不赶路</span>
         </div>
         <div class="fact">
-          <strong>3 天</strong>
-          <span>热门景点集中 3 天，每点预留 1 到 2 小时缓冲</span>
+          <strong>2 人轮换</strong>
+          <span>自驾汽车，交替驾驶</span>
         </div>
         <div class="fact">
-          <strong>9:00 后</strong>
-          <span>每天最早起床时间</span>
+          <strong>9/30 18:00</strong>
+          <span>夜出发，10/6 午间返程</span>
         </div>
       </div>
     </div>
@@ -1335,16 +1472,16 @@
       <div class="topnav">
         <a href="#overview"><i class="icon" data-lucide="map" aria-hidden="true"></i>总览</a>
         <a href="#calendar"><i class="icon" data-lucide="calendar-days" aria-hidden="true"></i>逐日路书</a>
-        <a href="#timing"><i class="icon" data-lucide="clock-3" aria-hidden="true"></i>错峰表</a>
-        <a href="#food"><i class="icon" data-lucide="utensils" aria-hidden="true"></i>美食价格</a>
-        <a href="#booking"><i class="icon" data-lucide="ticket-check" aria-hidden="true"></i>购票预约</a>
+        <a href="#timing"><i class="icon" data-lucide="clock-3" aria-hidden="true"></i>时间表</a>
+        <a href="#food"><i class="icon" data-lucide="utensils" aria-hidden="true"></i>沿途美食</a>
+        <a href="#booking"><i class="icon" data-lucide="ticket-check" aria-hidden="true"></i>预约清单</a>
         <a href="#stay-fuel"><i class="icon" data-lucide="hotel" aria-hidden="true"></i>住宿与加油</a>
-        <a href="#fallback"><i class="icon" data-lucide="shield-alert" aria-hidden="true"></i>备选与应急</a>
+        <a href="#fallback"><i class="icon" data-lucide="shield-alert" aria-hidden="true"></i>应急</a>
       </div>
       <div class="spacer"></div>
-      <button class="action" id="hotOnly" type="button" aria-pressed="false">
-        <i class="icon" data-lucide="flame" aria-hidden="true"></i>
-        <span id="hotOnlyLabel">只看热门日</span>
+      <button class="action" id="dayViewToggle" type="button" aria-pressed="false">
+        <i class="icon" data-lucide="list" aria-hidden="true"></i>
+        <span id="dayViewLabel">展开全部</span>
       </button>
       <button class="action solid" id="printPlan" type="button">
         <i class="icon" data-lucide="printer" aria-hidden="true"></i>
@@ -1356,352 +1493,253 @@
   <main>
     <section class="section" id="overview">
       <div class="section-head">
-        <h2>主线只走一条环线</h2>
-        <p class="section-note">不绕徐州，不排青岛。每天尽量只换一次住宿。</p>
+        <h2>一条顺时针江南环线</h2>
+        <p class="section-note">按指定顺序行进，不折返、不临时加站，两人轮换驾驶。</p>
       </div>
 
       <div class="route-map">
         <div class="route-scroll">
           <div class="route-track" aria-label="路线节点">
-            <div class="route-stop home">
-              <strong>常熟</strong>
-              <small>9/30 18:00 出发</small>
-            </div>
-            <div class="route-stop">
-              <strong>连云港</strong>
-              <small>9/30 直达 · 连住两晚 · 连岛买票预约</small>
-            </div>
-            <div class="route-stop">
-              <strong>日照</strong>
-              <small>住宿需订 · 海岸通常免费但可能预约</small>
-            </div>
-            <div class="route-stop">
-              <strong>沂水</strong>
-              <small>住宿两晚 · 云蒙或峡谷买票预约</small>
-            </div>
-            <div class="route-stop">
-              <strong>临沂</strong>
-              <small>住宿需订 · 岱崮或天蒙买票预约</small>
-            </div>
-            <div class="route-stop home">
-              <strong>常熟</strong>
-              <small>10/6 18:30 到 21:00 到</small>
-            </div>
+            <div class="route-stop home"><strong>常熟</strong><small>9/30 18:00 出发</small></div>
+            <div class="route-stop"><strong>嘉兴乌镇</strong><small>9/30 夜抵 · 10/1 东栅</small></div>
+            <div class="route-stop"><strong>宁波</strong><small>10/1 晚到 · 10/2 天一阁</small></div>
+            <div class="route-stop"><strong>台州神仙居</strong><small>10/2 住白塔镇 · 10/3 早入园</small></div>
+            <div class="route-stop"><strong>金华横店</strong><small>10/3 晚到 · 10/4 秦王宫</small></div>
+            <div class="route-stop"><strong>绍兴</strong><small>10/4 晚到 · 10/5 古城</small></div>
+            <div class="route-stop"><strong>湖州南浔</strong><small>10/5 晚到 · 10/6 返程</small></div>
+            <div class="route-stop home"><strong>常熟</strong><small>10/6 午间错峰到家</small></div>
           </div>
         </div>
       </div>
 
       <div class="stats" aria-label="行程统计">
-        <div class="stat">
-          <b>9/30</b>
-          <span>18:00 后从常熟直达连云港</span>
-        </div>
-        <div class="stat">
-          <b>6 天 + 出发夜</b>
-          <span>每天 9:00 后起床、10:00 后出发</span>
-        </div>
-        <div class="stat">
-          <b>油车</b>
-          <span>优先市区加油，不赌服务区</span>
-        </div>
-        <div class="stat">
-          <b>一人驾驶</b>
-          <span>每 2 小时必须停一次</span>
-        </div>
-        <div class="stat">
-          <b>2 人</b>
-          <span>一箱行李，住宿选双床或大床</span>
-        </div>
+        <div class="stat"><b>8 个节点</b><span>常熟出发并原路回到常熟</span></div>
+        <div class="stat"><b>6 天 + 夜出发</b><span>9/30 到乌镇，10/6 午间返程</span></div>
+        <div class="stat"><b>1 次换 1 城</b><span>每天只推进到下一站住宿</span></div>
+        <div class="stat"><b>两人轮换</b><span>每 2 小时左右交换驾驶</span></div>
+        <div class="stat"><b>重点预约</b><span>天一阁、神仙居、横店、鲁迅故里、南浔联票</span></div>
       </div>
 
       <div class="grid-3">
         <article class="decision">
-          <h3><i class="icon" data-lucide="sunrise" aria-hidden="true"></i>热门怎么错峰</h3>
-          <p>不设清晨场，热门点尽量约 10:30 后或午后时段。国庆排队、停车和接驳各留 1 到 2 小时缓冲，每个点只保留一条主线。</p>
+          <h3><i class="icon" data-lucide="route" aria-hidden="true"></i>路线不折返</h3>
+          <p>按乌镇、宁波、神仙居、横店、绍兴、南浔的顺序推进，每天只换一次住宿，不回头补点。</p>
         </article>
         <article class="decision offbeat">
-          <h3><i class="icon" data-lucide="waves" aria-hidden="true"></i>冷门怎么补</h3>
-          <p>下午只走渔村、海岸外围、博物馆、县城夜市和老区村落。热门点排队过长时，直接用冷门点替换，不影响住宿和转场。</p>
+          <h3><i class="icon" data-lucide="clock-3" aria-hidden="true"></i>控制驾驶强度</h3>
+          <p>每日车程 1.5–3 小时，两人轮换。神仙居日安排 7:30 早入园，其余日期不抢无效早起。</p>
         </article>
         <article class="decision warn">
-          <h3><i class="icon" data-lucide="bed-double" aria-hidden="true"></i>一人驾驶底线</h3>
-          <p>连续驾驶不超过 2 小时。9/30 直达连云港约 4.7 小时，经过盐城后如果犯困或已经很晚，立即下高速住盐城，不硬撑。</p>
+          <h3><i class="icon" data-lucide="ticket-check" aria-hidden="true"></i>热门项目先约</h3>
+          <p>国庆限流容易约满。所有热门景区建议提前 3 天完成预约，演出和索道还要提前选场次。</p>
         </article>
-      </div>
-
-      <div class="callout">
-        <h3>9/30 可以直接到连云港</h3>
-        <p>18:00 从常熟出发，正常约 4.7 小时到连云港；按节前路况、服务区休息和进城时间，预计 23:30 到 01:00 入住。这样 10/1 可以睡到自然醒，不再在盐城多停一晚。不建议当晚继续冲到日照，路程明显超出一人夜间安全驾驶范围。</p>
       </div>
 
       <div class="callout hot">
-        <h3>国庆人流放宽规则</h3>
+        <h3>两人自驾总提示</h3>
         <ul>
-          <li>每天最多 1 个主目标，再加 1 个顺路点。主目标玩 3 到 4 小时，顺路点可随时删除。</li>
-          <li>正常 1 小时车程按 1.5 小时估，2 小时车程按 2.5 到 3 小时估。晚到 1 小时不改路线，只删景点。</li>
-          <li>热门点预约优先选 11:00 后或 14:00 后时段。约不到合适时段就换备选，不为了预约改成早起。</li>
-          <li>国庆景区餐饮和停车可能排队。吃饭避开 12:00 到 13:00，停车先找外围正规停车场，再步行或接驳。</li>
+          <li>预约汇总：所有热门景区建议提前 3 天完成预约，国庆限流易约满。</li>
+          <li>错峰技巧：每日尽量 8 点前入园/出发，避开 9–11 点车流人流高峰。</li>
+          <li>美食避坑：海鲜排挡选明码标价的门店，景区小吃浅尝即可，正餐优先去市区本地人常去的餐馆。</li>
+          <li>物品准备：带好身份证、驾驶证、车载充电器、舒适的步行鞋，山区早晚温差大备薄外套。</li>
         </ul>
-      </div>
-
-      <div class="callout">
-        <h3>这条线为什么适合你们</h3>
-        <p>海洋、渔港、海岸公路和沂蒙山区的组合，与常熟的园林、水乡、湖景差异明显。9/30 直达连云港省掉一次中转，白天不设清晨场。代价是热门点会碰到更多游客，所以用放宽时长、限时参观和冷门备选控制节奏。</p>
       </div>
     </section>
 
     <section class="section" id="calendar">
       <div class="section-head">
         <h2>逐日路书</h2>
-        <p class="section-note">驾驶时间为正常路况估算。国庆请按导航实时路况预留 30% 到 50% 余量。</p>
+        <p class="section-note">点击日期，只查看当天安排。需要通读时再展开全部。</p>
       </div>
 
-      <div class="hot-only-note">当前只显示有热门景点的日期。再次点击“只看热门日”可恢复全部行程。</div>
+      <div class="day-tabs" id="dayTabs" role="tablist" aria-label="选择日期"></div>
 
-      <div class="calendar">
-        <article class="day offbeat-day" id="day-0">
+      <div class="calendar" data-view="single">
+        <article class="day hot-day" id="day-0">
           <div class="day-meta">
             <p class="day-date">9/30</p>
             <p>周三 · 出发夜</p>
-            <span class="day-badge"><i class="icon" data-lucide="car-front" aria-hidden="true"></i>直达连云港</span>
+            <span class="day-badge"><i class="icon" data-lucide="car-front" aria-hidden="true"></i>常熟 → 乌镇</span>
           </div>
           <div class="day-content">
-            <h3 class="day-title">常熟 → 连云港：当晚直接到第一站</h3>
-            <p class="day-summary">18:00 下班后出发，不安排景点。正常约 4.7 小时，按节前路况、服务区休息和进城时间，预计 23:30 到 01:00 入住。</p>
+            <h3 class="day-title">常熟 → 嘉兴乌镇：18:00 出发，夜游西栅</h3>
+            <p class="day-summary">18:00 从常熟出发走常台高速，全程约 110 公里，车程 1.5–2 小时；20:00 抵达乌镇西栅，办理入住后凭房卡办理景区临时出入证，夜游西栅提灯夜景、坐摇橹船。</p>
             <div class="reservation-strip">
-              <span class="reserve-badge hotel">必须提前订房</span>
-              <span><strong>连云港住宿：</strong>订连云区或墟沟，标记“可晚到入住”和“免费停车”。</span>
+              <span class="reserve-badge hotel">必须提前预订</span>
+              <span><strong>乌镇住宿：</strong>在「乌镇旅游官方预订网」提前预订东西栅联票和住宿；住西栅可买两日有效联票。</span>
+              <span class="reserve-badge required">单独预约</span>
+              <span><strong>木心美术馆：</strong>需单独预约，确定到馆日期后尽早办理。</span>
             </div>
-            <p class="route-chip"><span>常熟</span><span>→</span><span>沈海 / 长深高速</span><span>→</span><span>连云港连云区</span><span>· 约 405 km / 4.7 h</span></p>
+            <p class="route-chip"><span>常熟</span><span>→</span><span>常台高速</span><span>→</span><span>乌镇西栅</span><span>→</span><span>约 110 km / 1.5–2 h</span></p>
             <div class="day-transport">
-              <p><strong>主交通：</strong>自驾汽车，从常熟直接开到连云港酒店，全程不换乘。</p>
-              <p><strong>当地交通：</strong>到达已是深夜，取车停酒店，晚到只打车或网约车，不再开夜路找吃的。</p>
+              <p><strong>主交通：</strong>两人自驾，从常熟直接到乌镇西栅。</p>
+              <p><strong>停车：</strong>停西栅景区官方停车场；住景区内民宿可凭房卡享停车优惠。</p>
             </div>
-
             <ol class="timeline">
-              <li>
-                <span class="time">17:30</span>
-                <div class="event">
-                  <strong>出发前检查并加满油</strong>
-                  <span>胎压、玻璃水、灯光、备胎或补胎工具。油卡、ETC、驾驶证和行驶证放在随手位置。</span>
-                </div>
-              </li>
               <li>
                 <span class="time">18:00</span>
                 <div class="event">
                   <strong>从常熟出发</strong>
-                  <span>导航直接设连云港连云区酒店，不要临时加盐城或日照景点。苏通大桥如果拥堵，按导航绕行通常更快。</span>
-                </div>
-              </li>
-              <li class="warn">
-                <span class="time">20:00 到 20:30</span>
-                <div class="event">
-                  <strong>服务区休息 20 到 30 分钟</strong>
-                  <span>一人驾驶必须下车走动。不要只停着刷手机，补水、上厕所，再继续。</span>
-                </div>
-              </li>
-              <li class="warn">
-                <span class="time">22:00</span>
-                <div class="event">
-                  <strong>安全判断点</strong>
-                  <span>如果已经明显犯困、头痛或前方拥堵严重，就在盐城下高速住一晚，第二天再补 2.3 小时到连云港。不要为了“当天必须到”硬撑。</span>
-                  <span class="reserve-detail"><strong>备用：</strong>盐城只做临时住宿，选高速口附近、可晚到入住的连锁酒店。</span>
+                  <span>走常台高速，全程约 110 公里，车程 1.5–2 小时。</span>
                 </div>
               </li>
               <li>
-                <span class="time">23:30 到 01:00</span>
+                <span class="time">20:00</span>
                 <div class="event">
-                  <strong>到连云港，直接入住</strong>
-                  <span>优先选连云区或墟沟。不要把住宿订在市中心，第二天去海边和转场都会更远。</span>
-                  <span class="reserve-detail"><strong>需订房：</strong>取消政策选“免费取消”，并电话确认“01:00 前仍保留房间”和免费停车。</span>
+                  <strong>抵达乌镇西栅、办理入住</strong>
+                  <span>入住后凭房卡办景区临时出入证，再开始夜游。</span>
+                  <span class="reserve-detail">西栅景区内住宿优先；确认停车场、出入证和次日东栅接驳。</span>
+                </div>
+              </li>
+              <li>
+                <span class="time">20:30–22:30</span>
+                <div class="event">
+                  <strong>夜游西栅、坐摇橹船</strong>
+                  <span>看提灯夜景，沿河慢走。夜宵可选书生羊肉面、嘉兴鲜肉大粽、定胜糕。</span>
                 </div>
               </li>
             </ol>
-
-            <div class="tags">
-              <span class="tag">约 4.7 h 驾驶</span>
-              <span class="tag">不安排景点</span>
-              <span class="tag sun">最晚 01:00 入住</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="day offbeat-day" id="day-1">
-          <div class="day-meta">
-            <p class="day-date">10/1</p>
-            <p>周四 · 海边慢游</p>
-            <span class="day-badge"><i class="icon" data-lucide="anchor" aria-hidden="true"></i>不早起</span>
-          </div>
-          <div class="day-content">
-            <h3 class="day-title">连云港：睡到自然醒，海岸慢游</h3>
-            <p class="day-summary">不设闹钟。9:00 前后起床，10:30 后出门，只走老街、在海一方和海岸外围，把连岛留到 10/2 的 10:30 后。</p>
-            <div class="reservation-strip">
-              <span class="reserve-badge hotel">连云港连住两晚</span>
-              <span><strong>住宿：</strong>9/30 和 10/1 住同一家，10/1 不用搬行李，也能睡到自然醒。</span>
-              <span class="reserve-badge check">出发前确认</span>
-              <span>连云老街、在海一方是否临时交通管制。</span>
-            </div>
-            <p class="route-chip"><span>酒店</span><span>→</span><span>连云老街</span><span>→</span><span>在海一方</span><span>→</span><span>酒店</span></p>
-            <div class="day-transport">
-              <p><strong>主交通：</strong>市区慢游不拼里程，自驾汽车可开可不开，按当天交通管制决定是否把车留酒店。</p>
-              <p><strong>当地交通：</strong>酒店到连云老街、在海一方单程约 8 公里内且 22:00 前返回，可公交或打车；跨区、晚归或临时加外围海岸点，继续自驾。</p>
-            </div>
-
-            <ol class="timeline">
-              <li>
-                <span class="time">09:00</span>
-                <div class="event">
-                  <strong>起床、早餐</strong>
-                  <span>昨晚到得晚，今天不设闹钟。睡够再出门，不看日出，不赶第一个景点时段。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">10:30</span>
-                <div class="event">
-                  <strong>出门去连云老街</strong>
-                  <span>先走老街和港口周边。节假日停车和道路可能临时管控，出发前看景区或交警当天公告。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">12:00</span>
-                <div class="event">
-                  <strong>午餐与休息</strong>
-                  <span>海鲜店先问价再点，选明码标价的店。饭后回酒店午休 1 小时，不让昨晚的疲劳累积。</span>
-                </div>
-              </li>
-              <li class="offbeat">
-                <span class="time">14:30</span>
-                <div class="event">
-                  <strong>在海一方与外围海岸</strong>
-                  <span>只走开放步道和外围海岸，不排队进热门项目。停车紧张时，直接改为市区博物馆或商场休息。</span>
-                  <span class="reserve-detail">出发前确认：是否免预约、停车区是否临时调整、海边大风预警。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">18:00</span>
-                <div class="event">
-                  <strong>海鲜晚餐</strong>
-                  <span>先问价再点，选明码标价的店。两人不要点太多，山东和江苏菜量普遍偏大。</span>
-                </div>
-              </li>
-            </ol>
-
-            <div class="tags">
-              <span class="tag">10:30 后出门</span>
-              <span class="tag offbeat">海岸外围</span>
-              <span class="tag sun">不早起</span>
-            </div>
             <div class="photo-grid">
               <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="放大查看连云港港口全景">
-                  <img src="./assets/images/lianyungang-port-panorama.jpg" width="960" height="720" loading="lazy" decoding="async" alt="连云港港口全景">
+                <button class="photo-zoom" type="button" aria-label="查看乌镇西栅夜景大图">
+                  <img src="./assets/images/wuzhen-xizha-night.jpg" alt="乌镇西栅水乡夜色与临河灯光" loading="lazy" decoding="async">
                 </button>
-                <figcaption><strong>连云港港口全景</strong>10/1 先走开放海岸和港区外围，把连岛主景区留给 10/2。图：David290，CC BY-SA 4.0，<a href="https://commons.wikimedia.org/wiki/File:Port_of_Lianyungang_PANO0001.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+                <figcaption><strong>乌镇西栅夜色</strong>入夜后沿河灯影层叠，适合抵达当晚慢慢走。图片：N509FZ，CC BY-SA 4.0，Wikimedia Commons。</figcaption>
               </figure>
               <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="放大查看山东海鲜面">
-                  <img src="./assets/images/lianyungang-seafood-noodles.jpg" width="960" height="720" loading="lazy" decoding="async" alt="山东海鲜面">
+                <button class="photo-zoom" type="button" aria-label="查看乌镇水巷大图">
+                  <img src="./assets/images/wuzhen-waterway.jpg" alt="乌镇水巷、石桥与临水民居" loading="lazy" decoding="async">
                 </button>
-                <figcaption><strong>海鲜面</strong>10/1 晚餐或早餐参考，先问清海鲜按份还是按斤计价。图：Suginami，CC0，<a href="https://commons.wikimedia.org/wiki/File:%E5%B1%B1%E4%B8%9C%E6%B5%B7%E9%B2%9C%E9%9D%A2.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+                <figcaption><strong>水巷与石桥</strong>第二天上午逛东栅时，顺着水巷看最经典的水乡尺度。图片：韩笃一，CC BY-SA 3.0，Wikimedia Commons。</figcaption>
               </figure>
+            </div>
+            <div class="tags">
+              <span class="tag">110 km</span>
+              <span class="tag">夜游西栅</span>
+              <span class="tag">住西栅</span>
             </div>
           </div>
         </article>
 
-        <article class="day hot-day" id="day-2">
+        <article class="day " id="day-1">
           <div class="day-meta">
-            <p class="day-date">10/2</p>
-            <p>周五 · 热门日 1</p>
-            <span class="day-badge"><i class="icon" data-lucide="flame" aria-hidden="true"></i>连岛不早场</span>
+            <p class="day-date">10/1</p>
+            <p>周四 · 水乡到港城</p>
+            <span class="day-badge"><i class="icon" data-lucide="waves" aria-hidden="true"></i>乌镇 → 宁波</span>
           </div>
           <div class="day-content">
-            <h3 class="day-title">连云港 → 日照：连岛晚点去，下午转场</h3>
-            <p class="day-summary">9:00 后起床、10:30 后进连岛，只走主栈道和 1 到 2 个观景点。最晚 16:30 离开，傍晚到日照。</p>
+            <h3 class="day-title">嘉兴乌镇 → 宁波：上午东栅，晚上南塘老街</h3>
+            <p class="day-summary">上午深度游东栅，打卡茅盾故居、林家铺子、皮影戏馆、逢源双桥；14:00 出发前往宁波，全程 180 公里，车程 2–2.5 小时；晚上逛南塘老街，看三江口港口夜景。</p>
             <div class="reservation-strip">
-              <span class="reserve-badge required">买票 + 预约</span>
-              <span><strong>连岛：</strong>必须买票并实名预约。优先约 10:30 到 12:00 时段。</span>
+              <span class="reserve-badge required">次日预约</span>
+              <span><strong>天一阁博物院：</strong>提前在「天一阁」微信公众号预约，建议约 8:30–9:30 时段错峰入园。</span>
               <span class="reserve-badge hotel">住宿需预订</span>
-              <span>10/2 日照住宿，优先万平口、灯塔或山海天外围。</span>
+              <span><strong>宁波住宿：</strong>老城区车位紧张，优先选带免费车位的酒店。</span>
             </div>
-            <p class="route-chip"><span>连云区</span><span>→</span><span>连岛</span><span>→</span><span>日照</span><span>· 连云港到日照约 119 km / 1.4 h</span></p>
+            <p class="route-chip"><span>乌镇</span><span>→</span><span>东栅</span><span>→</span><span>宁波</span><span>→</span><span>约 180 km / 2–2.5 h</span></p>
             <div class="day-transport">
-              <p><strong>主交通：</strong>连云港到日照必须自驾汽车，带行李转场，不坐公交跨市。</p>
-              <p><strong>当地交通：</strong>到连岛停车场后换乘景区观光车或接驳车，不开车进岛内各点；返回取车后再开去日照。</p>
+              <p><strong>主交通：</strong>14:00 从乌镇出发自驾去宁波。</p>
+              <p><strong>停车：</strong>宁波老城区车位紧张，优先选带免费车位的酒店，晚上尽量把车留在酒店。</p>
             </div>
-
             <ol class="timeline">
               <li>
-                <span class="time">09:00</span>
+                <span class="time">上午</span>
                 <div class="event">
-                  <strong>起床、退房、寄存行李</strong>
-                  <span>不用赶清晨场。先吃早餐，确认预约时段和停车区，再开车去连岛。</span>
-                </div>
-              </li>
-              <li class="warn">
-                <span class="time">10:00</span>
-                <div class="event">
-                  <strong>从酒店出发去连岛</strong>
-                  <span>提前一天确认停车区和入园通道。节假日可能启用交通管控，以景区公众号当天公告为准。</span>
-                  <span class="reserve-detail"><strong>必须预约：</strong>门票、实名信息、入园时段、车辆是否需预约，四项都要查。</span>
+                  <strong>东栅深度游</strong>
+                  <span>打卡茅盾故居、林家铺子、皮影戏馆、逢源双桥。</span>
                 </div>
               </li>
               <li class="hot">
-                <span class="time">10:30 到 11:00</span>
+                <span class="time">14:00</span>
                 <div class="event">
-                  <strong>进入连岛</strong>
-                  <span>这个时段人已经不少，所以只走海边栈道和主要观景点，不追所有支线。排队超过 30 分钟的项目直接跳过。</span>
+                  <strong>乌镇 → 宁波</strong>
+                  <span>全程约 180 公里，正常车程 2–2.5 小时；两人可轮换驾驶。</span>
+                  <span class="reserve-detail">国庆按 2.5–3 小时预留，途中安排一次服务区休息。</span>
                 </div>
               </li>
               <li>
-                <span class="time">12:30 到 13:30</span>
+                <span class="time">晚上</span>
                 <div class="event">
-                  <strong>岛上简餐或回市区吃饭</strong>
-                  <span>不要花一小时排队吃网红店。简单吃好，把时间留给海边和转场。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">16:00 到 16:30</span>
-                <div class="event">
-                  <strong>离开连岛，回酒店取行李</strong>
-                  <span>不要继续加景点。出发前在连云港市区加油，不要在景区门口排队。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">17:00 到 17:30</span>
-                <div class="event">
-                  <strong>连云港 → 日照</strong>
-                  <span>约 119 公里、正常 1.4 小时，国庆按 2 到 2.5 小时预留。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">19:00 到 20:00</span>
-                <div class="event">
-                  <strong>到日照，入住、吃晚饭</strong>
-                  <span>住宿优先选灯塔、万平口或山海天外围。吃蒸汽海鲜锅或鲅鱼水饺，今晚只吃饭休息，不赶夜游。</span>
-                  <span class="reserve-detail"><strong>需订房：</strong>确认停车位，不要只看“距景区几百米”。</span>
+                  <strong>南塘老街、三江口港口夜景</strong>
+                  <span>先逛南塘老街，再去三江口看港口夜景。</span>
                 </div>
               </li>
             </ol>
-
-            <div class="tags">
-              <span class="tag hot">连岛</span>
-              <span class="tag">10:30 后进</span>
-              <span class="tag">最晚 16:30 出</span>
-              <span class="tag">傍晚到日照</span>
-            </div>
             <div class="photo-grid">
               <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="放大查看连岛海滨浴场">
-                  <img src="./assets/images/lian-island-beach.jpg" width="960" height="720" loading="lazy" decoding="async" alt="连云港连岛海滨浴场">
+                <button class="photo-zoom" type="button" aria-label="查看宁波三江口大图">
+                  <img src="./assets/images/ningbo-sanjiangkou.jpg" alt="宁波三江口江面与城市建筑" loading="lazy" decoding="async">
                 </button>
-                <figcaption><strong>连岛海滨浴场</strong>10/2 只走主栈道和 1 到 2 个观景点，排队超过 30 分钟就撤。图：钉钉，CC BY-SA 4.0，<a href="https://commons.wikimedia.org/wiki/File:%E8%BF%9E%E4%BA%91%E6%B8%AF%E8%BF%9E%E5%B2%9B%E6%B5%B7%E6%BB%A8%E6%B5%B4%E5%9C%BA.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+                <figcaption><strong>宁波三江口</strong>甬江、姚江、奉化江在此交汇，傍晚看城市水岸线。图片：钉钉，CC BY-SA 4.0，Wikimedia Commons。</figcaption>
               </figure>
+            </div>
+            <div class="tags">
+              <span class="tag">东栅</span>
+              <span class="tag">180 km</span>
+              <span class="tag">南塘老街</span>
+              <span class="tag">三江口</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="day " id="day-2">
+          <div class="day-meta">
+            <p class="day-date">10/2</p>
+            <p>周五 · 城市到仙居</p>
+            <span class="day-badge"><i class="icon" data-lucide="mountain" aria-hidden="true"></i>宁波 → 神仙居</span>
+          </div>
+          <div class="day-content">
+            <h3 class="day-title">宁波 → 台州神仙居：天一阁、月湖，再转仙居</h3>
+            <p class="day-summary">上午游天一阁博物院，逛尊经阁、东明草堂、天一池，顺路逛月湖公园；13:30 出发前往台州神仙居，全程 160 公里，车程 2.5–3 小时；晚上入住仙居县白塔镇酒店。</p>
+            <div class="reservation-strip">
+              <span class="reserve-badge required">提前 1 天预约</span>
+              <span><strong>神仙居大门票 + 南天索道：</strong>在「神仙居景区」官方公众号预订，建议买套票，选南门入园。</span>
+              <span class="reserve-badge hotel">住宿需预订</span>
+              <span><strong>仙居白塔镇：</strong>离景区南门约 10 分钟车程，减少次日早间车程。</span>
+            </div>
+            <p class="route-chip"><span>宁波</span><span>→</span><span>天一阁 / 月湖</span><span>→</span><span>仙居白塔镇</span><span>→</span><span>约 160 km / 2.5–3 h</span></p>
+            <div class="day-transport">
+              <p><strong>主交通：</strong>上午在宁波市区游览，13:30 出发自驾去仙居。</p>
+              <p><strong>停车：</strong>神仙居南门停车场车位多，停车 5 元/小时，20 元封顶。</p>
+            </div>
+            <ol class="timeline">
+              <li>
+                <span class="time">上午</span>
+                <div class="event">
+                  <strong>天一阁博物院</strong>
+                  <span>逛尊经阁、东明草堂、天一池；顺路逛月湖公园。</span>
+                  <span class="reserve-detail">按预约时段 8:30–9:30 入园，避开 9–11 点人流高峰。</span>
+                </div>
+              </li>
+              <li class="hot">
+                <span class="time">13:30</span>
+                <div class="event">
+                  <strong>宁波 → 台州神仙居</strong>
+                  <span>全程约 160 公里，车程 2.5–3 小时。</span>
+                  <span class="reserve-detail">两人轮换驾驶，途中服务区休息一次。</span>
+                </div>
+              </li>
+              <li>
+                <span class="time">晚上</span>
+                <div class="event">
+                  <strong>入住仙居县白塔镇</strong>
+                  <span>选离景区南门约 10 分钟车程的酒店，早点休息。</span>
+                </div>
+              </li>
+            </ol>
+            <div class="photo-grid">
               <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="放大查看连岛海湾与沙滩">
-                  <img src="./assets/images/lian-island-coast.jpg" width="960" height="720" loading="lazy" decoding="async" alt="连云港连岛海湾与沙滩">
+                <button class="photo-zoom" type="button" aria-label="查看宁波天一阁大图">
+                  <img src="./assets/images/ningbo-tianyige.jpg" alt="宁波天一阁传统建筑与园林" loading="lazy" decoding="async">
                 </button>
-                <figcaption><strong>连岛海湾与沙滩</strong>海边大风或排队过长时，改走外围沙滩和开放步道。图：LianIsland，CC BY 4.0，<a href="https://commons.wikimedia.org/wiki/File:Baai_en_strand_van_de_Lian_Island,_Lianyungang,_China.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+                <figcaption><strong>天一阁博物院</strong>中国现存最古老的藏书楼之一，适合按预约时段安静参观。图片：Nablazzz，CC BY-SA 3.0，Wikimedia Commons。</figcaption>
               </figure>
+            </div>
+            <div class="tags">
+              <span class="tag">天一阁</span>
+              <span class="tag">月湖公园</span>
+              <span class="tag">160 km</span>
+              <span class="tag">白塔镇</span>
             </div>
           </div>
         </article>
@@ -1709,344 +1747,288 @@
         <article class="day hot-day" id="day-3">
           <div class="day-meta">
             <p class="day-date">10/3</p>
-            <p>周六 · 热门日 2</p>
-            <span class="day-badge"><i class="icon" data-lucide="flame" aria-hidden="true"></i>午后看海</span>
+            <p>周六 · 神仙居主日</p>
+            <span class="day-badge"><i class="icon" data-lucide="sunrise" aria-hidden="true"></i>神仙居 → 横店</span>
           </div>
           <div class="day-content">
-            <h3 class="day-title">日照 → 沂水：上午睡够，午后看海</h3>
-            <p class="day-summary">万平口或灯塔二选一，14:00 后进景区，按 3 到 3.5 小时安排。18:00 左右再转去沂水，避开清晨和正午。</p>
+            <h3 class="day-title">台州神仙居 → 金华横店：早入园，晚看梦幻谷</h3>
+            <p class="day-summary">7:30 早入园错峰，南天索道上山，走悬空栈道，打卡如意桥、观音峰、南天顶，全程游玩 5–6 小时；14:30 出发前往横店影视城，全程 120 公里，车程 1.5–2 小时；晚上逛梦幻谷景区，看《梦幻太极》《暴雨山洪》实景演出。</p>
             <div class="reservation-strip">
-              <span class="reserve-badge suggested">免费但可能预约</span>
-              <span><strong>万平口或灯塔：</strong>通常免门票，但国庆可能分时预约或交通管制。优先选 14:00 后时段。</span>
+              <span class="reserve-badge required">提前预约</span>
+              <span><strong>神仙居：</strong>大门票 + 南天索道提前 1 天在官方公众号预订，建议买套票，南门入园。</span>
+              <span class="reserve-badge required">提前预约</span>
+              <span><strong>横店联票 + 梦幻谷：</strong>在「横店影视城」官方公众号预订，热门演出场次提前选座。</span>
               <span class="reserve-badge hotel">住宿需预订</span>
-              <span>沂水连住两晚。</span>
+              <span><strong>横店住宿：</strong>优先合作酒店；各景区均有专属停车场，10 元/天，合作酒店一般送停车券。</span>
             </div>
-            <p class="route-chip"><span>日照</span><span>→</span><span>万平口/灯塔</span><span>→</span><span>沂水</span><span>· 约 109 km / 1.4 h</span></p>
+            <p class="route-chip"><span>神仙居南门</span><span>→</span><span>南天索道</span><span>→</span><span>横店影视城</span><span>→</span><span>约 120 km / 1.5–2 h</span></p>
             <div class="day-transport">
-              <p><strong>主交通：</strong>日照到沂水必须自驾汽车，傍晚带行李转场。</p>
-              <p><strong>当地交通：</strong>日照市区短程可打车或公交；14:00 后进万平口或灯塔，停车紧张时也直接打车到入口，离开前再回停车点取车。</p>
+              <p><strong>主交通：</strong>上午在神仙居，14:30 从景区出发自驾去横店。</p>
+              <p><strong>停车：</strong>神仙居选南门停车场；横店各景区均有专属停车场，10 元/天。</p>
             </div>
-
             <ol class="timeline">
               <li>
-                <span class="time">09:00</span>
+                <span class="time">7:30</span>
                 <div class="event">
-                  <strong>起床、早餐、退房</strong>
-                  <span>万平口和灯塔二选一。想看城市海岸线选万平口，想看礁石和灯塔选灯塔。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">10:30</span>
-                <div class="event">
-                  <strong>日照市区早午餐、补给</strong>
-                  <span>不要为了等景区开放干耗。吃好饭，确认预约、停车和海边天气，再出发。</span>
-                </div>
-              </li>
-              <li class="warn">
-                <span class="time">12:00 到 14:00</span>
-                <div class="event">
-                  <strong>酒店或咖啡馆休息</strong>
-                  <span>国庆正午停车场最容易满，这段不进去硬碰。先把午饭吃完，再按实时停车情况选万平口或灯塔。</span>
-                  <span class="reserve-detail"><strong>出发前一日确认：</strong>是否需预约、能否开车直达、14:00 后时段是否开放。</span>
+                  <strong>神仙居南门早入园</strong>
+                  <span>南天索道上山，走悬空栈道，打卡如意桥、观音峰、南天顶。</span>
+                  <span class="reserve-detail">全程游玩 5–6 小时；上山路线选南门更省力。</span>
                 </div>
               </li>
               <li class="hot">
-                <span class="time">14:00 到 14:30</span>
+                <span class="time">14:30</span>
                 <div class="event">
-                  <strong>进入万平口或灯塔</strong>
-                  <span>只走一条主步道和 1 到 2 个观景点。找车位超过 30 分钟就换另一处，或改走外围海岸，不把时间耗在排队上。</span>
+                  <strong>神仙居 → 横店影视城</strong>
+                  <span>全程约 120 公里，车程 1.5–2 小时。</span>
+                  <span class="reserve-detail">离开前补水、吃点东西，避免连续驾驶疲劳。</span>
                 </div>
               </li>
               <li>
-                <span class="time">18:00</span>
+                <span class="time">晚上</span>
                 <div class="event">
-                  <strong>离开海岸，日照 → 沂水</strong>
-                  <span>先在日照市区加油。约 107 公里、正常 1.4 小时，国庆按 2 到 2.5 小时预留。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">20:00 到 20:30</span>
-                <div class="event">
-                  <strong>到沂水，入住、吃晚饭</strong>
-                  <span>选择县城中心或景区方向交通方便的连锁酒店。晚饭吃沂蒙炒鸡或糁汤，今天不再加大景点。</span>
-                  <span class="reserve-detail"><strong>需订房：</strong>10/3 和 10/4 连住同一家，确认两晚房型和停车。</span>
+                  <strong>梦幻谷景区</strong>
+                  <span>看《梦幻太极》《暴雨山洪》实景演出。</span>
+                  <span class="reserve-detail">热门演出提前选座，提前 30 分钟到场。</span>
                 </div>
               </li>
             </ol>
-
-            <div class="tags">
-              <span class="tag hot">万平口/灯塔</span>
-              <span class="tag">14:00 后进</span>
-              <span class="tag">18:00 出</span>
-              <span class="tag">不赶日出</span>
-            </div>
             <div class="photo-grid">
               <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="放大查看日照万平口海洋公园">
-                  <img src="./assets/images/rizhao-wanpingkou-marine-park.jpg" width="960" height="640" loading="lazy" decoding="async" alt="日照市万平口海洋公园">
+                <button class="photo-zoom" type="button" aria-label="查看神仙居山峰大图">
+                  <img src="./assets/images/shenxianju-peaks.jpg" alt="神仙居山峰、云雾与悬空栈道景观" loading="lazy" decoding="async">
                 </button>
-                <figcaption><strong>万平口海洋公园</strong>14:00 后进入，只走一条主步道；停车超过 30 分钟就换灯塔或外围海岸。图：Iswzo，CC BY-SA 4.0，<a href="https://commons.wikimedia.org/wiki/File:%E6%97%A5%E7%85%A7%E5%B8%82%E4%B8%87%E5%B9%B3%E5%8F%A3%E6%B5%B7%E6%B4%8B%E5%85%AC%E5%9B%AD2022.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+                <figcaption><strong>神仙居奇峰</strong>山峰立起、云雾流动，早入园更容易看到安静的山色。图片：钉钉，CC BY-SA 4.0，Wikimedia Commons。</figcaption>
               </figure>
               <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="放大查看日照灯塔晚照">
-                  <img src="./assets/images/rizhao-lighthouse-sunset.jpg" width="960" height="600" loading="lazy" decoding="async" alt="日照灯塔晚照">
+                <button class="photo-zoom" type="button" aria-label="查看神仙居桥梁大图">
+                  <img src="./assets/images/shenxianju-bridge.jpg" alt="神仙居山间桥梁与峡谷">
                 </button>
-                <figcaption><strong>日照灯塔晚照</strong>万平口和灯塔二选一；傍晚离开海岸前，在这里看完落日再转去沂水。图：Jd Shi，CC BY-SA 3.0，<a href="https://commons.wikimedia.org/wiki/File:%E6%97%A5%E7%85%A7%E7%81%AF%E5%A1%94%E6%99%9A%E7%85%A7_-_panoramio.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+                <figcaption><strong>山间天桥</strong>桥梁连接山壁，是神仙居游览里很有辨识度的一段路。图片：钉钉，CC BY-SA 4.0，Wikimedia Commons。</figcaption>
               </figure>
+            </div>
+            <div class="tags">
+              <span class="tag">7:30 入园</span>
+              <span class="tag">南天索道</span>
+              <span class="tag">如意桥</span>
+              <span class="tag">梦幻谷</span>
             </div>
           </div>
         </article>
 
-        <article class="day hot-day" id="day-4">
+        <article class="day " id="day-4">
           <div class="day-meta">
             <p class="day-date">10/4</p>
-            <p>周日 · 热门日 3</p>
-            <span class="day-badge"><i class="icon" data-lucide="flame" aria-hidden="true"></i>午前进山</span>
+            <p>周日 · 影视城到绍兴</p>
+            <span class="day-badge"><i class="icon" data-lucide="film" aria-hidden="true"></i>横店 → 绍兴</span>
           </div>
           <div class="day-content">
-            <h3 class="day-title">沂水：沂蒙山或地下大峡谷，只选一个</h3>
-            <p class="day-summary">天气好用云蒙景区，风大或下雨用地下大峡谷。10:30 后再出发，11:00 左右入园，16:00 离场。</p>
+            <h3 class="day-title">金华横店 → 绍兴：秦王宫取景地，夜游仓桥直街</h3>
+            <p class="day-summary">上午游秦王宫景区，打卡四海归一殿，看《帝国江山》球幕电影；时间充裕可加逛清明上河图。15:00 出发前往绍兴，全程 130 公里，车程 2 小时；晚上逛仓桥直街，坐乌篷船游环城河。</p>
             <div class="reservation-strip">
-              <span class="reserve-badge required">必须预约</span>
-              <span><strong>云蒙或地下大峡谷：</strong>先看天气二选一，预约 11:00 后的入园时段。</span>
-              <span class="reserve-badge check">出发前确认</span>
-              <span>桃棵子村或沂蒙老区当天是否开放。</span>
+              <span class="reserve-badge required">次日免费预约</span>
+              <span><strong>鲁迅故里 + 沈园：</strong>提前在「绍兴市文旅集团」微信公众号免费预约，分时段入园。</span>
+              <span class="reserve-badge hotel">住宿需预订</span>
+              <span><strong>绍兴住宿：</strong>停鲁迅故里景区停车场，或选带免费车位的市区酒店。</span>
             </div>
-            <p class="route-chip"><span>沂水县城</span><span>→</span><span>云蒙/地下大峡谷</span><span>→</span><span>沂水县城</span></p>
+            <p class="route-chip"><span>横店秦王宫</span><span>→</span><span>绍兴</span><span>→</span><span>约 130 km / 2 h</span></p>
             <div class="day-transport">
-              <p><strong>主交通：</strong>云蒙或地下大峡谷以自驾汽车为主，从沂水县城直接开到景区停车场。</p>
-              <p><strong>当地交通：</strong>停车后按现场指引换景区观光车、摆渡车或索道；山区公交不方便，不把当天行程交给公交。</p>
+              <p><strong>主交通：</strong>上午在横店游览，15:00 出发自驾去绍兴。</p>
+              <p><strong>停车：</strong>停鲁迅故里景区停车场，或选择带免费车位的市区酒店。</p>
             </div>
-
             <ol class="timeline">
               <li>
-                <span class="time">09:00</span>
+                <span class="time">上午</span>
                 <div class="event">
-                  <strong>起床、早餐，检查门票和证件</strong>
-                  <span>不设清晨闹钟。吃好早餐再检查预约码和身份证，不把时间卡死。</span>
-                  <span class="reserve-detail"><strong>必须预约：</strong>带好身份证，截图预约码；地下大峡谷内单独项目另查是否需购票。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">10:30</span>
-                <div class="event">
-                  <strong>从沂水县城出发</strong>
-                  <span>先查看实时路况和停车情况。如果前一晚睡晚了，出发时间可以顺延，但预约时段要提前改。</span>
+                  <strong>秦王宫景区</strong>
+                  <span>《琅琊榜》《陈情令》取景地，打卡四海归一殿，看《帝国江山》球幕电影。</span>
+                  <span class="reserve-detail">时间充裕可加逛清明上河图。</span>
                 </div>
               </li>
               <li class="hot">
-                <span class="time">11:00 左右</span>
+                <span class="time">15:00</span>
                 <div class="event">
-                  <strong>进沂蒙山云蒙或地下大峡谷</strong>
-                  <span>云蒙适合看山和徒步，地下大峡谷适合风雨天。两处都按预约时段进入，只走主线。</span>
-                  <span class="reserve-detail">若迟到，先联系景区确认预约是否作废，不要直接开车到入口堵着。</span>
-                </div>
-              </li>
-              <li class="hot">
-                <span class="time">16:00</span>
-                <div class="event">
-                  <strong>离开景区</strong>
-                  <span>玩满主线就撤，不为了“值回票价”继续加项目。天黑前回县城或去近处村落。</span>
-                </div>
-              </li>
-              <li class="offbeat">
-                <span class="time">17:00</span>
-                <div class="event">
-                  <strong>桃棵子村或沂蒙老区冷门点</strong>
-                  <span>看山村、老屋和红色遗址，节奏慢。如果景区玩累了，直接回酒店休息，不补项目。</span>
-                  <span class="reserve-detail">通常不需要门票，但出发前确认是否闭馆或道路管控。</span>
+                  <strong>横店 → 绍兴</strong>
+                  <span>全程约 130 公里，车程 2 小时。</span>
+                  <span class="reserve-detail">两人轮换驾驶，避开傍晚疲劳时段。</span>
                 </div>
               </li>
               <li>
-                <span class="time">19:30</span>
+                <span class="time">晚上</span>
                 <div class="event">
-                  <strong>回沂水吃晚饭</strong>
-                  <span>推荐沂蒙炒鸡、煎饼、糁汤。不要开夜路去远处景点。</span>
+                  <strong>仓桥直街、环城河乌篷船</strong>
+                  <span>逛仓桥直街，坐乌篷船游环城河。</span>
                 </div>
               </li>
             </ol>
-
-            <div class="tags">
-              <span class="tag hot">沂蒙山云蒙 / 地下大峡谷</span>
-              <span class="tag">11:00 进</span>
-              <span class="tag">16:00 出</span>
-              <span class="tag offbeat">沂蒙老区</span>
-            </div>
             <div class="photo-grid">
               <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="放大查看沂水地下大峡谷">
-                  <img src="./assets/images/yishui-underground-canyon.jpg" width="960" height="595" loading="lazy" decoding="async" alt="沂水地下大峡谷">
+                <button class="photo-zoom" type="button" aria-label="查看横店秦王宫大殿大图">
+                  <img src="./assets/images/hengdian-qin-hall.jpg" alt="横店秦王宫四海归一殿建筑外观" loading="lazy" decoding="async">
                 </button>
-                <figcaption><strong>沂水地下大峡谷</strong>风大或下雨天可改走地下大峡谷，停车后按现场指引换景交或步行通道。图：WeelStone，CC BY-SA 3.0，<a href="https://commons.wikimedia.org/wiki/File:%E6%B2%82%E6%B0%B4%E5%9C%B0%E4%B8%8B%E5%A4%A7%E5%B3%A1%E8%B0%B7_-_panoramio.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+                <figcaption><strong>秦王宫大殿</strong>气势开阔的影视城场景，《琅琊榜》《陈情令》都在这里取景。图片：N509FZ，CC BY-SA 4.0，Wikimedia Commons。</figcaption>
               </figure>
               <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="放大查看山东菜窝头">
-                  <img src="./assets/images/yimeng-caiwotou.jpg" width="960" height="721" loading="lazy" decoding="async" alt="山东菜窝头">
+                <button class="photo-zoom" type="button" aria-label="查看横店秦王宫宫殿大图">
+                  <img src="./assets/images/hengdian-qin-palace.jpg" alt="横店秦王宫宫殿与广场" loading="lazy" decoding="async">
                 </button>
-                <figcaption><strong>山东菜窝头</strong>10/4 晚饭配糁汤或炒鸡，两人先点小份试口味。图：Cartonfox，CC0，<a href="https://commons.wikimedia.org/wiki/File:%E5%B1%B1%E4%B8%9C%E8%8F%9C%E7%AA%9D%E5%A4%B4.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+                <figcaption><strong>秦王宫场景</strong>上午把主线走完，下午按点转场绍兴。图片：N509FZ，CC BY-SA 4.0，Wikimedia Commons。</figcaption>
               </figure>
+              <figure class="itinerary-photo">
+                <button class="photo-zoom" type="button" aria-label="查看绍兴仓桥直街大图">
+                  <img src="./assets/images/shaoxing-cangqiao.jpg" alt="绍兴仓桥直街河道与沿河民居" loading="lazy" decoding="async">
+                </button>
+                <figcaption><strong>仓桥直街</strong>抵达绍兴后的夜间慢游点，沿河走走就能感受到老城气息。图片：猫猫的日记本，CC BY-SA 4.0，Wikimedia Commons。</figcaption>
+              </figure>
+            </div>
+            <div class="tags">
+              <span class="tag">秦王宫</span>
+              <span class="tag">四海归一殿</span>
+              <span class="tag">130 km</span>
+              <span class="tag">仓桥直街</span>
             </div>
           </div>
         </article>
 
-        <article class="day offbeat-day" id="day-5">
+        <article class="day " id="day-5">
           <div class="day-meta">
             <p class="day-date">10/5</p>
-            <p>周一 · 转场日</p>
-            <span class="day-badge"><i class="icon" data-lucide="mountain" aria-hidden="true"></i>晚出发</span>
+            <p>周一 · 古城到南浔</p>
+            <span class="day-badge"><i class="icon" data-lucide="anchor" aria-hidden="true"></i>绍兴 → 南浔</span>
           </div>
           <div class="day-content">
-            <h3 class="day-title">沂水 → 临沂：午后看岱崮，晚上进城</h3>
-            <p class="day-summary">想保持人少就选岱崮地貌；如果体力好再去天蒙。10:30 后出发，傍晚到临沂，晚上只逛街吃饭。</p>
+            <h3 class="day-title">绍兴 → 湖州南浔：鲁迅故里、东湖，夜看百间楼</h3>
+            <p class="day-summary">上午游鲁迅故里（百草园、三味书屋），步行游览沈园；下午去东湖景区，坐乌篷船穿采石岩洞；16:00 出发前往南浔古镇，全程 140 公里，车程 2–2.5 小时；晚上逛百间楼沿河夜景。</p>
             <div class="reservation-strip">
-              <span class="reserve-badge required">必须预约 / 购票</span>
-              <span><strong>岱崮地貌或天蒙：</strong>二选一，提前买对应景区门票。</span>
+              <span class="reserve-badge required">免费预约</span>
+              <span><strong>鲁迅故里 + 沈园：</strong>提前在「绍兴市文旅集团」微信公众号免费预约，分时段入园。</span>
+              <span class="reserve-badge suggested">提前 1 天购票</span>
+              <span><strong>南浔核心景点联票：</strong>南浔古镇免大门票；小莲庄 + 嘉业藏书楼等核心联票提前 1 天线上买 75 元/人，2 日有效。</span>
               <span class="reserve-badge hotel">住宿需预订</span>
-              <span>10/5 临沂住宿，选上高速方便的位置。</span>
+              <span><strong>南浔住宿：</strong>停南浔古镇南入口停车场，免费停车，步行约 5 分钟到百间楼。</span>
             </div>
-            <p class="route-chip"><span>沂水</span><span>→</span><span>岱崮/天蒙</span><span>→</span><span>临沂</span><span>· 沂水到临沂约 89 km / 1.2 h 起</span></p>
+            <p class="route-chip"><span>绍兴鲁迅故里</span><span>→</span><span>东湖</span><span>→</span><span>南浔古镇</span><span>→</span><span>约 140 km / 2–2.5 h</span></p>
             <div class="day-transport">
-              <p><strong>主交通：</strong>岱崮或天蒙必须自驾汽车，山区公共交通班次少，转场时间不可控。</p>
-              <p><strong>当地交通：</strong>景区内按现场换观光车、摆渡车或索道；到临沂后车留酒店，沂河夜景和晚饭打车或公交。</p>
+              <p><strong>主交通：</strong>上午在绍兴游览，16:00 出发自驾去南浔。</p>
+              <p><strong>停车：</strong>南浔古镇南入口停车场免费，步行约 5 分钟到百间楼。</p>
             </div>
-
             <ol class="timeline">
               <li>
-                <span class="time">09:00</span>
+                <span class="time">上午</span>
                 <div class="event">
-                  <strong>起床、早餐、退房</strong>
-                  <span>出发前在沂水或临沂方向加油。今天是转场日，不要把油量压到警戒线。</span>
+                  <strong>鲁迅故里 → 沈园</strong>
+                  <span>逛百草园、三味书屋，再步行到沈园。</span>
+                  <span class="reserve-detail">按预约时段分时入园。</span>
                 </div>
               </li>
-              <li class="offbeat">
-                <span class="time">10:30</span>
+              <li>
+                <span class="time">下午</span>
                 <div class="event">
-                  <strong>出发</strong>
-                  <span>不赶早场。按实时路况选岱崮或天蒙方向，路上再决定是否停车休息。</span>
-                </div>
-              </li>
-              <li class="offbeat">
-                <span class="time">11:30</span>
-                <div class="event">
-                  <strong>岱崮地貌或天蒙二选一</strong>
-                  <span>岱崮更冷门，天蒙更热门。你们已在前三天用过热门点，默认推荐岱崮。</span>
-                  <span class="reserve-detail"><strong>需买票：</strong>默认岱崮；选天蒙时同时查索道、摆渡车和停车预约。</span>
+                  <strong>东湖景区</strong>
+                  <span>坐乌篷船穿采石岩洞。</span>
                 </div>
               </li>
               <li>
                 <span class="time">16:00</span>
                 <div class="event">
-                  <strong>出发去临沂</strong>
-                  <span>如果下雨或大风，跳过山地，直接去临沂市区，给最后一天留体力。</span>
+                  <strong>绍兴 → 南浔古镇</strong>
+                  <span>全程约 140 公里，车程 2–2.5 小时。</span>
+                  <span class="reserve-detail">出发前在绍兴市区补满油。</span>
                 </div>
               </li>
               <li>
-                <span class="time">17:30</span>
+                <span class="time">晚上</span>
                 <div class="event">
-                  <strong>到临沂，入住</strong>
-                  <span>住宿选北城新区或沂河附近，第二天上高速方便。</span>
-                  <span class="reserve-detail"><strong>需订房：</strong>要求免费停车，确认次日早上退房不排队。</span>
-                </div>
-              </li>
-              <li class="offbeat">
-                <span class="time">19:00</span>
-                <div class="event">
-                  <strong>沂河夜景和夜市，吃临沂炒鸡或糁汤</strong>
-                  <span>可以玩晚一点，但只安排城市夜景和晚饭，不去需要排队的远距离景区。</span>
+                  <strong>百间楼沿河夜景</strong>
+                  <span>入住后沿河慢走，不赶第二个远距离景点。</span>
                 </div>
               </li>
             </ol>
-
-            <div class="tags">
-              <span class="tag offbeat">岱崮地貌</span>
-              <span class="tag sun">天蒙备选</span>
-              <span class="tag">临沂夜景</span>
-              <span class="tag">可以玩晚</span>
-            </div>
             <div class="photo-grid">
               <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="放大查看沂蒙山天蒙玻璃索桥">
-                  <img src="./assets/images/yimeng-tianmeng-glass-bridge.jpg" width="960" height="540" loading="lazy" decoding="async" alt="沂蒙山天蒙旅游区玻璃索桥远眺">
+                <button class="photo-zoom" type="button" aria-label="查看绍兴鲁迅故里大图">
+                  <img src="./assets/images/shaoxing-luxun.jpg" alt="绍兴鲁迅故里传统建筑与戏台" loading="lazy" decoding="async">
                 </button>
-                <figcaption><strong>天蒙玻璃索桥远眺</strong>体力好时选天蒙；停车后按现场换索道或摆渡车，默认仍推荐人少的岱崮。图：WPTO，CC BY 4.0，<a href="https://commons.wikimedia.org/wiki/File:%E6%B2%82%E8%92%99%E5%B1%B1%E5%A4%A9%E8%92%99%E6%97%85%E6%B8%B8%E5%8C%BA%E7%8E%BB%E7%92%83%E7%B4%A2%E6%A1%A5%E8%BF%9C%E7%9C%BA.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+                <figcaption><strong>鲁迅故里</strong>百草园、三味书屋连成一条步行线，记得按预约时段入园。图片：wanghongliu，CC BY-SA 3.0，Wikimedia Commons。</figcaption>
               </figure>
               <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="放大查看临沂电视塔">
-                  <img src="./assets/images/linyi-tv-tower.jpg" width="934" height="312" loading="lazy" decoding="async" alt="临沂电视塔">
+                <button class="photo-zoom" type="button" aria-label="查看绍兴东湖大图">
+                  <img src="./assets/images/shaoxing-east-lake.jpg" alt="绍兴东湖采石遗迹、湖面与岩壁" loading="lazy" decoding="async">
                 </button>
-                <figcaption><strong>临沂电视塔</strong>10/5 晚上沿沂河看夜景，车留酒店，打车或公交往返。图：Liziyuan0216，CC BY-SA 4.0，<a href="https://commons.wikimedia.org/wiki/File:Linyi_television_tower_(cropped).jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+                <figcaption><strong>绍兴东湖</strong>坐乌篷船穿行采石岩洞，是古城游览后很舒服的一段水上行程。图片：Logan Wenger，CC BY 2.0，Wikimedia Commons。</figcaption>
               </figure>
               <figure class="itinerary-photo">
-                <button class="photo-zoom" type="button" aria-label="放大查看山东炒鸡">
-                  <img src="./assets/images/shandong-stir-fried-chicken.jpg" width="960" height="720" loading="lazy" decoding="async" alt="山东炒鸡">
+                <button class="photo-zoom" type="button" aria-label="查看南浔百间楼大图">
+                  <img src="./assets/images/nanxun-baijianlou.jpg" alt="南浔百间楼沿河民居夜景" loading="lazy" decoding="async">
                 </button>
-                <figcaption><strong>山东炒鸡</strong>10/5 晚餐参考，两人先点小份，再加一份面或饼蘸汤。图：Suginami，CC0，<a href="https://commons.wikimedia.org/wiki/File:%E5%B1%B1%E4%B8%9C%E7%82%92%E9%B8%A1_Shandong_Chaoji.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+                <figcaption><strong>南浔百间楼</strong>抵达南浔后沿河看夜景，水面和民居灯光很适合慢慢走。图片：钉钉，CC BY-SA 4.0，Wikimedia Commons。</figcaption>
               </figure>
+            </div>
+            <div class="tags">
+              <span class="tag">鲁迅故里</span>
+              <span class="tag">沈园</span>
+              <span class="tag">东湖乌篷船</span>
+              <span class="tag">百间楼</span>
             </div>
           </div>
         </article>
 
-        <article class="day offbeat-day" id="day-6">
+        <article class="day " id="day-6">
           <div class="day-meta">
             <p class="day-date">10/6</p>
-            <p>周二 · 返程日</p>
-            <span class="day-badge"><i class="icon" data-lucide="home" aria-hidden="true"></i>直接回家</span>
+            <p>周二 · 错峰返程</p>
+            <span class="day-badge"><i class="icon" data-lucide="home" aria-hidden="true"></i>南浔 → 常熟</span>
           </div>
           <div class="day-content">
-            <h3 class="day-title">临沂 → 常熟：不加班，不临时加点</h3>
-            <p class="day-summary">今天是全程最长驾驶日，约 508 公里、正常 5.8 小时。10:00 左右出发，18:00 到 20:00 到家。</p>
+            <h3 class="day-title">湖州南浔 → 返程常熟：午间错峰回家</h3>
+            <p class="day-summary">上午游小莲庄、嘉业藏书楼，再逛湖笔作坊体验文房文化；中午在古镇内吃太湖湖鲜；12:30 出发返程，全程 120 公里，车程 1.5–2 小时，避开 16 点后高速高峰。</p>
             <div class="reservation-strip">
               <span class="reserve-badge check">无需景区预约</span>
-              <span><strong>今天只返程：</strong>不安排需要预约的项目。前一晚检查车况和高速路况。</span>
+              <span><strong>返程：</strong>当天不安排需要预约的新景区，重点确认车况和高速实时路况。</span>
+              <span class="reserve-badge suggested">联票 2 日有效</span>
+              <span><strong>南浔核心联票：</strong>若前一天未购票，当天可在官方线上渠道购买 75 元/人联票。</span>
             </div>
-            <p class="route-chip"><span>临沂</span><span>→</span><span>G2 / G15</span><span>→</span><span>常熟</span><span>· 约 508 km / 5.8 h</span></p>
+            <p class="route-chip"><span>南浔古镇</span><span>→</span><span>常台高速</span><span>→</span><span>常熟</span><span>→</span><span>约 120 km / 1.5–2 h</span></p>
             <div class="day-transport">
-              <p><strong>主交通：</strong>临沂到常熟全程自驾汽车，不换乘。出发前在临沂市区加满油。</p>
-              <p><strong>当地交通：</strong>今天没有当地交通切换；途中每 2 小时进服务区休息一次，不连续驾驶。</p>
+              <p><strong>主交通：</strong>12:30 从南浔出发自驾回常熟。</p>
+              <p><strong>路线：</strong>走常台高速，中途可在嘉兴服务区休整。</p>
             </div>
-
             <ol class="timeline">
               <li>
-                <span class="time">09:00</span>
+                <span class="time">上午</span>
                 <div class="event">
-                  <strong>起床、早餐、退房、加油</strong>
-                  <span>在临沂市区加满油再上高速。水、湿巾、提神饮品放副驾手边。</span>
+                  <strong>小莲庄、嘉业藏书楼</strong>
+                  <span>逛私家园林和藏书楼，再去湖笔作坊体验文房文化。</span>
                 </div>
               </li>
               <li>
-                <span class="time">10:00 到 10:30</span>
+                <span class="time">中午</span>
                 <div class="event">
-                  <strong>上高速返程</strong>
-                  <span>导航以实时路况为准。今天不早起，但也不要拖到中午后出发，否则晚饭时间会明显后移。</span>
-                </div>
-              </li>
-              <li class="warn">
-                <span class="time">每 2 小时</span>
-                <div class="event">
-                  <strong>停一次，下车走动</strong>
-                  <span>不要连续开 4 小时以上。困意出现就进服务区小睡 20 分钟，不靠意志硬撑。</span>
+                  <strong>古镇内吃太湖湖鲜</strong>
+                  <span>推荐太湖三白、笋干老鸭煲、酱板鱼。</span>
                 </div>
               </li>
               <li>
-                <span class="time">13:00</span>
+                <span class="time">12:30</span>
                 <div class="event">
-                  <strong>午饭和 30 分钟休息</strong>
-                  <span>优先选容量大、出口清楚的服务区，不要为了省 10 分钟去拥挤的小停车区。</span>
-                </div>
-              </li>
-              <li>
-                <span class="time">18:00 到 20:00</span>
-                <div class="event">
-                  <strong>到常熟</strong>
-                  <span>如果 10:30 后出发或路况差，到家时间顺延。最后 100 公里尤其不要赶时间。</span>
+                  <strong>南浔 → 常熟</strong>
+                  <span>全程约 120 公里，车程 1.5–2 小时，避开 16 点后高速高峰。</span>
+                  <span class="reserve-detail">走常台高速，中途可在嘉兴服务区休整。</span>
                 </div>
               </li>
             </ol>
-
+            <div class="photo-grid">
+              <figure class="itinerary-photo">
+                <button class="photo-zoom" type="button" aria-label="查看南浔小莲庄大图">
+                  <img src="./assets/images/nanxun-xiaolianzhuang.jpg" alt="南浔古镇小莲庄园林与水面" loading="lazy" decoding="async">
+                </button>
+                <figcaption><strong>小莲庄</strong>返程当天上午逛私家园林和嘉业藏书楼，午间错峰出发。图片：钉钉，CC BY-SA 4.0，Wikimedia Commons。</figcaption>
+              </figure>
+            </div>
             <div class="tags">
-              <span class="tag">5.8 h 驾驶</span>
-              <span class="tag sun">10:00 后出发</span>
-              <span class="tag">不加景点</span>
+              <span class="tag">小莲庄</span>
+              <span class="tag">嘉业藏书楼</span>
+              <span class="tag">120 km</span>
+              <span class="tag">午间返程</span>
             </div>
           </div>
         </article>
@@ -2055,322 +2037,141 @@
 
     <section class="section" id="timing">
       <div class="section-head">
-        <h2>不早起版时间表</h2>
-        <p class="section-note">规则是“不早起、可晚归”。热门点统一放到 10:30 后或午后，不抢第一班。</p>
+        <h2>每日时间表</h2>
+        <p class="section-note">时间以正常路况估算，国庆按导航实时路况预留 30% 到 50% 余量。</p>
       </div>
 
       <div class="table-wrap">
         <table>
           <thead>
-            <tr>
-              <th>景点</th>
-              <th>建议到达</th>
-              <th>建议离开</th>
-              <th>为什么这样排</th>
-              <th>如果晚了</th>
-            </tr>
+            <tr><th>日期</th><th>核心安排</th><th>关键时间</th><th>当天转场</th><th>晚了怎么办</th></tr>
           </thead>
           <tbody>
-            <tr>
-              <td>连云港连岛</td>
-              <td>10/2 10:30 到 11:00</td>
-              <td>10/2 16:00 到 16:30</td>
-              <td>9:00 起床后出发，不坐清晨第一班；只走主栈道和 1 到 2 个观景点，国庆留 1.5 小时排队和停车缓冲。</td>
-              <td>停车或排队超过 30 分钟，改走外围海岸；最晚 16:30 离开去日照。</td>
-            </tr>
-            <tr>
-              <td>日照万平口 / 灯塔</td>
-              <td>10/3 14:00 到 14:30</td>
-              <td>10/3 18:00</td>
-              <td>中午先在酒店休息，避开正午最挤时段；两处二选一，国庆停车超过 30 分钟就换。</td>
-              <td>只走一条短步道，不恋战；18:00 离开去沂水，20:00 后到也接受。</td>
-            </tr>
-            <tr>
-              <td>沂蒙山云蒙 / 地下大峡谷</td>
-              <td>10/4 11:00 到 11:30</td>
-              <td>10/4 16:00 到 16:30</td>
-              <td>10:30 后从县城出发，不设清晨闹钟。只走主线，索道和换乘按 1 到 2 小时排队预留。</td>
-              <td>天气不好改地下大峡谷；预约时段约不到午后，就改走冷门村落。</td>
-            </tr>
-            <tr>
-              <td>岱崮地貌 / 天蒙</td>
-              <td>10/5 11:30</td>
-              <td>10/5 16:00 到 16:30</td>
-              <td>10:30 后从沂水出发，默认走岱崮；天蒙只作为体力好的备选，索道和摆渡车要留排队时间。</td>
-              <td>排队明显就跳过山地，直接临沂市区，保留返程体力。晚上可以逛街吃饭。</td>
-            </tr>
+            <tr><td>9/30</td><td>常熟 → 乌镇西栅</td><td>18:00 出发，20:00 抵达</td><td>110 km / 1.5–2 h</td><td>晚到只办入住和夜游，不再加项目。</td></tr>
+            <tr><td>10/1</td><td>东栅 → 宁波南塘老街、三江口</td><td>14:00 出发去宁波</td><td>180 km / 2–2.5 h</td><td>东栅压缩到上午，宁波夜景正常保留。</td></tr>
+            <tr><td>10/2</td><td>天一阁、月湖 → 仙居白塔镇</td><td>8:30–9:30 天一阁，13:30 出发</td><td>160 km / 2.5–3 h</td><td>天一阁排队过长就逛月湖，按点转场。</td></tr>
+            <tr><td>10/3</td><td>神仙居 → 横店梦幻谷</td><td>7:30 入园，14:30 出发</td><td>120 km / 1.5–2 h</td><td>索道排队过长就删支线，确保 14:30 转场。</td></tr>
+            <tr><td>10/4</td><td>秦王宫 → 绍兴仓桥直街</td><td>15:00 出发去绍兴</td><td>130 km / 2 h</td><td>清明上河图只作加逛，不影响 15:00 发车。</td></tr>
+            <tr><td>10/5</td><td>鲁迅故里、沈园、东湖 → 南浔</td><td>16:00 出发去南浔</td><td>140 km / 2–2.5 h</td><td>东湖来不及就取消，优先保证南浔夜景。</td></tr>
+            <tr><td>10/6</td><td>小莲庄、嘉业藏书楼 → 常熟</td><td>12:30 出发返程</td><td>120 km / 1.5–2 h</td><td>午间出发，避开 16 点后高速高峰。</td></tr>
           </tbody>
         </table>
-      </div>
-
-      <div class="callout hot">
-        <h3>这版接受什么，放弃什么</h3>
-        <ul>
-          <li>接受：起床不早于 9:00，热门点可以玩到 16:00 后，晚上也可以逛街吃饭。</li>
-          <li>放弃：清晨第一批入园和空景照片。热门点的人会更多，所以每个点都必须限时。</li>
-          <li>硬规则：停车或排队超过 30 分钟就换；当天必须完成的只有转场和住宿，景点随时可删。</li>
-        </ul>
       </div>
     </section>
 
     <section class="section" id="food">
       <div class="section-head">
-        <h2>地方美食与价格参考</h2>
-        <p class="section-note">价格为 2026 国庆常见菜单参考区间，不是官方定价。海鲜先问清按斤还是按份，以进店当天菜单和称重为准。</p>
+        <h2>沿途美食</h2>
+        <p class="section-note">按路线顺序整理，景区店只浅尝，正餐优先市区本地餐馆。</p>
       </div>
 
       <div class="food-grid">
         <article class="food-card">
-          <h3><i class="icon" data-lucide="fish" aria-hidden="true"></i>连云港：海鲜和板浦凉粉</h3>
-          <span class="food-price">两人一餐参考 180 到 320 元</span>
+          <h3><i class="icon" data-lucide="soup" aria-hidden="true"></i>乌镇与嘉兴</h3>
+          <span class="food-price">夜宵 + 水乡菜</span>
           <ul class="food-list">
-            <li>
-              <strong>梭子蟹：约 80 到 180 元 / 斤</strong>
-              <span>国庆可能上浮。先问活蟹规格、是否含加工费，称重后再确认做法。</span>
-            </li>
-            <li>
-              <strong>皮皮虾：约 50 到 100 元 / 斤</strong>
-              <span>适合两人点 1 到 1.5 斤，选清蒸或椒盐。空壳多时及时停止加点。</span>
-            </li>
-            <li>
-              <strong>对虾：约 60 到 120 元 / 斤</strong>
-              <span>白灼或蒜蓉都可。不要只看“时价”，要让店家报出每斤价格。</span>
-            </li>
-            <li>
-              <strong>海鲜面：约 15 到 30 元 / 碗</strong>
-              <span>适合早餐或简单午餐，两人再配一份凉菜即可。</span>
-            </li>
-            <li>
-              <strong>板浦凉粉：约 8 到 15 元 / 份</strong>
-              <span>便宜、有地方特色，适合当开胃菜，不要当主食。</span>
-            </li>
-            <li>
-              <strong>花果山风鹅：约 30 到 70 元 / 份</strong>
-              <span>常见按斤或按份卖，咸香偏重，两人点小份即可。</span>
-            </li>
+            <li><strong>夜宵：书生羊肉面、嘉兴鲜肉大粽、定胜糕</strong><span>抵达西栅后选 1–2 样，不用一次吃全。</span></li>
+            <li><strong>必尝：乌镇酱鸭、乌米饭、清蒸白水鱼、臭豆干</strong><span>水乡菜偏清淡，按两人食量少点。</span></li>
           </ul>
-          <p class="food-advice"><strong>最适合：</strong>10/1 晚餐。两人点 1 种海鲜、1 份凉粉、1 份主食。避开景区门口，选市区明码标价店。</p>
+          <p class="food-advice"><strong>适合：</strong>9/30 夜游后吃夜宵，10/1 东栅午餐。</p>
         </article>
 
         <article class="food-card">
-          <h3><i class="icon" data-lucide="soup" aria-hidden="true"></i>日照：蒸汽海鲜和鲅鱼水饺</h3>
-          <span class="food-price">两人一餐参考 160 到 300 元</span>
+          <h3><i class="icon" data-lucide="fish" aria-hidden="true"></i>宁波</h3>
+          <span class="food-price">小吃 + 海鲜正餐</span>
           <ul class="food-list">
-            <li>
-              <strong>蒸汽海鲜锅：约 168 到 298 元 / 锅</strong>
-              <span>通常包含贝类、虾和少量蟹。先问清是否按锅计价、有没有额外加工费。</span>
-            </li>
-            <li>
-              <strong>鲅鱼水饺：约 28 到 45 元 / 份</strong>
-              <span>两人点半份或一份，再配一个热菜。不要在海边第一排盲选高价店。</span>
-            </li>
-            <li>
-              <strong>海沙子面：约 12 到 25 元 / 碗</strong>
-              <span>地方口味，适合早餐或夜宵。海鲜过敏者先确认汤底。</span>
-            </li>
-            <li>
-              <strong>日照绿茶：约 30 到 120 元 / 罐</strong>
-              <span>价格跨度大。自喝选小罐，不要在景区门口买高价礼盒。</span>
-            </li>
+            <li><strong>小吃：缸鸭狗宁波汤圆（黑芝麻猪油馅）、海苔味油赞子、年糕团</strong><span>南塘老街适合边走边吃。</span></li>
+            <li><strong>正餐：海鲜面、红膏炝蟹、慈城年糕炒蟹、腐皮包黄鱼</strong><span>海鲜排挡先看明码标价，再决定点单。</span></li>
           </ul>
-          <p class="food-advice"><strong>最适合：</strong>10/2 到日照后的晚餐。两人点 1 锅蒸汽海鲜加 1 份水饺就够，最多再加一个素菜。</p>
+          <p class="food-advice"><strong>适合：</strong>10/1 晚上南塘老街或 10/2 宁波午餐。</p>
         </article>
 
         <article class="food-card">
-          <h3><i class="icon" data-lucide="wheat" aria-hidden="true"></i>沂水 / 沂蒙：炒鸡、煎饼和糁汤</h3>
-          <span class="food-price">两人一餐参考 100 到 190 元</span>
+          <h3><i class="icon" data-lucide="mountain" aria-hidden="true"></i>仙居与横店</h3>
+          <span class="food-price">山野主食 + 金华味</span>
           <ul class="food-list">
-            <li>
-              <strong>沂蒙炒鸡：约 68 到 138 元 / 份</strong>
-              <span>通常是一大盆，两人点小份或半只就够。先问是否含配菜和饼。</span>
-            </li>
-            <li>
-              <strong>糁汤：约 8 到 20 元 / 碗</strong>
-              <span>适合早餐或晚饭配主食。可选牛肉或鸡肉，先问是否偏辣。</span>
-            </li>
-            <li>
-              <strong>沂蒙煎饼：约 2 到 8 元 / 张</strong>
-              <span>卷菜版本约 10 到 25 元 / 份。牙口一般的人少点，配汤更好入口。</span>
-            </li>
-            <li>
-              <strong>沂水丰糕：约 10 到 20 元 / 斤</strong>
-              <span>适合当路上点心。先买半斤试口味，不要一次买大盒。</span>
-            </li>
+            <li><strong>仙居主食：仙居麦虾、食饼筒、浇头面</strong><span>适合登山前后补充体力。</span></li>
+            <li><strong>仙居特色：泡鲞、仙居三黄鸡、溪鱼豆腐</strong><span>白塔镇和仙居县城选择更多。</span></li>
+            <li><strong>横店：金华火腿煲、萝卜丝饼、义乌红糖麻花</strong><span>正餐可选沃面、上卢馄饨、本地土菜。</span></li>
           </ul>
-          <p class="food-advice"><strong>最适合：</strong>10/3 晚到沂水后吃炒鸡，10/4 晚餐用糁汤配煎饼。两人点 1 个主菜、1 个主食、1 个素菜即可。</p>
+          <p class="food-advice"><strong>适合：</strong>10/2 晚、10/3 登山后和横店晚餐。</p>
         </article>
 
         <article class="food-card">
-          <h3><i class="icon" data-lucide="flame-kindling" aria-hidden="true"></i>临沂：炒鸡、糁汤和豆豉</h3>
-          <span class="food-price">两人一餐参考 100 到 200 元</span>
+          <h3><i class="icon" data-lucide="wheat" aria-hidden="true"></i>绍兴与南浔</h3>
+          <span class="food-price">黄酒味 + 太湖湖鲜</span>
           <ul class="food-list">
-            <li>
-              <strong>临沂炒鸡：约 68 到 138 元 / 份</strong>
-              <span>和沂蒙炒鸡相近，偏咸香。两人点小份，加一份面或饼蘸汤。</span>
-            </li>
-            <li>
-              <strong>糁汤：约 8 到 20 元 / 碗</strong>
-              <span>晚餐和早餐都能吃。国庆热门店排队时，换居民区老店更稳。</span>
-            </li>
-            <li>
-              <strong>八宝豆豉：约 10 到 25 元 / 袋</strong>
-              <span>适合带回家，先看生产日期和保存方式，不在景区买散装高价货。</span>
-            </li>
-            <li>
-              <strong>沂蒙煎饼：约 2 到 8 元 / 张</strong>
-              <span>适合配炒鸡和糁汤，两人先点 2 张，不够再加。</span>
-            </li>
+            <li><strong>绍兴小吃：臭豆腐（配蒜酱）、黄酒棒冰、茴香豆、奶油小攀</strong><span>仓桥直街边走边尝。</span></li>
+            <li><strong>绍兴正餐：梅干菜扣肉、醉鸡、黄酒蒸蟹、嵊州豆腐年糕</strong><span>黄酒饮品后不要立即开车。</span></li>
+            <li><strong>南浔小吃：双交面（酥肉 + 爆鱼）、丁莲芳千张包、桔红糕</strong><span>适合早餐和路上点心。</span></li>
+            <li><strong>南浔正餐：太湖三白（银鱼、白鱼、白虾）、笋干老鸭煲、酱板鱼</strong><span>返程前吃一顿，午间错峰出发。</span></li>
           </ul>
-          <p class="food-advice"><strong>最适合：</strong>10/5 晚上。吃完去沂河附近走走，可以玩晚一点，但不再开车去远景区。</p>
+          <p class="food-advice"><strong>适合：</strong>10/4–10/6。</p>
         </article>
       </div>
 
       <div class="callout">
-        <h3>点菜和避坑规则</h3>
+        <h3>美食避坑</h3>
         <ul>
-          <li>海鲜先确认“按斤、按份还是按锅”，再确认加工费、茶位费和餐具费。没有明确报价就不点。</li>
-          <li>国庆海边第一排和景区门口价格通常更高。宁可开 10 分钟去居民区或市区连锁店。</li>
-          <li>两人点菜控制在 1 个主菜、1 个海鲜或肉类、1 个主食、1 个素菜。临沂和连云港菜量偏大，先少点。</li>
-          <li>肠胃敏感就少吃生腌，海鲜尽量选清蒸、白灼或热炒。车上准备肠胃药和矿泉水。</li>
+          <li>海鲜排挡选明码标价的门店，先确认按斤、按份还是按锅。</li>
+          <li>景区小吃浅尝即可，正餐优先去市区本地人常去的餐馆。</li>
+          <li>饮酒后绝不开车，含黄酒的正餐安排在住宿后或改由另一人驾驶。</li>
         </ul>
       </div>
     </section>
 
     <section class="section" id="booking">
       <div class="section-head">
-        <h2>购票、预约与订房清单</h2>
-        <p class="section-note">先看状态总表，再逐项勾选。进度会保存在当前浏览器，手机和电脑不会互相同步。</p>
+        <h2>预约与订房清单</h2>
+        <p class="section-note">热门景区建议提前 3 天完成预约，国庆限流容易约满。</p>
       </div>
 
       <div class="table-wrap">
         <table>
           <thead>
-            <tr>
-              <th>日期 / 地点</th>
-              <th>是否预约</th>
-              <th>要预约什么</th>
-              <th>建议完成时间</th>
-              <th>备注</th>
-            </tr>
+            <tr><th>日期 / 地点</th><th>是否预约</th><th>要预约什么</th><th>建议完成时间</th><th>备注</th></tr>
           </thead>
           <tbody>
-            <tr>
-              <td>9/30 连云港</td>
-              <td><span class="reserve-badge hotel">只需订房</span></td>
-              <td>连云区或墟沟住宿</td>
-              <td>9/29 前</td>
-              <td>确认 23:30 后仍保留房间、免费停车和免费取消。</td>
-            </tr>
-            <tr>
-              <td>10/1 连云港</td>
-              <td><span class="reserve-badge check">无需景区预约</span></td>
-              <td>老街和在海一方通常不需预约</td>
-              <td>10/1 当天早上</td>
-              <td>上午自然醒后再确认交通管制和停车，不赶清晨。</td>
-            </tr>
-            <tr>
-              <td>10/2 连岛</td>
-              <td><span class="reserve-badge required">必须预约</span></td>
-              <td>门票、实名信息、入园时段</td>
-              <td>9/28 到 9/30</td>
-              <td>优先选 10:30 到 12:00 时段，同步查车辆、停车区和接驳预约。</td>
-            </tr>
-            <tr>
-              <td>10/3 万平口 / 灯塔</td>
-              <td><span class="reserve-badge suggested">建议预约</span></td>
-              <td>免费景区也可能要分时预约</td>
-              <td>10/2 到 10/3 上午</td>
-              <td>优先选 14:00 后时段，以日照文旅或景区官方公众号公告为准。</td>
-            </tr>
-            <tr>
-              <td>10/4 沂蒙山云蒙 / 地下大峡谷</td>
-              <td><span class="reserve-badge required">必须预约</span></td>
-              <td>门票、换乘、项目票</td>
-              <td>10/2 到 10/3</td>
-              <td>先看天气二选一，预约 11:00 后时段；地下大峡谷内部项目可能单独购票。</td>
-            </tr>
-            <tr>
-              <td>10/5 岱崮地貌 / 天蒙</td>
-              <td><span class="reserve-badge required">必须预约</span></td>
-              <td>所选景区门票</td>
-              <td>10/3 到 10/4</td>
-              <td>默认岱崮；天蒙另查索道、摆渡车和停车规则。</td>
-            </tr>
-            <tr>
-              <td>10/6 返程</td>
-              <td><span class="reserve-badge check">无需景区预约</span></td>
-              <td>无</td>
-              <td>10/5 晚上</td>
-              <td>只确认高速路况、车况和第二天出发时间。</td>
-            </tr>
+            <tr><td>9/30 乌镇</td><td><span class="reserve-badge hotel">订房 + 联票</span></td><td>乌镇住宿、东西栅联票；木心美术馆</td><td>提前 3 天以上</td><td>「乌镇旅游官方预订网」预订；住西栅可买两日有效联票，木心美术馆单独预约。</td></tr>
+            <tr><td>10/1 宁波</td><td><span class="reserve-badge hotel">订房</span></td><td>宁波住宿；次日天一阁</td><td>10/1 前完成</td><td>老城区优先带免费车位的酒店；天一阁约 8:30–9:30。</td></tr>
+            <tr><td>10/2 神仙居</td><td><span class="reserve-badge required">必须预约</span></td><td>神仙居大门票 + 南天索道</td><td>提前 1 天</td><td>「神仙居景区」官方公众号，建议买套票，选南门入园。</td></tr>
+            <tr><td>10/3 横店</td><td><span class="reserve-badge required">必须预约</span></td><td>横店景区联票 + 梦幻谷</td><td>提前 3 天以上</td><td>「横店影视城」官方公众号，热门演出场次提前选座。</td></tr>
+            <tr><td>10/4–10/5 绍兴</td><td><span class="reserve-badge suggested">免费预约</span></td><td>鲁迅故里 + 沈园</td><td>提前 1–3 天</td><td>「绍兴市文旅集团」微信公众号免费预约，分时段入园。</td></tr>
+            <tr><td>10/5–10/6 南浔</td><td><span class="reserve-badge suggested">建议购票</span></td><td>南浔核心景点联票</td><td>提前 1 天</td><td>古镇免大门票；小莲庄 + 嘉业藏书楼等联票 75 元/人，2 日有效。</td></tr>
+            <tr><td>全程住宿</td><td><span class="reserve-badge hotel">必须预订</span></td><td>乌镇、宁波、仙居、横店、绍兴、南浔</td><td>9/27 前优先锁房</td><td>确认停车、免费取消、晚到保留和房型。</td></tr>
           </tbody>
         </table>
       </div>
 
       <div class="callout hot">
-        <h3>预约优先级</h3>
-        <p>先锁定 9/30 连云港住宿，再订 10/2 连岛、10/4 沂蒙山或地下大峡谷、10/5 岱崮或天蒙。景区预约优先找 10:30 后或午后时段，约不到就换备选。</p>
+        <h3>预约顺序</h3>
+        <p>先锁乌镇住宿和联票，再订宁波、仙居、横店、绍兴、南浔住宿；随后依次完成神仙居、横店、天一阁、鲁迅故里和南浔联票。</p>
       </div>
 
       <div class="checklist" id="bookingChecklist">
-        <label class="check-item">
-          <input type="checkbox" data-key="booking-lianyungang-hotel">
-          <span><strong>9/30 到 10/1 连云港住宿</strong><span>连云区或墟沟连住两晚，确认 23:30 后晚到保留、免费停车和免费取消。</span></span>
-        </label>
-        <label class="check-item">
-          <input type="checkbox" data-key="booking-lian-island">
-          <span><strong>10/2 连岛门票</strong><span>优先选 10:30 到 12:00 入园时段。留意节假日停车和换乘公告。</span></span>
-        </label>
-        <label class="check-item">
-          <input type="checkbox" data-key="booking-rizhao-hotel">
-          <span><strong>10/2 日照住宿</strong><span>选万平口、灯塔或山海天外围，第二天上午不用穿城。</span></span>
-        </label>
-        <label class="check-item">
-          <input type="checkbox" data-key="booking-wanpingkou">
-          <span><strong>10/3 万平口或灯塔预约</strong><span>优先选 14:00 后时段。免费景区也可能需要分时预约或交通接驳。</span></span>
-        </label>
-        <label class="check-item">
-          <input type="checkbox" data-key="booking-yishui-hotel">
-          <span><strong>10/3 到 10/4 沂水住宿</strong><span>连住两晚，减少搬行李。优先县城中心或景区方向主干道旁。</span></span>
-        </label>
-        <label class="check-item">
-          <input type="checkbox" data-key="booking-yimeng">
-          <span><strong>10/4 沂蒙山或地下大峡谷门票</strong><span>确定天气后二选一。优先选 11:00 后时段，地下大峡谷按项目单独购票。</span></span>
-        </label>
-        <label class="check-item">
-          <input type="checkbox" data-key="booking-linyi-hotel">
-          <span><strong>10/5 临沂住宿</strong><span>选北城新区或沂河附近，第二天上高速方便，停车要确认是否免费。</span></span>
-        </label>
-        <label class="check-item">
-          <input type="checkbox" data-key="booking-daigu">
-          <span><strong>10/5 岱崮地貌或天蒙门票</strong><span>默认岱崮。若改天蒙，提前看索道、摆渡车和停车规则。</span></span>
-        </label>
-        <label class="check-item">
-          <input type="checkbox" data-key="booking-car-check">
-          <span><strong>车辆检查与保险电话</strong><span>胎压、机油、玻璃水、制动灯、备胎或补胎工具。把保险公司和道路救援电话存进手机。</span></span>
-        </label>
-        <label class="check-item">
-          <input type="checkbox" data-key="booking-yancheng-backup">
-          <span><strong>9/30 盐城备用住宿</strong><span>如果 22:00 后明显疲劳或高速严重拥堵，直接下高速住盐城，不硬撑到连云港。记 1 家高速口附近、可晚到入住的酒店。</span></span>
-        </label>
+        <label class="check-item"><input type="checkbox" data-key="booking-wuzhen-hotel"><span><strong>乌镇住宿与东西栅联票</strong><span>官方预订网完成；住西栅可买两日有效联票，并预约木心美术馆。</span></span></label>
+        <label class="check-item"><input type="checkbox" data-key="booking-ningbo-hotel"><span><strong>宁波住宿</strong><span>老城区优先带免费车位，确认晚到保留。</span></span></label>
+        <label class="check-item"><input type="checkbox" data-key="booking-tianyige"><span><strong>天一阁博物院</strong><span>「天一阁」微信公众号预约，建议 8:30–9:30 时段。</span></span></label>
+        <label class="check-item"><input type="checkbox" data-key="booking-xianju-hotel"><span><strong>仙居白塔镇住宿</strong><span>离景区南门约 10 分钟车程，确认停车。</span></span></label>
+        <label class="check-item"><input type="checkbox" data-key="booking-shenxianju"><span><strong>神仙居门票与南天索道</strong><span>提前 1 天官方公众号预约，建议套票、南门入园。</span></span></label>
+        <label class="check-item"><input type="checkbox" data-key="booking-hengdian"><span><strong>横店联票与梦幻谷</strong><span>官方公众号预订，热门演出提前选座。</span></span></label>
+        <label class="check-item"><input type="checkbox" data-key="booking-shaoxing-hotel"><span><strong>绍兴住宿</strong><span>鲁迅故里停车场附近，或选带免费车位的市区酒店。</span></span></label>
+        <label class="check-item"><input type="checkbox" data-key="booking-shaoxing-reserve"><span><strong>鲁迅故里与沈园</strong><span>「绍兴市文旅集团」微信公众号免费预约，分时段入园。</span></span></label>
+        <label class="check-item"><input type="checkbox" data-key="booking-nanxun-hotel"><span><strong>南浔住宿与核心联票</strong><span>南入口免费停车；联票 75 元/人，提前 1 天购买，2 日有效。</span></span></label>
+        <label class="check-item"><input type="checkbox" data-key="booking-car-check"><span><strong>车辆检查与证件</strong><span>身份证、驾驶证、胎压、玻璃水、灯光、车载充电器、步行鞋和薄外套。</span></span></label>
       </div>
 
       <div class="progress" aria-live="polite">
         <span id="progressText">已完成 0 / 10</span>
-        <div class="progress-track" aria-hidden="true">
-          <div class="progress-bar" id="progressBar"></div>
-        </div>
-        <button class="action" id="resetProgress" type="button">
-          <i class="icon" data-lucide="rotate-ccw" aria-hidden="true"></i>
-          清空勾选
-        </button>
+        <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+        <button class="action" id="resetProgress" type="button"><i class="icon" data-lucide="rotate-ccw" aria-hidden="true"></i>清空勾选</button>
       </div>
     </section>
 
     <section class="section" id="stay-fuel">
       <div class="section-head">
         <h2>住宿与加油</h2>
-        <p class="section-note">油车不需要规划充电，但国庆服务区加油会排队。原则是市区加、半箱补。</p>
+        <p class="section-note">每天只换一次住宿；市区加油优先，不赌国庆服务区排队。</p>
       </div>
 
       <div class="grid-2">
@@ -2378,39 +2179,14 @@
           <h3>住宿位置</h3>
           <div class="table-wrap">
             <table>
-              <thead>
-                <tr>
-                  <th>日期</th>
-                  <th>住哪里</th>
-                  <th>订房关键词</th>
-                </tr>
-              </thead>
+              <thead><tr><th>日期</th><th>住哪里</th><th>订房关键词</th></tr></thead>
               <tbody>
-                <tr>
-                  <td>9/30</td>
-                  <td>连云港连云区</td>
-                  <td>墟沟、在海一方、连云老街附近；可晚到入住、免费停车</td>
-                </tr>
-                <tr>
-                  <td>10/1</td>
-                  <td>连云港连云区</td>
-                  <td>与 9/30 连住同一家，不换酒店</td>
-                </tr>
-                <tr>
-                  <td>10/2</td>
-                  <td>日照</td>
-                  <td>万平口外围、灯塔、山海天</td>
-                </tr>
-                <tr>
-                  <td>10/3 到 10/4</td>
-                  <td>沂水</td>
-                  <td>县城中心、景区方向主干道、连住两晚</td>
-                </tr>
-                <tr>
-                  <td>10/5</td>
-                  <td>临沂</td>
-                  <td>北城新区、沂河附近、上高速方便</td>
-                </tr>
+                <tr><td>9/30</td><td>乌镇西栅</td><td>景区内住宿、官方停车、房卡出入证、两日联票</td></tr>
+                <tr><td>10/1</td><td>宁波</td><td>老城区或地铁沿线、免费车位、离南塘老街不远</td></tr>
+                <tr><td>10/2</td><td>仙居白塔镇</td><td>离神仙居南门约 10 分钟车程、停车方便</td></tr>
+                <tr><td>10/3</td><td>横店</td><td>影视城合作酒店、停车券、近梦幻谷</td></tr>
+                <tr><td>10/4</td><td>绍兴</td><td>鲁迅故里附近、免费车位、方便夜游仓桥直街</td></tr>
+                <tr><td>10/5</td><td>南浔</td><td>南入口停车场附近、步行 5 分钟到百间楼</td></tr>
               </tbody>
             </table>
           </div>
@@ -2420,44 +2196,15 @@
           <h3>加油节点</h3>
           <div class="table-wrap">
             <table>
-              <thead>
-                <tr>
-                  <th>时间</th>
-                  <th>加油位置</th>
-                  <th>执行规则</th>
-                </tr>
-              </thead>
+              <thead><tr><th>时间</th><th>加油位置</th><th>执行规则</th></tr></thead>
               <tbody>
-                <tr>
-                  <td>9/30 出发前</td>
-                  <td>常熟</td>
-                  <td>直接加满，拍一张油表照片便于判断。</td>
-                </tr>
-                <tr>
-                  <td>9/30 途中</td>
-                  <td>沈海高速服务区</td>
-                  <td>半箱以下就补，不在拥堵服务区硬排长队。</td>
-                </tr>
-                <tr>
-                  <td>10/2 转场前</td>
-                  <td>连云港市区</td>
-                  <td>从连云区去日照前补满。</td>
-                </tr>
-                <tr>
-                  <td>10/3 转场前</td>
-                  <td>日照市区</td>
-                  <td>去沂水前补满，山区加油站少。</td>
-                </tr>
-                <tr>
-                  <td>10/5 转场前</td>
-                  <td>沂水 / 临沂</td>
-                  <td>保持半箱以上，避免返程日排队。</td>
-                </tr>
-                <tr>
-                  <td>10/6 出发前</td>
-                  <td>临沂</td>
-                  <td>直接加满，回家前不再规划加油。</td>
-                </tr>
+                <tr><td>9/30 出发前</td><td>常熟</td><td>直接加满，夜间减少途中停留。</td></tr>
+                <tr><td>10/1 转场前</td><td>嘉兴或乌镇</td><td>去宁波前保持半箱以上。</td></tr>
+                <tr><td>10/2 转场前</td><td>宁波市区</td><td>去神仙居前加满，山区少临时找站。</td></tr>
+                <tr><td>10/3 转场前</td><td>仙居县城或横店方向</td><td>离开神仙居先补油，再上高速。</td></tr>
+                <tr><td>10/4 转场前</td><td>横店或绍兴方向</td><td>保持半箱以上，避免晚间排队。</td></tr>
+                <tr><td>10/5 转场前</td><td>绍兴市区</td><td>去南浔前加满。</td></tr>
+                <tr><td>10/6 出发前</td><td>南浔</td><td>返程前补满，在嘉兴服务区休整。</td></tr>
               </tbody>
             </table>
           </div>
@@ -2465,57 +2212,37 @@
       </div>
 
       <div class="callout">
-        <h3>一人驾驶的节奏</h3>
+        <h3>两人轮换驾驶规则</h3>
         <ul>
-          <li>每 2 小时停车一次，哪怕只下车 10 分钟。</li>
-          <li>午后 13:00 到 15:00 最容易犯困，提前安排服务区休息或换人导航。</li>
-          <li>9/30 是夜间 405 公里直达，休息次数要按需要增加，不能为了赶时间省休息。</li>
-          <li>不安排清晨项目，返程也允许 10:00 后再上高速；到家晚一点可以接受。</li>
-          <li>出现连续打哈欠、车道偏移、忘记前几分钟路况，立即进服务区小睡 20 分钟。</li>
+          <li>每 2 小时左右轮换一次，山区和夜间不把驾驶任务压在一个人身上。</li>
+          <li>午后 13:00–15:00 容易犯困，提前进服务区休息或换人。</li>
+          <li>出现连续打哈欠、车道偏移或忘记前几分钟路况，立即停车休息。</li>
         </ul>
       </div>
     </section>
 
     <section class="section" id="fallback">
       <div class="section-head">
-        <h2>备选与应急</h2>
-        <p class="section-note">不追求每个点都打卡。路况、天气或体力变化时，按下面的规则切换。</p>
+        <h2>应急与调整</h2>
+        <p class="section-note">住宿和转场优先，景点可以按天气、排队和体力临时删减。</p>
       </div>
 
       <div class="grid-3">
-        <article class="decision">
-          <h3><i class="icon" data-lucide="cloud-rain" aria-hidden="true"></i>下雨</h3>
-          <p>10/4 优先地下大峡谷，取消山地和村落。海边下雨时去博物馆、市场或酒店休息，不硬走栈道；当天景点可以直接取消。</p>
-        </article>
-        <article class="decision warn">
-          <h3><i class="icon" data-lucide="wind" aria-hidden="true"></i>大风</h3>
-          <p>海边风力大时，不上礁石、不坐快艇、不靠近浪大的防波堤。连岛和日照海岸可以改成室内或市区慢游。</p>
-        </article>
-        <article class="decision offbeat">
-          <h3><i class="icon" data-lucide="traffic-cone" aria-hidden="true"></i>高速拥堵</h3>
-          <p>不要死守原路线。导航给出多 30 分钟但少 10 公里拥堵的路线时，优先选更稳的那条。</p>
-        </article>
-        <article class="decision warn">
-          <h3><i class="icon" data-lucide="battery-warning" aria-hidden="true"></i>疲劳</h3>
-          <p>删除当天下午项目，酒店提前入住。热门点可以不去，安全不能省。</p>
-        </article>
-        <article class="decision">
-          <h3><i class="icon" data-lucide="dog" aria-hidden="true"></i>景区排队过长</h3>
-          <p>不早起版更容易碰到队伍，超过 30 分钟就撤。把时间换成海岸外围、博物馆、县城夜市或提前去下一站。</p>
-        </article>
-        <article class="decision offbeat">
-          <h3><i class="icon" data-lucide="phone-call" aria-hidden="true"></i>应急电话</h3>
-          <p>报警 110，急救 120，交通事故 122，高速公路救援 12122。保险公司和车企救援电话提前存入手机。</p>
-        </article>
+        <article class="decision"><h3><i class="icon" data-lucide="cloud-rain" aria-hidden="true"></i>下雨</h3><p>神仙居可缩短栈道行程，绍兴改看博物馆和古城街巷；南浔古镇雨中游览注意石板路防滑。</p></article>
+        <article class="decision warn"><h3><i class="icon" data-lucide="wind" aria-hidden="true"></i>大风</h3><p>索道和山区栈道可能临时停运。出发前看神仙居官方公告，停运时改为山下景点或直接转场。</p></article>
+        <article class="decision offbeat"><h3><i class="icon" data-lucide="traffic-cone" aria-hidden="true"></i>高速拥堵</h3><p>10/6 午间返程，若导航显示 16 点后拥堵加剧，可提前到 11:30 出发，不再加景点。</p></article>
+        <article class="decision warn"><h3><i class="icon" data-lucide="battery-warning" aria-hidden="true"></i>疲劳</h3><p>立即换人驾驶或进服务区休息。当天下午景点可直接取消，住宿不能临时硬赶。</p></article>
+        <article class="decision"><h3><i class="icon" data-lucide="users" aria-hidden="true"></i>排队过长</h3><p>超过 30 分钟就删支线，热门演出和索道优先按预约时段执行，避免拖垮后续转场。</p></article>
+        <article class="decision offbeat"><h3><i class="icon" data-lucide="phone-call" aria-hidden="true"></i>应急电话</h3><p>报警 110，急救 120，交通事故 122，高速公路救援 12122。保险公司和道路救援电话提前存入手机。</p></article>
       </div>
 
       <div class="callout hot">
-        <h3>出发前 24 小时再核对一次</h3>
+        <h3>出发前 24 小时再核对</h3>
         <ul>
-          <li>查天气预报、台风和大风预警，特别是 10/2 到 10/5 的海边行程。</li>
-          <li>查连岛、万平口、沂蒙山、地下大峡谷、岱崮或天蒙的官方公众号，确认停车、换乘和午后时段。</li>
-          <li>查高速公路实时路况和返程高峰预测，10/6 按 10:00 后出发重新估算到家时间。</li>
-          <li>重点确认 9/30 连云港酒店能保留到 23:30 后，并支持免费停车和免费取消。</li>
+          <li>核对乌镇联票、天一阁、神仙居、横店、鲁迅故里和南浔联票的预约状态。</li>
+          <li>查神仙居索道、横店演出场次和南浔核心景点是否有临时调整。</li>
+          <li>确认六晚住宿全部支持停车，并核对 9/30 乌镇晚到入住。</li>
+          <li>检查身份证、驾驶证、车辆状况和 10/6 高速实时路况。</li>
         </ul>
       </div>
     </section>
@@ -2523,23 +2250,16 @@
 
   <footer class="footer">
     <div class="footer-inner">
-      <span>常熟出发 · 苏北鲁南 6 天自驾路书</span>
-      <span>不早起版 · 更新于 2026-09-25 · 路线和门票信息请以当天官方公告为准</span>
+      <span>常熟出发 · 江南山湖 6 天自驾路书</span>
+      <span>两人轮换 · 轻松不赶路 · 更新于 2026-09-25 · 路线和预约信息以官方当天公告为准</span>
     </div>
   </footer>
 
   <div class="lightbox" id="photoLightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle" hidden>
     <div class="lightbox-panel">
-      <button class="lightbox-close" id="lightboxClose" type="button" aria-label="关闭图片预览">
-        <i class="icon" data-lucide="x" aria-hidden="true"></i>
-      </button>
-      <div class="lightbox-media">
-        <img class="lightbox-image" id="lightboxImage" src="" alt="">
-      </div>
-      <div class="lightbox-caption">
-        <strong id="lightboxTitle"></strong>
-        <p id="lightboxCredit"></p>
-      </div>
+      <button class="lightbox-close" id="lightboxClose" type="button" aria-label="关闭图片预览"><i class="icon" data-lucide="x" aria-hidden="true"></i></button>
+      <div class="lightbox-media"><img class="lightbox-image" id="lightboxImage" src="" alt=""></div>
+      <div class="lightbox-caption"><strong id="lightboxTitle"></strong><p id="lightboxCredit"></p></div>
     </div>
   </div>
 
@@ -2550,10 +2270,13 @@
       const checkboxes = [...document.querySelectorAll("#bookingChecklist input[type='checkbox']")];
       const progressText = document.getElementById("progressText");
       const progressBar = document.getElementById("progressBar");
-      const hotOnlyButton = document.getElementById("hotOnly");
-      const hotOnlyLabel = document.getElementById("hotOnlyLabel");
+      const calendar = document.querySelector("#calendar .calendar");
+      const dayTabs = document.getElementById("dayTabs");
+      const dayViewToggle = document.getElementById("dayViewToggle");
+      const dayViewLabel = document.getElementById("dayViewLabel");
       const printButton = document.getElementById("printPlan");
       const resetButton = document.getElementById("resetProgress");
+      const days = [...calendar.querySelectorAll(".day")];
 
       function loadChecks() {
         let saved = {};
@@ -2597,13 +2320,56 @@
 
       printButton.addEventListener("click", () => window.print());
 
-      hotOnlyButton.addEventListener("click", () => {
-        const active = document.body.classList.toggle("hot-only");
-        hotOnlyButton.setAttribute("aria-pressed", String(active));
-        hotOnlyLabel.textContent = active ? "显示全部" : "只看热门日";
+      function setActiveDay(dayId, shouldScroll) {
+        calendar.dataset.view = "single";
+        days.forEach((day) => {
+          day.classList.toggle("is-active", day.id === dayId);
+        });
+        dayTabs.querySelectorAll(".day-tab").forEach((tab) => {
+          tab.setAttribute("aria-selected", String(tab.dataset.target === dayId));
+        });
+        dayViewToggle.setAttribute("aria-pressed", "false");
+        dayViewLabel.textContent = "展开全部";
+        if (shouldScroll) {
+          document.getElementById("calendar").scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+
+      function buildDayTabs() {
+        dayTabs.replaceChildren();
+        days.forEach((day, index) => {
+          const date = day.querySelector(".day-date");
+          const title = day.querySelector(".day-title");
+          const badge = day.querySelector(".day-badge");
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "day-tab";
+          button.dataset.target = day.id;
+          button.setAttribute("role", "tab");
+          button.setAttribute("aria-controls", day.id);
+          button.innerHTML = `<strong>${date ? date.textContent : `第 ${index} 天`}</strong><span>${badge ? badge.textContent.trim() : (title ? title.textContent : "")}</span>`;
+          button.addEventListener("click", () => setActiveDay(day.id, true));
+          dayTabs.append(button);
+        });
+        if (days[0]) {
+          setActiveDay(days[0].id, false);
+        }
+      }
+
+      dayViewToggle.addEventListener("click", () => {
+        const showAll = calendar.dataset.view !== "all";
+        calendar.dataset.view = showAll ? "all" : "single";
+        if (showAll) {
+          days.forEach((day) => day.classList.remove("is-active"));
+        } else if (days[0]) {
+          days[0].classList.add("is-active");
+        }
+        dayViewToggle.setAttribute("aria-pressed", String(showAll));
+        dayViewLabel.textContent = showAll ? "只看一天" : "展开全部";
       });
 
       loadChecks();
+      buildDayTabs();
       if (window.lucide) {
         window.lucide.createIcons();
       }
