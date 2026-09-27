@@ -1,23 +1,7 @@
 {
   "project": "常熟出发 6 天自驾路书（浙江版）",
-  "source": "Wikimedia Commons plus locally generated editorial illustrations",
-  "updated": "2026-09-26",
-  "generatedIllustrations": {
-    "note": "以下文件为本地生成的编辑示意图，不是实拍照片；页面中会标注“示意图”，实际外观和口味请以现场为准。",
-    "files": [
-      "assets/images/food-cake.png",
-      "assets/images/food-casserole.png",
-      "assets/images/food-duck.png",
-      "assets/images/food-noodle.png",
-      "assets/images/food-pancake.png",
-      "assets/images/food-popsicle.png",
-      "assets/images/food-shaomai.png",
-      "assets/images/food-tofu.png",
-      "assets/images/place-mountain.png",
-      "assets/images/place-palace.png",
-      "assets/images/place-waterway.png"
-    ]
-  },
+  "source": "Wikimedia Commons",
+  "updated": "2026-09-27",
   "images": [
     {
       "file": "assets/images/wuzhen-xizha-night.jpg",
@@ -34,6 +18,20 @@
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Canal_in_Wuzhen.JPG"
     },
     {
+      "file": "assets/images/wuxie-waterfall.jpg",
+      "title": "五泄瀑布2 - panoramio.jpg",
+      "author": "江上清风1961",
+      "license": "CC BY 3.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:%E4%BA%94%E6%B3%84%E7%80%91%E5%B8%832_-_panoramio.jpg"
+    },
+    {
+      "file": "assets/images/xishi-ancient-town.jpg",
+      "title": "诸暨西施殿, 2008-03-15.jpg",
+      "author": "江上清风1961",
+      "license": "CC BY 3.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:%E8%AF%B8%E6%9A%A8%E8%A5%BF%E6%96%BD%E6%AE%BF,_2008-03-15.jpg"
+    },
+    {
       "file": "assets/images/hengdian-qin-hall.jpg",
       "title": "Unification Hall, Palace of Emperor Qin, Hengdian World Studios (20250131150447).jpg",
       "author": "N509FZ",
@@ -41,11 +39,25 @@
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Unification_Hall,_Palace_of_Emperor_Qin,_Hengdian_World_Studios_(20250131150447).jpg"
     },
     {
-      "file": "assets/images/hengdian-qin-palace.jpg",
-      "title": "Palace of Emperor Qin, Hengdian World Studios",
+      "file": "assets/images/hengdian-mingqing-palace.jpg",
+      "title": "20240111 Ming-Qing Gongyuan (092854).jpg",
+      "author": "Yumeto",
+      "license": "CC BY-SA 4.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:20240111_Ming-Qing_Gongyuan_(092854).jpg"
+    },
+    {
+      "file": "assets/images/hengdian-yuanming-menchun.jpg",
+      "title": "20240112 Chunhua Men, Hengdian Yingshicheng.jpg",
+      "author": "Yumeto",
+      "license": "CC BY-SA 4.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:20240112_Chunhua_Men,_Hengdian_Yingshicheng.jpg"
+    },
+    {
+      "file": "assets/images/hengdian-guangzhou-hongkong.jpg",
+      "title": "Cathay Theatre at Legend of Bund, Hengdian World Studios (20250130182516).jpg",
       "author": "N509FZ",
       "license": "CC BY-SA 4.0",
-      "sourcePage": "https://commons.wikimedia.org/wiki/Category:Palace_of_Emperor_Qin"
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cathay_Theatre_at_Legend_of_Bund,_Hengdian_World_Studios_(20250130182516).jpg"
     },
     {
       "file": "assets/images/shaoxing-cangqiao.jpg",
@@ -60,6 +72,104 @@
       "author": "Logan Wenger",
       "license": "CC BY 2.0",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:East_Lake_Quarry_01.jpg"
+    },
+    {
+      "file": "assets/images/yuehe-historic-street.jpg",
+      "title": "Yuehe Historic District, Jiaxing.jpg",
+      "author": "钉钉",
+      "license": "CC BY-SA 4.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Yuehe_Historic_District,_Jiaxing.jpg"
+    },
+    {
+      "file": "assets/images/food-jiya.jpg",
+      "title": "Braised duck teochew.jpg",
+      "author": "Unknown",
+      "license": "CC BY-SA 4.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Braised_duck_teochew.jpg"
+    },
+    {
+      "file": "assets/images/food-luobosi-bing.jpg",
+      "title": "Pan-fried slices of radish cakes.jpg",
+      "author": "Copyright © 2006 David Monniaux",
+      "license": "CC BY 2.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Pan-fried_slices_of_radish_cakes.jpg"
+    },
+    {
+      "file": "assets/images/food-ciwu-noodle.jpg",
+      "title": "A bowl of Ci wu da mian (次塢打面) sold in Ningbo.jpg",
+      "author": "源義信",
+      "license": "CC BY-SA 4.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:A_bowl_of_Ci_wu_da_mian_(%E6%AC%A1%E5%A1%A2%E6%89%93%E9%9D%A2)_sold_in_Ningbo.jpg"
+    },
+    {
+      "file": "assets/images/food-xishi-tofu.jpg",
+      "title": "Fresh silken tofu - 47808713282 (cropped).jpg",
+      "author": "T.Tseng",
+      "license": "CC BY 2.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Fresh_silken_tofu_-_47808713282_(cropped).jpg"
+    },
+    {
+      "file": "assets/images/food-claypot-rice.jpg",
+      "title": "Clay pot rice with special soy sauce.jpg",
+      "author": "Peachyeung316",
+      "license": "CC BY-SA 4.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Clay_pot_rice_with_special_soy_sauce.jpg"
+    },
+    {
+      "file": "assets/images/food-claypot-soup.jpg",
+      "title": "Clay pot soup in Nanchang (20190619174819).jpg",
+      "author": "N509FZ",
+      "license": "CC BY-SA 4.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Clay_pot_soup_in_Nanchang_(20190619174819).jpg"
+    },
+    {
+      "file": "assets/images/food-stinky-tofu.jpg",
+      "title": "Stinky Tofu Wuzhen.jpg",
+      "author": "Henrysz",
+      "license": "CC BY-SA 4.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Stinky_Tofu_Wuzhen.jpg"
+    },
+    {
+      "file": "assets/images/food-huangjiu-bing.jpg",
+      "title": "伊曼黄酒棒冰.jpg",
+      "author": "A Chinese Wikipedia user",
+      "license": "CC BY-SA 4.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:%E4%BC%8A%E6%9B%BC%E9%BB%84%E9%85%92%E6%A3%92%E5%86%B0.jpg"
+    },
+    {
+      "file": "assets/images/food-shaoxing-wine.jpg",
+      "title": "Shao xing jiu.jpg",
+      "author": "A Chinese Wikipedia user",
+      "license": "CC BY-SA 3.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Shao_xing_jiu.jpg"
+    },
+    {
+      "file": "assets/images/food-shaomai.jpg",
+      "title": "Leshan-style Shaomai at Huayanjie, Lize (20211119171902).jpg",
+      "author": "N509FZ",
+      "license": "CC BY-SA 4.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Leshan-style_Shaomai_at_Huayanjie,_Lize_(20211119171902).jpg"
+    },
+    {
+      "file": "assets/images/food-meigan-kourou.jpg",
+      "title": "Red braised pork belly.jpg",
+      "author": "Unknown",
+      "license": "CC BY-SA 3.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Red_braised_pork_belly.jpg"
+    },
+    {
+      "file": "assets/images/food-zongzi.jpg",
+      "title": "Two Zongzi styles.jpg",
+      "author": "Dllu",
+      "license": "CC BY-SA 4.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Two_Zongzi_styles.jpg"
+    },
+    {
+      "file": "assets/images/food-vermicelli-soup.jpg",
+      "title": "Chinese vermicelli soup (12030126095).jpg",
+      "author": "pelican from Tokyo, Japan",
+      "license": "CC BY-SA 2.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Chinese_vermicelli_soup_(12030126095).jpg"
     }
   ]
 }

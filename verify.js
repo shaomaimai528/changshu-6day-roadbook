@@ -60,7 +60,8 @@ async function runViewport(browser, viewport) {
     await page.waitForTimeout(250);
     await assert(await page.locator("#detailPanel").isVisible(), "移动端当天详情不能展开", failures);
     const mobileDetailText = await page.locator("#detailContent").innerText();
-    await assert(mobileDetailText.includes("122 km / 2 h"), "移动端 10/1 路线距离缺失", failures);
+    await assert(mobileDetailText.includes("122 km / 1.5 h"), "移动端 10/1 第一段路线距离缺失", failures);
+    await assert(mobileDetailText.includes("93 km / 1.3 h"), "移动端 10/1 第二段路线距离缺失", failures);
     await assert(mobileDetailText.includes("当天时间轴"), "移动端当天时间轴缺失", failures);
     await assert(mobileDetailText.includes("预约提醒"), "移动端预约提醒缺失", failures);
 
@@ -76,10 +77,15 @@ async function runViewport(browser, viewport) {
     }
     await page.locator('.rail-scroll [data-day="d1"]').click();
     await page.waitForTimeout(150);
-    await assert((await page.locator("#detailContent").innerText()).includes("122 km / 2 h"), "10/1 路线距离缺失", failures);
+    const day1Text = await page.locator("#detailContent").innerText();
+    await assert(day1Text.includes("122 km / 1.5 h"), "10/1 第一段路线距离缺失", failures);
+    await assert(day1Text.includes("93 km / 1.3 h"), "10/1 第二段路线距离缺失", failures);
     await page.locator('.rail-scroll [data-day="d2"]').click();
     await page.waitForTimeout(150);
-    await assert((await page.locator("#detailContent").innerText()).includes("65 km / 1 h"), "10/2 路线距离缺失", failures);
+    const day2Text = await page.locator("#detailContent").innerText();
+    await assert(day2Text.includes("54 km / 45 min"), "10/2 第一段路线距离缺失", failures);
+    await assert(day2Text.includes("21 km / 25 min"), "10/2 第二段路线距离缺失", failures);
+    await assert(day2Text.includes("81 km / 1 h"), "10/2 第三段路线距离缺失", failures);
     await page.locator('.rail-scroll [data-day="d3"]').click();
     await page.waitForTimeout(150);
     await assert((await page.locator("#detailContent").innerText()).includes("秦王宫"), "10/3 景点详情缺失", failures);
@@ -96,7 +102,7 @@ async function runViewport(browser, viewport) {
     await assert((await page.locator("#detailContent").innerText()).includes("东湖"), "10/5 东湖详情缺失", failures);
     await page.locator('.rail-scroll [data-day="d6"]').click();
     await page.waitForTimeout(150);
-    await assert((await page.locator("#detailContent").innerText()).includes("1.5 km"), "10/6 月河短途距离缺失", failures);
+    await assert((await page.locator("#detailContent").innerText()).includes("1.7 km / 5 min"), "10/6 月河短途距离缺失", failures);
 
     await page.locator("#overviewButton").click();
     await page.waitForTimeout(200);
