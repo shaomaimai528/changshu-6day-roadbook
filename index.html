@@ -87,9 +87,7 @@
       min-height: 100svh;
       flex-direction: column;
       border-right: 1px solid var(--line);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(247, 245, 239, 0.98)),
-        radial-gradient(circle at 8% 4%, rgba(217, 240, 236, 0.72), transparent 22rem);
+      background: #fbfaf6;
       box-shadow: 12px 0 34px rgba(28, 58, 61, 0.08);
       overflow: hidden;
     }
@@ -1150,15 +1148,6 @@
       background: var(--paper);
     }
 
-    .food-photo-visual::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 30% 38%, rgba(255, 255, 255, 0.72), transparent 34%),
-        radial-gradient(circle at 70% 62%, rgba(255, 255, 255, 0.35), transparent 30%);
-    }
-
     .food-photo img {
       display: block;
       width: 100%;
@@ -2148,10 +2137,10 @@
           worldCopyJump: true
         }).setView([30.55, 120.55], 7);
 
-        var shortLabels = L.tileLayer("https://basemaps.cartocdn.com/zh_cn_voyager/{z}/{x}/{y}.png", {
-          subdomains: "abcd",
+        var shortLabels = L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
+          subdomains: "abc",
           maxZoom: 19,
-          attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+          attribution: '&copy; OpenStreetMap contributors &copy; OpenStreetMap France'
         });
 
         shortLabels.on("tileerror", function () {
