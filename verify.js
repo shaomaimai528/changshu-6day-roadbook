@@ -65,9 +65,10 @@ async function runViewport(browser, viewport) {
     await assert(mobileDetailText.includes("当天时间轴"), "移动端当天时间轴缺失", failures);
     await assert(mobileDetailText.includes("预约提醒"), "移动端预约提醒缺失", failures);
 
-    await page.locator("#sheetHandle").click();
+    await page.locator("#map").click({ position: { x: 195, y: 120 } });
     await page.waitForTimeout(250);
-    await assert(await page.locator("#detailPanel").isHidden(), "移动端当天详情不能收起", failures);
+    await assert(await page.locator("#detailPanel").isHidden(), "点击地图后当天详情不能返回地图", failures);
+    await assert(await page.locator("#mobileBrief").isVisible(), "返回地图后每日速览没有恢复", failures);
   } else {
     await assert(await page.locator(".rail").isVisible(), "桌面行程栏不可见", failures);
     for (const dayId of ["d1", "d2", "d3", "d4", "d5", "d6"]) {
@@ -132,15 +133,16 @@ async function runViewport(browser, viewport) {
   await assert(visibleText.includes("临浦"), "10/1 住宿信息缺失", failures);
 
   if (viewport.name === "mobile") {
-    await page.locator("#sheetHandle").click();
+    await page.locator("#map").click({ position: { x: 195, y: 120 } });
     await page.waitForTimeout(200);
+    await assert(await page.locator("#detailPanel").isHidden(), "点击地图后详情没有收起", failures);
     for (const [dayId, stay] of [["d2", "横店"], ["d5", "绍兴"]]) {
       await page.locator(`.mobile-day-chip[data-day-chip="${dayId}"]`).click();
       await page.waitForTimeout(120);
       await page.locator("#mobileBrief [data-open-day]").click();
       await page.waitForTimeout(200);
       await assert((await page.locator("#detailContent").innerText()).includes(stay), `${dayId} 住宿信息缺失`, failures);
-      await page.locator("#sheetHandle").click();
+      await page.locator("#map").click({ position: { x: 195, y: 120 } });
       await page.waitForTimeout(200);
     }
   } else {
