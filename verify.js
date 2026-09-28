@@ -1,4 +1,4 @@
-const { chromium } = require("playwright");
+const { chromium } = require("playwright-core");
 const fs = require("fs");
 const path = require("path");
 
@@ -61,7 +61,8 @@ async function runViewport(browser, viewport) {
     await assert(await page.locator("#detailPanel").isVisible(), "移动端当天详情不能展开", failures);
     const mobileDetailText = await page.locator("#detailContent").innerText();
     await assert(mobileDetailText.includes("122 km / 1.5 h"), "移动端 10/1 第一段路线距离缺失", failures);
-    await assert(mobileDetailText.includes("93 km / 1.3 h"), "移动端 10/1 第二段路线距离缺失", failures);
+    await assert(mobileDetailText.includes("135 km / 1.7 h"), "移动端 10/1 第二段路线距离缺失", failures);
+    await assert(mobileDetailText.includes("逸居·轻奢影寓（诸暨高铁站宝龙广场店）"), "移动端 10/1 诸暨酒店缺失", failures);
     await assert(mobileDetailText.includes("当天时间轴"), "移动端当天时间轴缺失", failures);
     await assert(mobileDetailText.includes("预约提醒"), "移动端预约提醒缺失", failures);
 
@@ -80,13 +81,16 @@ async function runViewport(browser, viewport) {
     await page.waitForTimeout(150);
     const day1Text = await page.locator("#detailContent").innerText();
     await assert(day1Text.includes("122 km / 1.5 h"), "10/1 第一段路线距离缺失", failures);
-    await assert(day1Text.includes("93 km / 1.3 h"), "10/1 第二段路线距离缺失", failures);
+    await assert(day1Text.includes("135 km / 1.7 h"), "10/1 第二段路线距离缺失", failures);
+    await assert(day1Text.includes("逸居·轻奢影寓（诸暨高铁站宝龙广场店）"), "10/1 诸暨酒店缺失", failures);
     await page.locator('.rail-scroll [data-day="d2"]').click();
     await page.waitForTimeout(150);
     const day2Text = await page.locator("#detailContent").innerText();
-    await assert(day2Text.includes("54 km / 45 min"), "10/2 第一段路线距离缺失", failures);
+    await assert(day2Text.includes("28 km / 30 min"), "10/2 第一段路线距离缺失", failures);
     await assert(day2Text.includes("21 km / 25 min"), "10/2 第二段路线距离缺失", failures);
     await assert(day2Text.includes("81 km / 1 h"), "10/2 第三段路线距离缺失", failures);
+    await assert(day2Text.includes("五泄漂流（已购）"), "10/2 漂流票信息缺失", failures);
+    await assert(day2Text.includes("丫丫民宿（明清宫轻轨站店）"), "10/2 横店民宿缺失", failures);
     await page.locator('.rail-scroll [data-day="d3"]').click();
     await page.waitForTimeout(150);
     await assert((await page.locator("#detailContent").innerText()).includes("秦王宫"), "10/3 景点详情缺失", failures);
@@ -113,46 +117,50 @@ async function runViewport(browser, viewport) {
     await assert((await page.locator("#detailContent").innerText()).includes("10/1"), "键盘切换日期失败", failures);
   }
 
-  let visibleText = await page.locator("body").innerText();
+  const visibleText = await page.locator("body").innerText();
   for (const oldTerm of ["宁波", "神仙居", "南浔", "鲁迅故里", "沈园", "南湖"]) {
     await assert(!visibleText.includes(oldTerm), `页面仍含旧路线词：${oldTerm}`, failures);
   }
-  if (viewport.name === "mobile") {
-    await page.locator('.mobile-day-chip[data-day-chip="d1"]').click();
-    await page.waitForTimeout(120);
-    await page.locator("#mobileBrief [data-open-day]").click();
-    await page.waitForTimeout(250);
-    await assert(await page.locator("#detailPanel").isVisible(), "移动端详情面板不能展开", failures);
-  } else {
-    await page.locator("#overviewButton").click();
-    await page.waitForTimeout(200);
-    await page.locator("#toggleDetailButton").click();
-    await page.waitForTimeout(200);
-  }
-  visibleText = await page.locator("#detailContent").innerText();
-  await assert(visibleText.includes("临浦"), "10/1 住宿信息缺失", failures);
+
+  const zhujiHotel = "逸居·轻奢影寓（诸暨高铁站宝龙广场店）";
+  const yayaStay = "丫丫民宿（明清宫轻轨站店）";
+  await assert(await page.locator(`#map .leaflet-marker-icon[title="${zhujiHotel}"]`).count() > 0, "地图缺少诸暨酒店标记", failures);
+  await assert(await page.locator(`#map .leaflet-marker-icon[title="${yayaStay}"]`).count() > 0, "地图缺少横店民宿标记", failures);
 
   if (viewport.name === "mobile") {
     await page.locator("#map").click({ position: { x: 195, y: 120 } });
     await page.waitForTimeout(200);
     await assert(await page.locator("#detailPanel").isHidden(), "点击地图后详情没有收起", failures);
-    for (const [dayId, stay] of [["d2", "横店"], ["d5", "绍兴"]]) {
+    for (const [dayId, expected, message] of [
+      ["d2", "五泄漂流（已购）", "移动端 10/2 漂流票信息缺失"],
+      ["d2", yayaStay, "移动端 10/2 横店民宿缺失"],
+      ["d5", "绍兴", "移动端 10/5 绍兴住宿信息缺失"]
+    ]) {
       await page.locator(`.mobile-day-chip[data-day-chip="${dayId}"]`).click();
       await page.waitForTimeout(120);
       await page.locator("#mobileBrief [data-open-day]").click();
       await page.waitForTimeout(200);
-      await assert((await page.locator("#detailContent").innerText()).includes(stay), `${dayId} 住宿信息缺失`, failures);
+      await assert((await page.locator("#detailContent").innerText()).includes(expected), message, failures);
       await page.locator("#map").click({ position: { x: 195, y: 120 } });
       await page.waitForTimeout(200);
     }
   } else {
     await page.locator("#toggleDetailButton").click();
     await page.waitForTimeout(200);
-    for (const [dayId, stay] of [["d2", "横店"], ["d5", "绍兴"]]) {
+    for (const [dayId, expected, message] of [
+      ["d2", "五泄漂流（已购）", "10/2 漂流票信息缺失"],
+      ["d2", yayaStay, "10/2 横店民宿缺失"],
+      ["d5", "绍兴", "10/5 绍兴住宿信息缺失"]
+    ]) {
       await page.locator(`.rail-scroll [data-day="${dayId}"]`).click();
       await page.waitForTimeout(150);
-      await assert((await page.locator("#detailContent").innerText()).includes(stay), `${dayId} 住宿信息缺失`, failures);
+      await assert((await page.locator("#detailContent").innerText()).includes(expected), message, failures);
     }
+    await page.locator("#overviewButton").click();
+    await page.waitForTimeout(200);
+    await page.locator("#toggleDetailButton").click();
+    await page.waitForTimeout(200);
+    await assert((await page.locator("#detailContent").innerText()).includes("绍兴 1 晚待定"), "总览缺绍兴待定住宿信息", failures);
   }
 
   const screenshot = path.join(OUT_DIR, `${viewport.name}.png`);
