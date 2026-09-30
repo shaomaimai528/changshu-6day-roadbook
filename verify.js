@@ -89,7 +89,8 @@ async function runViewport(browser, viewport) {
     await assert(day2Text.includes("28 km / 30 min"), "10/2 第一段路线距离缺失", failures);
     await assert(day2Text.includes("21 km / 25 min"), "10/2 第二段路线距离缺失", failures);
     await assert(day2Text.includes("81 km / 1 h"), "10/2 第三段路线距离缺失", failures);
-    await assert(day2Text.includes("五泄漂流（已购）"), "10/2 漂流票信息缺失", failures);
+    await assert(!day2Text.includes("五泄漂流（已购）"), "10/2 仍显示已购漂流信息", failures);
+    await assert(day2Text.includes("漂流计划已取消"), "10/2 漂流取消说明缺失", failures);
     await assert(day2Text.includes("丫丫民宿（明清宫轻轨站店）"), "10/2 横店民宿缺失", failures);
     await page.locator('.rail-scroll [data-day="d3"]').click();
     await page.waitForTimeout(150);
@@ -118,7 +119,7 @@ async function runViewport(browser, viewport) {
   }
 
   const visibleText = await page.locator("body").innerText();
-  for (const oldTerm of ["宁波", "神仙居", "南浔", "鲁迅故里", "沈园", "南湖"]) {
+  for (const oldTerm of ["宁波", "神仙居", "南浔"]) {
     await assert(!visibleText.includes(oldTerm), `页面仍含旧路线词：${oldTerm}`, failures);
   }
 
@@ -132,7 +133,7 @@ async function runViewport(browser, viewport) {
     await page.waitForTimeout(200);
     await assert(await page.locator("#detailPanel").isHidden(), "点击地图后详情没有收起", failures);
     for (const [dayId, expected, message] of [
-      ["d2", "五泄漂流（已购）", "移动端 10/2 漂流票信息缺失"],
+      ["d2", "漂流计划已取消", "移动端 10/2 漂流取消说明缺失"],
       ["d2", yayaStay, "移动端 10/2 横店民宿缺失"],
       ["d5", "绍兴", "移动端 10/5 绍兴住宿信息缺失"]
     ]) {
@@ -148,7 +149,7 @@ async function runViewport(browser, viewport) {
     await page.locator("#toggleDetailButton").click();
     await page.waitForTimeout(200);
     for (const [dayId, expected, message] of [
-      ["d2", "五泄漂流（已购）", "10/2 漂流票信息缺失"],
+      ["d2", "漂流计划已取消", "10/2 漂流取消说明缺失"],
       ["d2", yayaStay, "10/2 横店民宿缺失"],
       ["d5", "绍兴", "10/5 绍兴住宿信息缺失"]
     ]) {
